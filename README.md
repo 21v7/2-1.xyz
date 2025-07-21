@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
@@ -195,11 +194,11 @@
     <div class="stock-box">
       <h3>Instagram</h3>
       <p>
-        @la1o current offer 100$<br>
-        @mo4p 40$<br>
-        @fdwb 40$<br>
-        @f40m 35$<br>
-        @yg0t 30$<br>
+        @la1o c/o $100<br>
+        @mo4p $40<br>
+        @fdwb $40<br>
+        @f40m $40<br>
+        @yg0t $35<br>
       </p>
     </div>
     <div class="stock-box">
