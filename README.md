@@ -195,12 +195,11 @@
     <div class="stock-box">
       <h3>Instagram</h3>
       <p>
-        @yellowed 200$<br>
-        @mzye 65$<br>
-        @wyk0 40$<br>
-        @wkgo 40$<br>
-        @gpvi 35$<br>
-        @kdlv 35$
+        @la1o current offer 100$<br>
+        @mo4p 40$<br>
+        @fdwb 40$<br>
+        @f40m 35$<br>
+        @yg0t 30$<br>
       </p>
     </div>
     <div class="stock-box">
@@ -208,9 +207,6 @@
       <p>$5 - $10 (oge / no # linked)</p>
       <h3>Emotions and Mental States</h3>
       <p>
-        @abuse<br>
-        @agonize<br>
-        @alleviate<br>
         @antisociality<br>
         @awful<br>
         @delusional<br>
@@ -260,7 +256,6 @@
         @sack<br>
         @science<br>
         @selfless<br>
-        @shuttle<br>
         @spain<br>
         @spine<br>
         @stair<br>
@@ -271,7 +266,6 @@
         @tool<br>
         @topic<br>
         @turf<br>
-        @wagon<br>
         @want<br>
         @writer
       </p>
@@ -282,7 +276,7 @@
   <div class="popup" id="vouches">
     <h2>Vouches</h2>
     <p>We always try to provide the best stock and we provide the best and fast services, here you can check my deals with my customers</p>
-    <a class="telegram-link" href="https://t.me/Now0pen" target="_blank">Check my vouches</a>
+    <a class="telegram-link" href="https://t.me/piratas" target="_blank">Check my vouches</a>
   </div>
 
   <script>
