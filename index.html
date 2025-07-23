@@ -8,6 +8,10 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+    🌙
+  </button>
+
   <div class="social-floating" id="contactBar">
     <span>Contact Me</span>
     <a href="https://www.instagram.com/7521" target="_blank">Instagram</a>
@@ -54,15 +58,6 @@
     &copy; 2025 21. All rights reserved.
   </footer>
 
-  <script>
-    window.addEventListener('scroll', function() {
-      const contactBar = document.getElementById('contactBar');
-      if (window.scrollY > 100) {
-        contactBar.classList.add('visible');
-      } else {
-        contactBar.classList.remove('visible');
-      }
-    });
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
