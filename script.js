@@ -1,42 +1,27 @@
-const themeToggle = document.getElementById('themeToggle');
-const html = document.documentElement;
+// script.js
+(function () {
+  const btn = document.getElementById('themeToggle');
+  const root = document.documentElement; // <html>
 
-function updateThemeIcon() {
-  const theme = html.getAttribute('data-theme');
-  themeToggle.textContent = theme === 'dark' ? '☀️' : '🌙';
-}
+  // 1) Resolve initial theme (localStorage -> OS preference -> light)
+  const stored = localStorage.getItem('theme');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const initial = stored || (prefersDark ? 'dark' : 'light');
 
-function initTheme() {
-  let theme = localStorage.getItem('theme');
-  
-  if (!theme && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-    theme = 'dark';
-  } else if (!theme) {
-    theme = 'light';
+  applyTheme(initial);
+
+  // 2) Toggle on click
+  if (btn) {
+    btn.addEventListener('click', () => {
+      const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      applyTheme(next);
+    });
   }
-  
-  html.setAttribute('data-theme', theme);
-  updateThemeIcon();
-}
 
-themeToggle.addEventListener('click', function() {
-  const currentTheme = html.getAttribute('data-theme');
-  const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-  
-  html.setAttribute('data-theme', newTheme);
-  localStorage.setItem('theme', newTheme);
-  updateThemeIcon();
-});
-
-window.addEventListener('scroll', function() {
-  const contactBar = document.getElementById('contactBar');
-  if (window.scrollY > 100) {
-    contactBar.classList.add('visible');
-  } else {
-    contactBar.classList.remove('visible');
+  function applyTheme(theme) {
+    root.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+    // Update button icon
+    if (btn) btn.textContent = theme === 'dark' ? '☀️' : '🌙';
   }
-});
-
-document.addEventListener('DOMContentLoaded', function() {
-  initTheme();
-});
+})();
