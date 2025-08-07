@@ -666,3 +666,18 @@ footer {
 @media (max-width: 480px) {
   .card-grid { grid-template-columns: 1fr; }
 }
+.filter-bar {
+  display: flex; gap: 0.6rem; flex-wrap: wrap; margin: 0.5rem 0 1rem;
+}
+.filter-bar .filter {
+  border: 1px solid var(--border);
+  background: var(--card-bg); color: var(--text);
+  padding: 0.45rem 0.9rem; border-radius: 999px; font-size: 0.9rem;
+  cursor: pointer; transition: all 0.25s cubic-bezier(0.4,0,0.2,1);
+}
+.filter-bar .filter:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.06); }
+.filter-bar .filter.active {
+  background: var(--accent); color: #fff; border-color: var(--accent);
+  box-shadow: 0 8px 22px rgba(0,113,227,0.25);
+}
+
