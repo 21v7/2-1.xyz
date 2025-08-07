@@ -1,16 +1,21 @@
-// script.js
 (function () {
-  const btn = document.getElementById('themeToggle');
   const root = document.documentElement; // <html>
+  const btn = document.getElementById('themeToggle');
+  const bar = document.getElementById('contactBar');
 
-  // 1) Resolve initial theme (localStorage -> OS preference -> light)
-  const stored = localStorage.getItem('theme');
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  const initial = stored || (prefersDark ? 'dark' : 'light');
+  function applyTheme(theme) {
+    root.setAttribute('data-theme', theme);
+    try {
+      localStorage.setItem('theme', theme);
+    } catch (e) {}
+    if (btn) btn.textContent = theme === 'dark' ? '☀️' : '🌙';
+  }
 
-  applyTheme(initial);
+  // On load, use whatever was set in <head>
+  const current = root.getAttribute('data-theme') || 'light';
+  applyTheme(current);
 
-  // 2) Toggle on click
+  // Toggle
   if (btn) {
     btn.addEventListener('click', () => {
       const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
@@ -18,10 +23,8 @@
     });
   }
 
-  function applyTheme(theme) {
-    root.setAttribute('data-theme', theme);
-    localStorage.setItem('theme', theme);
-    // Update button icon
-    if (btn) btn.textContent = theme === 'dark' ? '☀️' : '🌙';
-  }
+  // Reveal floating bar after load (keeps your slide animation)
+  window.addEventListener('load', () => {
+    if (bar) bar.classList.add('visible');
+  });
 })();
