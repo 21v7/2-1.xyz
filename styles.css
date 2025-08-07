@@ -497,3 +497,21 @@ footer {
     transition-duration: 0.01ms;
   }
 }
+.contact-button {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.contact-button a {
+  background-color: var(--accent);
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.contact-button a:hover {
+  background-color: #000;
+}
