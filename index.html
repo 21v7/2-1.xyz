@@ -1,22 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>21</title>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <!-- Prevent theme flash -->
+  <script>
+    (function () {
+      try {
+        var stored = localStorage.getItem('theme');
+        var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var initial = stored || (prefersDark ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', initial);
+      } catch(e) {}
+    })();
+  </script>
+
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
-    🌙
-  </button>
+  <!-- Theme toggle -->
+  <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
 
+  <!-- Floating contacts -->
   <div class="social-floating" id="contactBar">
     <span>Contact Me</span>
-    <a href="https://www.instagram.com/7521" target="_blank">Instagram</a>
-    <a href="https://x.com/213333" target="_blank">Twitter</a>
-    <a href="https://oguser.com/TwentyOne" target="_blank">OGU</a>
+    <a href="https://www.instagram.com/7521" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://x.com/213333" target="_blank" rel="noopener">Twitter</a>
+    <a href="https://oguser.com/TwentyOne" target="_blank" rel="noopener">OGU</a>
   </div>
 
   <header>
@@ -26,67 +39,87 @@
   </header>
 
   <section class="content-section">
-    <div class="username-list">
+    <div class="stock-section">
+      <h2>Current Username Stock</h2>
 
-      <!-- Swap Service -->
-      <div class="category">
-        <h4>Swap Service</h4>
-        <div class="card">
-          <p><strong>Uninsured Swap:</strong> 8% of username value</p>
-          <p><strong>Insured Swap:</strong> 15% of username value</p>
-          <ul>
-            <li>If 8% of the username's value is less than $5, the minimum swap price is $5.</li>
-            <li>Insured swap is available starting at $10.</li>
-            <li>Aged accounts available starting at $3.</li>
-          </ul>
-          <a class="card-button" href="https://t.me/impairing" target="_blank">Buy</a>
+      <!-- FILTER BAR -->
+      <div class="filter-bar" id="filterBar">
+        <button class="filter active" data-filter="all">All</button>
+        <button class="filter" data-filter="swap">Swap</button>
+        <button class="filter" data-filter="instagram">Instagram</button>
+        <button class="filter" data-filter="xdigits">X Digits</button>
+        <button class="filter" data-filter="capcut">CapCut</button>
+      </div>
+
+      <div class="username-list">
+
+        <!-- 1) Swap Service -->
+        <div class="category" data-category="swap">
+          <h4>Swap Service</h4>
+          <div class="card">
+            <p><strong>Uninsured Swap:</strong> 8% of username value</p>
+            <p><strong>Insured Swap:</strong> 15% of username value</p>
+            <ul>
+              <li>If 8% of the username's value is less than $5, the minimum swap price is $5.</li>
+              <li>Insured swap is available starting at $10.</li>
+              <li>Aged accounts available starting at $3.</li>
+            </ul>
+            <a class="card-button" href="https://t.me/id7321" target="_blank" rel="noopener">DM to Swap</a>
+          </div>
         </div>
-      </div>
 
-      <!-- Instagram -->
-      <div class="category">
-        <h4>Instagram</h4>
-        <div class="card-grid">
-          <div class="card"><p>@la1o – $200</p><a href="https://t.me/impairing" target="_blank">Buy</a></div>
-          <div class="card"><p>@dqki – $45</p><a href="https://t.me/impairing" target="_blank">Buy</a></div>
-          <div class="card"><p>@jfxz – $40</p><a href="https://t.me/impairing" target="_blank">Buy</a></div>
-          <div class="card"><p>@pfrv – $40</p><a href="https://t.me/impairing" target="_blank">Buy</a></div>
-          <div class="card"><p>@f40m – $35</p><a href="https://t.me/impairing" target="_blank">Buy</a></div>
-          <div class="card"><p>@5224367 – $35</p><a href="https://t.me/impairing" target="_blank">Buy</a></div>
+        <!-- 2) Instagram -->
+        <div class="category" data-category="instagram">
+          <h4>Instagram</h4>
+          <div class="card-grid">
+            <div class="card" data-type="instagram"><p>@la1o – $200</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+            <div class="card" data-type="instagram"><p>@dqki – $45</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+            <div class="card" data-type="instagram"><p>@jfxz – $40</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+            <div class="card" data-type="instagram"><p>@pfrv – $40</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+            <div class="card" data-type="instagram"><p>@f40m – $35</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+            <div class="card" data-type="instagram"><p>@5224367 – $35</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+          </div>
         </div>
-      </div>
 
-      <!-- X Digits -->
-      <div class="category">
-        <h4>𝕏 Digits</h4>
-        <div class="card-grid">
-          <div class="card"><p>@173601 – $15</p><a href="https://t.me/impairing" target="_blank">Buy</a></div>
-          <div class="card"><p>@179170 – $20</p><a href="https://t.me/impairing" target="_blank">Buy</a></div>
-          <div class="card"><p>@222824 – $20</p><a href="https://t.me/impairing" target="_blank">Buy</a></div>
-          <div class="card"><p>@230204 – $20</p><a href="https://t.me/impairing" target="_blank">Buy</a></div>
-          <div class="card"><p>@296945 – $20</p><a href="https://t.me/impairing" target="_blank">Buy</a></div>
-          <div class="card"><p>@337723 – $20</p><a href="https://t.me/impairing" target="_blank">Buy</a></div>
-          <div class="card"><p>@359893 – $20</p><a href="https://t.me/impairing" target="_blank">Buy</a></div>
-          <div class="card"><p>@522613 – $15</p><a href="https://t.me/impairing" target="_blank">Buy</a></div>
-          <div class="card"><p>@687286 – $15</p><a href="https://t.me/impairing" target="_blank">Buy</a></div>
-          <div class="card"><p>@964945 – $15</p><a href="https://t.me/impairing" target="_blank">Buy</a></div>
+        <!-- 3) X Digits -->
+        <div class="category" data-category="xdigits">
+          <h4>𝕏 Digits</h4>
+          <div class="card-grid">
+            <div class="card" data-type="xdigits"><p>@173601 – $15</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+            <div class="card" data-type="xdigits"><p>@179170 – $20</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+            <div class="card" data-type="xdigits"><p>@222824 – $20</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+            <div class="card" data-type="xdigits"><p>@230204 – $20</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+            <div class="card" data-type="xdigits"><p>@296945 – $20</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+            <div class="card" data-type="xdigits"><p>@337723 – $20</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+            <div class="card" data-type="xdigits"><p>@359893 – $20</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+            <div class="card" data-type="xdigits"><p>@522613 – $15</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+            <div class="card" data-type="xdigits"><p>@687286 – $15</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+            <div class="card" data-type="xdigits"><p>@964945 – $15</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+          </div>
         </div>
-      </div>
 
-      <!-- CapCut -->
-      <div class="category">
-        <h4>CapCut</h4>
-        <div class="card">
-          <p>$5–$10 (OGE / no # linked)</p>
-          <a class="card-button" href="https://t.me/impairing" target="_blank">Buy</a>
+        <!-- 4) CapCut (FIXED: always visible content in a card) -->
+        <div class="category" data-category="capcut">
+          <h4>CapCut</h4>
+          <div class="card">
+            <p>$5–$10 (OGE / no # linked)</p>
+            <a class="card-button" href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a>
+          </div>
         </div>
-      </div>
 
-      <!-- Vouches Button -->
-      <div class="contact-button">
-        <a href="https://t.me/impairing" target="_blank">View Vouches</a>
-      </div>
+        <!-- 5) Vouches -->
+        <div class="vouches-section">
+          <h2>Client Vouches</h2>
+          <p>Highly Rated Seller, Trusted by over 400+ buyers. Fast, smooth, transparent transactions. Check out my most recent deals here.</p>
+          <a class="button" href="https://t.me/Now0pen" target="_blank" rel="noopener">Vouches</a>
+        </div>
 
+        <!-- Contact CTA -->
+        <div class="contact-button">
+          <a href="https://t.me/id7321" target="_blank" rel="noopener">Contact Me</a>
+        </div>
+
+      </div>
     </div>
   </section>
 
