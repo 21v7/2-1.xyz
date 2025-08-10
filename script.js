@@ -1,60 +1,76 @@
-// script.js
 (function () {
   const root = document.documentElement;
   const themeBtn = document.getElementById('themeToggle');
   const bar = document.getElementById('contactBar');
 
+  // Theme
   function applyTheme(theme) {
     root.setAttribute('data-theme', theme);
     try { localStorage.setItem('theme', theme); } catch (e) {}
     if (themeBtn) themeBtn.textContent = theme === 'dark' ? '☀️' : '🌙';
   }
-
-  // init theme from <head> value or light
   applyTheme(root.getAttribute('data-theme') || 'light');
-
-  // toggle theme
   themeBtn?.addEventListener('click', () => {
     const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
     applyTheme(next);
   });
 
-  // show floating bar after load for animation
+  // Reveal floating bar (keeps your slide animation)
   window.addEventListener('load', () => bar?.classList.add('visible'));
 
-  // ===== Filter logic =====
-  const filterBar = document.getElementById('filterBar');
-  const categories = Array.from(document.querySelectorAll('.category'));
-  const buttons = Array.from(document.querySelectorAll('.filter'));
+  // ===== Modal System =====
+  const openers = document.querySelectorAll('[data-modal-target]');
+  const closers = document.querySelectorAll('[data-modal-close]');
+  let lastFocused = null;
 
-  function setActive(btn) {
-    buttons.forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
+  function openModal(selector) {
+    const modal = document.querySelector(selector);
+    if (!modal) return;
+    lastFocused = document.activeElement;
+    modal.setAttribute('aria-hidden', 'false');
+    document.documentElement.classList.add('modal-open');
+    document.body.classList.add('modal-open');
+    // focus first close button or heading
+    const focusable = modal.querySelector('[data-modal-close]') || modal.querySelector('h2');
+    focusable?.focus();
   }
 
-  function applyFilter(key) {
-    categories.forEach(cat => {
-      const type = cat.getAttribute('data-category');
-      const show = (key === 'all' || key === type);
-      cat.style.display = show ? '' : 'none';
+  function closeModal(modal) {
+    modal.setAttribute('aria-hidden', 'true');
+    document.documentElement.classList.remove('modal-open');
+    document.body.classList.remove('modal-open');
+    lastFocused?.focus();
+  }
+
+  openers.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.getAttribute('data-modal-target');
+      if (target) openModal(target);
     });
-  }
-
-  // click handling
-  filterBar?.addEventListener('click', (e) => {
-    const btn = e.target.closest('button.filter[data-filter]');
-    if (!btn) return;
-    setActive(btn);
-    applyFilter(btn.getAttribute('data-filter'));
   });
 
-  // ensure default is "All"
-  const allBtn = document.querySelector('.filter[data-filter="all"]');
-  if (allBtn) {
-    setActive(allBtn);
-    applyFilter('all');
-  } else {
-    // safety fallback
-    applyFilter('all');
-  }
+  closers.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const modal = btn.closest('.modal');
+      if (modal) closeModal(modal);
+    });
+  });
+
+  // Click outside to close
+  document.addEventListener('click', (e) => {
+    const openModalEl = document.querySelector('.modal[aria-hidden="false"]');
+    if (!openModalEl) return;
+    const content = openModalEl.querySelector('.modal-content');
+    if (!content.contains(e.target) && !e.target.closest('[data-modal-target]')) {
+      closeModal(openModalEl);
+    }
+  });
+
+  // ESC to close
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      const openModalEl = document.querySelector('.modal[aria-hidden="false"]');
+      if (openModalEl) closeModal(openModalEl);
+    }
+  });
 })();
