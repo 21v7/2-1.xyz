@@ -2,18 +2,18 @@
 <html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
   <title>21</title>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700&display=swap" rel="stylesheet">
 
-  <!-- Prevent theme flash: set theme BEFORE CSS loads -->
+  <!-- Prevent theme flash before CSS loads -->
   <script>
     (function () {
       try {
         var stored = localStorage.getItem('theme');
-        var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        var initial = stored || (prefersDark ? 'dark' : 'light');
-        document.documentElement.setAttribute('data-theme', initial);
+        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.setAttribute('data-theme', stored || (prefersDark ? 'dark' : 'light'));
       } catch(e) {}
     })();
   </script>
@@ -22,10 +22,10 @@
 </head>
 <body>
   <!-- Theme toggle -->
-  <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
+  <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode">🌙</button>
 
   <!-- Floating contacts -->
-  <div class="social-floating" id="contactBar">
+  <div class="social-floating" id="contactBar" role="navigation" aria-label="Contact links">
     <span>Contact Me</span>
     <a href="https://www.instagram.com/7521" target="_blank" rel="noopener">Instagram</a>
     <a href="https://x.com/213333" target="_blank" rel="noopener">Twitter</a>
@@ -34,26 +34,26 @@
   </div>
 
   <header>
-    <img src="21.jpeg" alt="21 Logo">
+    <img src="21-new.jpeg" alt="21 brand logo">
     <h1>21</h1>
     <p class="intro">Established 2023 | formerly: imp / impairing | 400+ Vouches</p>
   </header>
 
-  <section class="content-section">
-    <div class="stock-section">
-      <h2>Current Username Stock</h2>
+  <main class="content-section" id="main">
+    <section class="stock-section" aria-labelledby="stockHeading">
+      <h2 id="stockHeading">Current Username Stock</h2>
 
       <!-- Platform Launchers -->
       <div class="launcher-grid" aria-label="Open a platform to view stock">
-        <button class="launcher" data-modal-target="#modal-swap">Swap Service</button>
-        <button class="launcher" data-modal-target="#modal-instagram">Instagram</button>
-        <button class="launcher" data-modal-target="#modal-xdigits">𝕏 Digits</button>
-        <button class="launcher" data-modal-target="#modal-capcut">CapCut + Word Lists</button>
-        <button class="launcher" data-modal-target="#modal-proxy">Proxy / Escrow</button>
-        <button class="launcher" data-modal-target="#modal-vouches">Client Vouches</button>
+        <button class="launcher" type="button" data-modal-target="#modal-swap">Swap Service</button>
+        <button class="launcher" type="button" data-modal-target="#modal-instagram">Instagram</button>
+        <button class="launcher" type="button" data-modal-target="#modal-xdigits">𝕏 Digits</button>
+        <button class="launcher" type="button" data-modal-target="#modal-capcut">CapCut + Word Lists</button>
+        <button class="launcher" type="button" data-modal-target="#modal-proxy">Proxy / Escrow</button>
+        <button class="launcher" type="button" data-modal-target="#modal-vouches">Client Vouches</button>
       </div>
-    </div>
-  </section>
+    </section>
+  </main>
 
   <footer>
     &copy; 2025 21. All rights reserved.
@@ -62,10 +62,10 @@
   <!-- ===== Modals ===== -->
 
   <!-- Swap -->
-  <div class="modal" id="modal-swap" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Swap Service">
-    <div class="modal-content">
-      <button class="modal-close" data-modal-close aria-label="Close">×</button>
-      <h2>Swap Service</h2>
+  <div class="modal" id="modal-swap" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="swapTitle">
+    <div class="modal-content" role="document">
+      <button class="modal-close" data-modal-close type="button" aria-label="Close">×</button>
+      <h2 id="swapTitle">Swap Service</h2>
       <div class="card big">
         <p><strong>Uninsured Swap:</strong> 8% of username value</p>
         <p><strong>Insured Swap:</strong> 15% of username value</p>
@@ -80,46 +80,46 @@
   </div>
 
   <!-- Instagram -->
-  <div class="modal" id="modal-instagram" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Instagram Stock">
-    <div class="modal-content">
-      <button class="modal-close" data-modal-close aria-label="Close">×</button>
-      <h2>Instagram</h2>
+  <div class="modal" id="modal-instagram" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="igTitle">
+    <div class="modal-content" role="document">
+      <button class="modal-close" data-modal-close type="button" aria-label="Close">×</button>
+      <h2 id="igTitle">Instagram</h2>
       <div class="card-grid">
-        <div class="card"><p>@la1o – $200</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
-        <div class="card"><p>@dqki – $45</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
-        <div class="card"><p>@jfxz – $40</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
-        <div class="card"><p>@pfrv – $40</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
-        <div class="card"><p>@f40m – $35</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
-        <div class="card"><p>@5224367 – $35</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
+        <div class="card"><p>@la1o – $200</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@dqki – $45</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@jfxz – $40</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@pfrv – $40</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@f40m – $35</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@5224367 – $35</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
       </div>
     </div>
   </div>
 
   <!-- X Digits -->
-  <div class="modal" id="modal-xdigits" aria-hidden="true" role="dialog" aria-modal="true" aria-label="X Digits Stock">
-    <div class="modal-content">
-      <button class="modal-close" data-modal-close aria-label="Close">×</button>
-      <h2>𝕏 Digits</h2>
+  <div class="modal" id="modal-xdigits" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="xTitle">
+    <div class="modal-content" role="document">
+      <button class="modal-close" data-modal-close type="button" aria-label="Close">×</button>
+      <h2 id="xTitle">𝕏 Digits</h2>
       <div class="card-grid">
-        <div class="card"><p>@173601 – $15</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
-        <div class="card"><p>@179170 – $20</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
-        <div class="card"><p>@222824 – $20</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
-        <div class="card"><p>@230204 – $20</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
-        <div class="card"><p>@296945 – $20</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
-        <div class="card"><p>@337723 – $20</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
-        <div class="card"><p>@359893 – $20</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
-        <div class="card"><p>@522613 – $15</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
-        <div class="card"><p>@687286 – $15</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
-        <div class="card"><p>@964945 – $15</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
+        <div class="card"><p>@173601 – $15</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@179170 – $20</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@222824 – $20</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@230204 – $20</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@296945 – $20</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@337723 – $20</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@359893 – $20</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@522613 – $15</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@687286 – $15</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@964945 – $15</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
       </div>
     </div>
   </div>
 
   <!-- CapCut + Word Lists -->
-  <div class="modal" id="modal-capcut" aria-hidden="true" role="dialog" aria-modal="true" aria-label="CapCut Stock">
-    <div class="modal-content">
-      <button class="modal-close" data-modal-close aria-label="Close">×</button>
-      <h2>CapCut</h2>
+  <div class="modal" id="modal-capcut" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="capcutTitle">
+    <div class="modal-content" role="document">
+      <button class="modal-close" data-modal-close type="button" aria-label="Close">×</button>
+      <h2 id="capcutTitle">CapCut</h2>
       <div class="card big">
         <p>All Semi's – $5</p>
         <p>All Finals – $10</p>
@@ -135,27 +135,36 @@
   </div>
 
   <!-- Proxy / Escrow -->
-  <div class="modal" id="modal-proxy" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Proxy and Escrow">
-    <div class="modal-content">
-      <button class="modal-close" data-modal-close aria-label="Close">×</button>
-      <h2>Proxy / Escrow</h2>
-      <div class="card big">
+  <div class="modal" id="modal-proxy" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="proxyTitle">
+    <div class="modal-content" role="document">
+      <button class="modal-close" data-modal-close type="button" aria-label="Close">×</button>
+      <h2 id="proxyTitle">Proxy / Escrow</h2>
+
+      <div class="card big" style="margin-bottom: 1rem;">
         <p>Use my network to secure better names — I’ll act as your proxy seller and escrow.</p>
         <ul>
           <li><strong>Proxy:</strong> I negotiate and acquire on your behalf to protect privacy and pricing.</li>
           <li><strong>Escrow:</strong> Funds held safely until successful handover. Transparent process.</li>
           <li><strong>Fees:</strong> Case-by-case, typically 5–10% depending on complexity and value.</li>
         </ul>
-        <a class="card-button" href="https://t.me/id7321" target="_blank" rel="noopener">Start a Proxy Deal</a>
+      </div>
+
+      <h2 class="subhead">Available via Proxy</h2>
+      <div class="card-grid">
+        <div class="card"><p>@2796</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Request</a></div>
+        <div class="card"><p>@4526</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Request</a></div>
+        <div class="card"><p>@5836</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Request</a></div>
+        <div class="card"><p>@8720</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Request</a></div>
+        <div class="card"><p>@8735</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Request</a></div>
       </div>
     </div>
   </div>
 
   <!-- Vouches -->
-  <div class="modal" id="modal-vouches" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Client Vouches">
-    <div class="modal-content">
-      <button class="modal-close" data-modal-close aria-label="Close">×</button>
-      <h2>Client Vouches</h2>
+  <div class="modal" id="modal-vouches" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="vouchTitle">
+    <div class="modal-content" role="document">
+      <button class="modal-close" data-modal-close type="button" aria-label="Close">×</button>
+      <h2 id="vouchTitle">Client Vouches</h2>
       <div class="card big">
         <p>Highly Rated Seller, Trusted by 400+ buyers. Fast, smooth, transparent transactions.</p>
         <a class="card-button" href="https://t.me/Now0pen" target="_blank" rel="noopener">View Vouches</a>
@@ -163,6 +172,6 @@
     </div>
   </div>
 
-  <script src="script.js"></script>
+  <script src="script.js" defer></script>
 </body>
 </html>
