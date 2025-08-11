@@ -834,4 +834,19 @@ html.modal-open, body.modal-open { overflow: hidden; }
   .launcher { border-radius: 12px; padding: 0.7rem 0.9rem; }
   .modal-content { padding: 1rem; border-radius: 16px; }
 }
+/* --- Modal scroll fix: allow scrolling inside modals, lock page behind --- */
+.modal {
+  overflow: hidden; /* keep background page from scrolling when a modal is open */
+}
+
+.modal-content {
+  max-height: 90vh;               /* fit within the viewport */
+  overflow-y: auto;               /* enable internal scrolling */
+  -webkit-overflow-scrolling: touch; /* smoother iOS scrolling (incl. Instagram browser) */
+  overscroll-behavior: contain;   /* prevent scroll chaining to the page */
+}
+
+@media (max-width: 480px) {
+  .modal-content { max-height: 88vh; }
+}
 
