@@ -15,7 +15,7 @@
     applyTheme(next);
   });
 
-  // Reveal floating bar (keeps your slide animation)
+  // Reveal floating bar (slide-in animation)
   window.addEventListener('load', () => bar?.classList.add('visible'));
 
   // ===== Modal System =====
@@ -30,7 +30,6 @@
     modal.setAttribute('aria-hidden', 'false');
     document.documentElement.classList.add('modal-open');
     document.body.classList.add('modal-open');
-    // focus first close button or heading
     const focusable = modal.querySelector('[data-modal-close]') || modal.querySelector('h2');
     focusable?.focus();
   }
