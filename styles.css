@@ -849,16 +849,3 @@ html.modal-open, body.modal-open { overflow: hidden; }
 @media (max-width: 480px) {
   .modal-content { max-height: 88vh; }
 }
-
-/* Recently Sold — Instagram */
-.sold-header{display:flex;align-items:center;justify-content:space-between;gap:.8rem;margin-top:1rem;margin-bottom:.4rem}
-.sold-header .subhead{margin:0}
-.sold-actions{display:flex;gap:.6rem;align-items:center}
-.sold-actions input[type="search"]{padding:.55rem .7rem;border:1px solid var(--border);background:var(--card-bg);color:var(--text);border-radius:10px;font-size:.95rem;min-width:220px}
-.pill{padding:.5rem .9rem;border-radius:999px;border:1px solid var(--border);background:var(--card-bg);color:var(--text);cursor:pointer;transition:transform .2s ease,box-shadow .2s ease,background .2s ease}
-.pill:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,.08)}
-.sold-grid{list-style:none;padding:0;margin:.2rem 0 0;display:grid;gap:.6rem;grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
-.sold-chip{display:flex;align-items:center;justify-content:space-between;gap:.6rem;padding:.6rem .8rem;border:1px solid var(--border);border-radius:12px;background:var(--card-bg);color:var(--text);box-shadow:0 2px 8px rgba(0,0,0,.05)}
-.sold-chip .handle{font-weight:600;letter-spacing:.2px}
-[data-theme="dark"] .sold-chip{box-shadow:0 2px 8px rgba(0,0,0,.25)}
-@media (max-width:480px){.sold-actions{width:100%}.sold-actions input[type="search"]{flex:1;min-width:0}}
