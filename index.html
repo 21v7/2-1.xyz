@@ -1,4 +1,4 @@
-<!-- index.html (cleaned + Sold Usernames modal added) -->
+<!-- index.html (your version + working Sold tabs) -->
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
@@ -183,7 +183,7 @@
       <button class="modal-close" data-modal-close type="button" aria-label="Close">×</button>
       <h2 id="soldTitle">Sold Usernames</h2>
 
-      <!-- Platform tabs (hooked via CSS/JS later) -->
+      <!-- Platform tabs -->
       <div class="filter-bar" role="tablist" aria-label="Sold platforms">
         <button class="filter active" role="tab" aria-selected="true" data-sold-tab="sold-ig">Instagram</button>
         <button class="filter" role="tab" aria-selected="false" data-sold-tab="sold-tt">TikTok</button>
@@ -192,11 +192,10 @@
       </div>
 
       <!-- Instagram sold list -->
-      <section id="sold-ig" class="sold-panel" role="tabpanel" aria-label="Instagram sold" data-visible="true">
+      <section id="sold-ig" class="sold-panel" role="tabpanel" aria-label="Instagram sold">
         <div class="card-grid">
-          <!-- Paste your sold Instagram usernames here as cards -->
-          <!-- Example: -->
-<div class="card"><p>@afed</p></div>
+          <!-- FULL Instagram list you provided -->
+          <div class="card"><p>@afed</p></div>
           <div class="card"><p>@ai7g</p></div>
           <div class="card"><p>@allaying</p></div>
           <div class="card"><p>@apah</p></div>
@@ -400,5 +399,34 @@
   </div>
 
   <script src="script.js" defer></script>
+
+  <!-- Tiny tab logic for "Sold Usernames" (kept separate from your main JS) -->
+  <script>
+    document.addEventListener('click', function(e){
+      const tab = e.target.closest('.filter[data-sold-tab]');
+      if (!tab) return;
+
+      const modal = tab.closest('#modal-sold');
+      if (!modal) return;
+
+      // Tabs
+      modal.querySelectorAll('.filter[data-sold-tab]').forEach(btn => {
+        btn.classList.remove('active');
+        btn.setAttribute('aria-selected', 'false');
+      });
+      tab.classList.add('active');
+      tab.setAttribute('aria-selected', 'true');
+
+      // Panels
+      const targetId = tab.getAttribute('data-sold-tab');
+      modal.querySelectorAll('.sold-panel').forEach(panel => {
+        if (panel.id === targetId) {
+          panel.removeAttribute('hidden');
+        } else {
+          panel.setAttribute('hidden', '');
+        }
+      });
+    });
+  </script>
 </body>
 </html>
