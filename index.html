@@ -1,4 +1,3 @@
-<!-- index.html (your version + working Sold tabs) -->
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
@@ -26,19 +25,20 @@
   <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode">🌙</button>
 
   <!-- Floating contacts -->
-  <div class="social-floating" id="contactBar" role="navigation" aria-label="Contact links">
+  <nav class="social-floating" id="contactBar" aria-label="Contact links">
     <span>Contact Me</span>
     <a href="https://oguser.com/TwentyOne" target="_blank" rel="noopener">OGU</a>
     <a href="https://www.instagram.com/7521" target="_blank" rel="noopener">Instagram</a>
     <a href="https://t.me/id7321" target="_blank" rel="noopener">Telegram</a>
     <a href="https://x.com/213333" target="_blank" rel="noopener">Twitter</a>
-  </div>
+  </nav>
 
   <header>
+    <!-- Logo with cache-buster + fallback -->
     <img
-      src="93C40C80-79AB-4157-89A6-7EE8F0284D88.jpeg?v=2"
+      src="93C40C80-79AB-4157-89A6-7EE8F0284D88.jpeg?v=3"
       alt="21 brand logo"
-      onerror="this.onerror=null; this.src='21.jpeg?v=2';"
+      onerror="this.onerror=null; this.src='21.jpeg?v=3';"
     >
     <h1>21</h1>
     <p class="intro">Established 2023 | 400+ Vouches<br>Formerly: imp / impairing</p>
@@ -177,256 +177,240 @@
     </div>
   </div>
 
-  <!-- Sold Usernames (NEW) -->
+  <!-- Sold Usernames (LAUNCHER MODAL) -->
   <div class="modal" id="modal-sold" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="soldTitle">
     <div class="modal-content" role="document">
       <button class="modal-close" data-modal-close type="button" aria-label="Close">×</button>
       <h2 id="soldTitle">Sold Usernames</h2>
-
-      <!-- Platform tabs -->
-      <div class="filter-bar" role="tablist" aria-label="Sold platforms">
-        <button class="filter active" role="tab" aria-selected="true" data-sold-tab="sold-ig">Instagram</button>
-        <button class="filter" role="tab" aria-selected="false" data-sold-tab="sold-tt">TikTok</button>
-        <button class="filter" role="tab" aria-selected="false" data-sold-tab="sold-cc">CapCut</button>
-        <button class="filter" role="tab" aria-selected="false" data-sold-tab="sold-x">X</button>
+      <div class="launcher-grid" aria-label="Open a sold platform list">
+        <button class="launcher" type="button" data-modal-open-and-close="#modal-sold-ig">Instagram</button>
+        <button class="launcher" type="button" data-modal-open-and-close="#modal-sold-tt">TikTok</button>
+        <button class="launcher" type="button" data-modal-open-and-close="#modal-sold-cc">CapCut</button>
+        <button class="launcher" type="button" data-modal-open-and-close="#modal-sold-x">X (Twitter)</button>
       </div>
+    </div>
+  </div>
 
-      <!-- Instagram sold list -->
-      <section id="sold-ig" class="sold-panel" role="tabpanel" aria-label="Instagram sold">
-        <div class="card-grid">
-          <!-- FULL Instagram list you provided -->
-          <div class="card"><p>@afed</p></div>
-          <div class="card"><p>@ai7g</p></div>
-          <div class="card"><p>@allaying</p></div>
-          <div class="card"><p>@apah</p></div>
-          <div class="card"><p>@apoy</p></div>
-          <div class="card"><p>@azjb</p></div>
-          <div class="card"><p>@azpi</p></div>
-          <div class="card"><p>@bbpc</p></div>
-          <div class="card"><p>@bdng</p></div>
-          <div class="card"><p>@bkcg</p></div>
-          <div class="card"><p>@bped</p></div>
-          <div class="card"><p>@b9y0</p></div>
-          <div class="card"><p>@c0dp</p></div>
-          <div class="card"><p>@cains</p></div>
-          <div class="card"><p>@cfib</p></div>
-          <div class="card"><p>@cgli</p></div>
-          <div class="card"><p>@crnp</p></div>
-          <div class="card"><p>@covp</p></div>
-          <div class="card"><p>@csjf</p></div>
-          <div class="card"><p>@d4pb</p></div>
-          <div class="card"><p>@deadland</p></div>
-          <div class="card"><p>@djmf</p></div>
-          <div class="card"><p>@dqki</p></div>
-          <div class="card"><p>@edvw</p></div>
-          <div class="card"><p>@elrj</p></div>
-          <div class="card"><p>@epjj</p></div>
-          <div class="card"><p>@f40m</p></div>
-          <div class="card"><p>@fdqj</p></div>
-          <div class="card"><p>@fdwb</p></div>
-          <div class="card"><p>@fhug</p></div>
-          <div class="card"><p>@fligr</p></div>
-          <div class="card"><p>@fliu</p></div>
-          <div class="card"><p>@furled</p></div>
-          <div class="card"><p>@fzld</p></div>
-          <div class="card"><p>@g3i9</p></div>
-          <div class="card"><p>@g3r1</p></div>
-          <div class="card"><p>@g6a9</p></div>
-          <div class="card"><p>@gepm</p></div>
-          <div class="card"><p>@gfsg</p></div>
-          <div class="card"><p>@ghif</p></div>
-          <div class="card"><p>@gohzilla</p></div>
-          <div class="card"><p>@gnx5</p></div>
-          <div class="card"><p>@gpvi</p></div>
-          <div class="card"><p>@gwrp</p></div>
-          <div class="card"><p>@gzw6</p></div>
-          <div class="card"><p>@_gt6</p></div>
-          <div class="card"><p>@hbxt</p></div>
-          <div class="card"><p>@hiqr</p></div>
-          <div class="card"><p>@hjgo</p></div>
-          <div class="card"><p>@hopb</p></div>
-          <div class="card"><p>@horne</p></div>
-          <div class="card"><p>@htbv</p></div>
-          <div class="card"><p>@hwye</p></div>
-          <div class="card"><p>@hxgl</p></div>
-          <div class="card"><p>@hyoc</p></div>
-          <div class="card"><p>@iemf</p></div>
-          <div class="card"><p>@ijyb</p></div>
-          <div class="card"><p>@istb</p></div>
-          <div class="card"><p>@jdga</p></div>
-          <div class="card"><p>@jeyv</p></div>
-          <div class="card"><p>@jfxz</p></div>
-          <div class="card"><p>@jk16</p></div>
-          <div class="card"><p>@jn4e</p></div>
-          <div class="card"><p>@jnfy</p></div>
-          <div class="card"><p>@jol4</p></div>
-          <div class="card"><p>@j41x</p></div>
-          <div class="card"><p>@kdlv</p></div>
-          <div class="card"><p>@kjui</p></div>
-          <div class="card"><p>@ky2t</p></div>
-          <div class="card"><p>@lkfj</p></div>
-          <div class="card"><p>@lndc</p></div>
-          <div class="card"><p>@lxc3</p></div>
-          <div class="card"><p>@mo4p</p></div>
-          <div class="card"><p>@movk</p></div>
-          <div class="card"><p>@mzye</p></div>
-          <div class="card"><p>@nc_t</p></div>
-          <div class="card"><p>@ngqo</p></div>
-          <div class="card"><p>@nlsd</p></div>
-          <div class="card"><p>@nqsz</p></div>
-          <div class="card"><p>@nyw0</p></div>
-          <div class="card"><p>@od4t</p></div>
-          <div class="card"><p>@ofqu</p></div>
-          <div class="card"><p>@ogjh</p></div>
-          <div class="card"><p>@orpc</p></div>
-          <div class="card"><p>@owgi</p></div>
-          <div class="card"><p>@oyql</p></div>
-          <div class="card"><p>@pashed</p></div>
-          <div class="card"><p>@pc62</p></div>
-          <div class="card"><p>@pf7i</p></div>
-          <div class="card"><p>@pfrv</p></div>
-          <div class="card"><p>@pmrc</p></div>
-          <div class="card"><p>@pxuj</p></div>
-          <div class="card"><p>@pvmn</p></div>
-          <div class="card"><p>@qpyj</p></div>
-          <div class="card"><p>@qt70</p></div>
-          <div class="card"><p>@qtud</p></div>
-          <div class="card"><p>@qzip</p></div>
-          <div class="card"><p>@qz37</p></div>
-          <div class="card"><p>@rbcy</p></div>
-          <div class="card"><p>@r46j</p></div>
-          <div class="card"><p>@raspado</p></div>
-          <div class="card"><p>@retightening</p></div>
-          <div class="card"><p>@rhpt</p></div>
-          <div class="card"><p>@rtgn</p></div>
-          <div class="card"><p>@ryjw</p></div>
-          <div class="card"><p>@stillen</p></div>
-          <div class="card"><p>@tae7</p></div>
-          <div class="card"><p>@tbgy</p></div>
-          <div class="card"><p>@tbpr</p></div>
-          <div class="card"><p>@tvrp</p></div>
-          <div class="card"><p>@t0ld</p></div>
-          <div class="card"><p>@udn4</p></div>
-          <div class="card"><p>@uvi6</p></div>
-          <div class="card"><p>@vcqw</p></div>
-          <div class="card"><p>@wcmb</p></div>
-          <div class="card"><p>@wgta</p></div>
-          <div class="card"><p>@wkgo</p></div>
-          <div class="card"><p>@wu1b</p></div>
-          <div class="card"><p>@wxas</p></div>
-          <div class="card"><p>@wyk0</p></div>
-          <div class="card"><p>@xe74</p></div>
-          <div class="card"><p>@xem0</p></div>
-          <div class="card"><p>@xgqw</p></div>
-          <div class="card"><p>@xkrq</p></div>
-          <div class="card"><p>@xpdg</p></div>
-          <div class="card"><p>@y0k_</p></div>
-          <div class="card"><p>@y0se</p></div>
-          <div class="card"><p>@yellowed</p></div>
-          <div class="card"><p>@yg0t</p></div>
-          <div class="card"><p>@ykdp</p></div>
-          <div class="card"><p>@ylsk</p></div>
-          <div class="card"><p>@ylxt</p></div>
-          <div class="card"><p>@z1gm</p></div>
-          <div class="card"><p>@zyqh</p></div>
-          <div class="card"><p>@1j8u</p></div>
-          <div class="card"><p>@27hp</p></div>
-          <div class="card"><p>@31hn</p></div>
-          <div class="card"><p>@3ukl</p></div>
-          <div class="card"><p>@4lj_</p></div>
-          <div class="card"><p>@4nvq</p></div>
-          <div class="card"><p>@4ra5</p></div>
-          <div class="card"><p>@5341</p></div>
-          <div class="card"><p>@54jd</p></div>
-          <div class="card"><p>@54yg</p></div>
-          <div class="card"><p>@6bze</p></div>
-          <div class="card"><p>@7__i</p></div>
-          <div class="card"><p>@9ag4</p></div>
-          <div class="card"><p>@9xcg</p></div>
-          <div class="card"><p>@6930</p></div>
-          <div class="card"><p>@1.6.4</p></div>
-          <div class="card"><p>@8.0.6</p></div>
-          <div class="card"><p>@00049</p></div>
-          <div class="card"><p>@009726</p></div>
-          <div class="card"><p>@01501</p></div>
-          <div class="card"><p>@01681</p></div>
-          <div class="card"><p>@111421</p></div>
-          <div class="card"><p>@13611</p></div>
-          <div class="card"><p>@15753</p></div>
-          <div class="card"><p>@21593</p></div>
-          <div class="card"><p>@26753</p></div>
-          <div class="card"><p>@36644</p></div>
-          <div class="card"><p>@39702</p></div>
-          <div class="card"><p>@41076</p></div>
-          <div class="card"><p>@43679</p></div>
-          <div class="card"><p>@5224367</p></div>
-          <div class="card"><p>@5235478</p></div>
-          <div class="card"><p>@54242</p></div>
-          <div class="card"><p>@67778</p></div>
-          <div class="card"><p>@73859</p></div>
-          <div class="card"><p>@81866</p></div>
-          <div class="card"><p>@86168</p></div>
-          <div class="card"><p>@92499</p></div>
-          <div class="card"><p>@94040</p></div>
-          <div class="card"><p>@94040499</p></div>
-          <div class="card"><p>@0817191439</p></div>
-          <div class="card"><p>@0892912917</p></div>
-          <div class="card"><p>@0988041686</p></div>
-        </div>
-      </section>
+  <!-- Sold: Instagram (FULL LIST) -->
+  <div class="modal" id="modal-sold-ig" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="soldIgTitle">
+    <div class="modal-content" role="document">
+      <button class="modal-close" data-modal-close type="button" aria-label="Close">×</button>
+      <h2 id="soldIgTitle">Sold on Instagram</h2>
+      <div class="card-grid">
+        <div class="card"><p>@afed</p></div>
+        <div class="card"><p>@ai7g</p></div>
+        <div class="card"><p>@allaying</p></div>
+        <div class="card"><p>@apah</p></div>
+        <div class="card"><p>@apoy</p></div>
+        <div class="card"><p>@azjb</p></div>
+        <div class="card"><p>@azpi</p></div>
+        <div class="card"><p>@bbpc</p></div>
+        <div class="card"><p>@bdng</p></div>
+        <div class="card"><p>@bkcg</p></div>
+        <div class="card"><p>@bped</p></div>
+        <div class="card"><p>@b9y0</p></div>
+        <div class="card"><p>@c0dp</p></div>
+        <div class="card"><p>@cains</p></div>
+        <div class="card"><p>@cfib</p></div>
+        <div class="card"><p>@cgli</p></div>
+        <div class="card"><p>@crnp</p></div>
+        <div class="card"><p>@covp</p></div>
+        <div class="card"><p>@csjf</p></div>
+        <div class="card"><p>@d4pb</p></div>
+        <div class="card"><p>@deadland</p></div>
+        <div class="card"><p>@djmf</p></div>
+        <div class="card"><p>@dqki</p></div>
+        <div class="card"><p>@edvw</p></div>
+        <div class="card"><p>@elrj</p></div>
+        <div class="card"><p>@epjj</p></div>
+        <div class="card"><p>@f40m</p></div>
+        <div class="card"><p>@fdqj</p></div>
+        <div class="card"><p>@fdwb</p></div>
+        <div class="card"><p>@fhug</p></div>
+        <div class="card"><p>@fligr</p></div>
+        <div class="card"><p>@fliu</p></div>
+        <div class="card"><p>@furled</p></div>
+        <div class="card"><p>@fzld</p></div>
+        <div class="card"><p>@g3i9</p></div>
+        <div class="card"><p>@g3r1</p></div>
+        <div class="card"><p>@g6a9</p></div>
+        <div class="card"><p>@gepm</p></div>
+        <div class="card"><p>@gfsg</p></div>
+        <div class="card"><p>@ghif</p></div>
+        <div class="card"><p>@gohzilla</p></div>
+        <div class="card"><p>@gnx5</p></div>
+        <div class="card"><p>@gpvi</p></div>
+        <div class="card"><p>@gwrp</p></div>
+        <div class="card"><p>@gzw6</p></div>
+        <div class="card"><p>@_gt6</p></div>
+        <div class="card"><p>@hbxt</p></div>
+        <div class="card"><p>@hiqr</p></div>
+        <div class="card"><p>@hjgo</p></div>
+        <div class="card"><p>@hopb</p></div>
+        <div class="card"><p>@horne</p></div>
+        <div class="card"><p>@htbv</p></div>
+        <div class="card"><p>@hwye</p></div>
+        <div class="card"><p>@hxgl</p></div>
+        <div class="card"><p>@hyoc</p></div>
+        <div class="card"><p>@iemf</p></div>
+        <div class="card"><p>@ijyb</p></div>
+        <div class="card"><p>@istb</p></div>
+        <div class="card"><p>@jdga</p></div>
+        <div class="card"><p>@jeyv</p></div>
+        <div class="card"><p>@jfxz</p></div>
+        <div class="card"><p>@jk16</p></div>
+        <div class="card"><p>@jn4e</p></div>
+        <div class="card"><p>@jnfy</p></div>
+        <div class="card"><p>@jol4</p></div>
+        <div class="card"><p>@j41x</p></div>
+        <div class="card"><p>@kdlv</p></div>
+        <div class="card"><p>@kjui</p></div>
+        <div class="card"><p>@ky2t</p></div>
+        <div class="card"><p>@lkfj</p></div>
+        <div class="card"><p>@lndc</p></div>
+        <div class="card"><p>@lxc3</p></div>
+        <div class="card"><p>@mo4p</p></div>
+        <div class="card"><p>@movk</p></div>
+        <div class="card"><p>@mzye</p></div>
+        <div class="card"><p>@nc_t</p></div>
+        <div class="card"><p>@ngqo</p></div>
+        <div class="card"><p>@nlsd</p></div>
+        <div class="card"><p>@nqsz</p></div>
+        <div class="card"><p>@nyw0</p></div>
+        <div class="card"><p>@od4t</p></div>
+        <div class="card"><p>@ofqu</p></div>
+        <div class="card"><p>@ogjh</p></div>
+        <div class="card"><p>@orpc</p></div>
+        <div class="card"><p>@owgi</p></div>
+        <div class="card"><p>@oyql</p></div>
+        <div class="card"><p>@pashed</p></div>
+        <div class="card"><p>@pc62</p></div>
+        <div class="card"><p>@pf7i</p></div>
+        <div class="card"><p>@pfrv</p></div>
+        <div class="card"><p>@pmrc</p></div>
+        <div class="card"><p>@pxuj</p></div>
+        <div class="card"><p>@pvmn</p></div>
+        <div class="card"><p>@qpyj</p></div>
+        <div class="card"><p>@qt70</p></div>
+        <div class="card"><p>@qtud</p></div>
+        <div class="card"><p>@qzip</p></div>
+        <div class="card"><p>@qz37</p></div>
+        <div class="card"><p>@rbcy</p></div>
+        <div class="card"><p>@r46j</p></div>
+        <div class="card"><p>@raspado</p></div>
+        <div class="card"><p>@retightening</p></div>
+        <div class="card"><p>@rhpt</p></div>
+        <div class="card"><p>@rtgn</p></div>
+        <div class="card"><p>@ryjw</p></div>
+        <div class="card"><p>@stillen</p></div>
+        <div class="card"><p>@tae7</p></div>
+        <div class="card"><p>@tbgy</p></div>
+        <div class="card"><p>@tbpr</p></div>
+        <div class="card"><p>@tvrp</p></div>
+        <div class="card"><p>@t0ld</p></div>
+        <div class="card"><p>@udn4</p></div>
+        <div class="card"><p>@uvi6</p></div>
+        <div class="card"><p>@vcqw</p></div>
+        <div class="card"><p>@wcmb</p></div>
+        <div class="card"><p>@wgta</p></div>
+        <div class="card"><p>@wkgo</p></div>
+        <div class="card"><p>@wu1b</p></div>
+        <div class="card"><p>@wxas</p></div>
+        <div class="card"><p>@wyk0</p></div>
+        <div class="card"><p>@xe74</p></div>
+        <div class="card"><p>@xem0</p></div>
+        <div class="card"><p>@xgqw</p></div>
+        <div class="card"><p>@xkrq</p></div>
+        <div class="card"><p>@xpdg</p></div>
+        <div class="card"><p>@y0k_</p></div>
+        <div class="card"><p>@y0se</p></div>
+        <div class="card"><p>@yellowed</p></div>
+        <div class="card"><p>@yg0t</p></div>
+        <div class="card"><p>@ykdp</p></div>
+        <div class="card"><p>@ylsk</p></div>
+        <div class="card"><p>@ylxt</p></div>
+        <div class="card"><p>@z1gm</p></div>
+        <div class="card"><p>@zyqh</p></div>
+        <div class="card"><p>@1j8u</p></div>
+        <div class="card"><p>@27hp</p></div>
+        <div class="card"><p>@31hn</p></div>
+        <div class="card"><p>@3ukl</p></div>
+        <div class="card"><p>@4lj_</p></div>
+        <div class="card"><p>@4nvq</p></div>
+        <div class="card"><p>@4ra5</p></div>
+        <div class="card"><p>@5341</p></div>
+        <div class="card"><p>@54jd</p></div>
+        <div class="card"><p>@54yg</p></div>
+        <div class="card"><p>@6bze</p></div>
+        <div class="card"><p>@7__i</p></div>
+        <div class="card"><p>@9ag4</p></div>
+        <div class="card"><p>@9xcg</p></div>
+        <div class="card"><p>@6930</p></div>
+        <div class="card"><p>@1.6.4</p></div>
+        <div class="card"><p>@8.0.6</p></div>
+        <div class="card"><p>@00049</p></div>
+        <div class="card"><p>@009726</p></div>
+        <div class="card"><p>@01501</p></div>
+        <div class="card"><p>@01681</p></div>
+        <div class="card"><p>@111421</p></div>
+        <div class="card"><p>@13611</p></div>
+        <div class="card"><p>@15753</p></div>
+        <div class="card"><p>@21593</p></div>
+        <div class="card"><p>@26753</p></div>
+        <div class="card"><p>@36644</p></div>
+        <div class="card"><p>@39702</p></div>
+        <div class="card"><p>@41076</p></div>
+        <div class="card"><p>@43679</p></div>
+        <div class="card"><p>@5224367</p></div>
+        <div class="card"><p>@5235478</p></div>
+        <div class="card"><p>@54242</p></div>
+        <div class="card"><p>@67778</p></div>
+        <div class="card"><p>@73859</p></div>
+        <div class="card"><p>@81866</p></div>
+        <div class="card"><p>@86168</p></div>
+        <div class="card"><p>@92499</p></div>
+        <div class="card"><p>@94040</p></div>
+        <div class="card"><p>@94040499</p></div>
+        <div class="card"><p>@0817191439</p></div>
+        <div class="card"><p>@0892912917</p></div>
+        <div class="card"><p>@0988041686</p></div>
+      </div>
+    </div>
+  </div>
 
-      <!-- TikTok sold list -->
-      <section id="sold-tt" class="sold-panel" role="tabpanel" aria-label="TikTok sold" hidden>
-        <div class="card-grid">
-          <!-- Add TikTok sold usernames here -->
-        </div>
-      </section>
+  <!-- Sold: TikTok -->
+  <div class="modal" id="modal-sold-tt" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="soldTtTitle">
+    <div class="modal-content" role="document">
+      <button class="modal-close" data-modal-close type="button" aria-label="Close">×</button>
+      <h2 id="soldTtTitle">Sold on TikTok</h2>
+      <div class="card-grid">
+        <!-- Add TikTok sold usernames here -->
+      </div>
+    </div>
+  </div>
 
-      <!-- CapCut sold list -->
-      <section id="sold-cc" class="sold-panel" role="tabpanel" aria-label="CapCut sold" hidden>
-        <div class="card-grid">
-          <!-- Add CapCut sold usernames here -->
-        </div>
-      </section>
+  <!-- Sold: CapCut -->
+  <div class="modal" id="modal-sold-cc" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="soldCcTitle">
+    <div class="modal-content" role="document">
+      <button class="modal-close" data-modal-close type="button" aria-label="Close">×</button>
+      <h2 id="soldCcTitle">Sold on CapCut</h2>
+      <div class="card-grid">
+        <!-- Add CapCut sold usernames here -->
+      </div>
+    </div>
+  </div>
 
-      <!-- X sold list -->
-      <section id="sold-x" class="sold-panel" role="tabpanel" aria-label="X sold" hidden>
-        <div class="card-grid">
-          <!-- Add X sold usernames here -->
-        </div>
-      </section>
+  <!-- Sold: X -->
+  <div class="modal" id="modal-sold-x" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="soldXTitle">
+    <div class="modal-content" role="document">
+      <button class="modal-close" data-modal-close type="button" aria-label="Close">×</button>
+      <h2 id="soldXTitle">Sold on X</h2>
+      <div class="card-grid">
+        <!-- Add X sold usernames here -->
+      </div>
     </div>
   </div>
 
   <script src="script.js" defer></script>
-
-  <!-- Tiny tab logic for "Sold Usernames" (kept separate from your main JS) -->
-  <script>
-    document.addEventListener('click', function(e){
-      const tab = e.target.closest('.filter[data-sold-tab]');
-      if (!tab) return;
-
-      const modal = tab.closest('#modal-sold');
-      if (!modal) return;
-
-      // Tabs
-      modal.querySelectorAll('.filter[data-sold-tab]').forEach(btn => {
-        btn.classList.remove('active');
-        btn.setAttribute('aria-selected', 'false');
-      });
-      tab.classList.add('active');
-      tab.setAttribute('aria-selected', 'true');
-
-      // Panels
-      const targetId = tab.getAttribute('data-sold-tab');
-      modal.querySelectorAll('.sold-panel').forEach(panel => {
-        if (panel.id === targetId) {
-          panel.removeAttribute('hidden');
-        } else {
-          panel.setAttribute('hidden', '');
-        }
-      });
-    });
-  </script>
 </body>
 </html>
