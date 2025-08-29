@@ -165,7 +165,6 @@
     toggleEl && toggleEl.addEventListener('click', ()=>{ showAll = !showAll; render(); });
 
     render();
-  })();
     }
   });
 })();
