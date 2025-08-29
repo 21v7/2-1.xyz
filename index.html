@@ -1,3 +1,4 @@
+<!-- index.html (cleaned + Sold Usernames modal added) -->
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
@@ -33,15 +34,15 @@
     <a href="https://x.com/213333" target="_blank" rel="noopener">Twitter</a>
   </div>
 
- <header>
-  <img
-    src="93C40C80-79AB-4157-89A6-7EE8F0284D88.jpeg?v=2"
-    alt="21 brand logo"
-    onerror="this.onerror=null; this.src='21.jpeg?v=2';"
-  >
-  <h1>21</h1>
-  <p class="intro">Established 2023 | 400+ Vouches<br>Formerly: imp / impairing</p>
-</header>
+  <header>
+    <img
+      src="93C40C80-79AB-4157-89A6-7EE8F0284D88.jpeg?v=2"
+      alt="21 brand logo"
+      onerror="this.onerror=null; this.src='21.jpeg?v=2';"
+    >
+    <h1>21</h1>
+    <p class="intro">Established 2023 | 400+ Vouches<br>Formerly: imp / impairing</p>
+  </header>
 
   <main class="content-section" id="main">
     <section class="stock-section" aria-labelledby="stockHeading">
@@ -149,7 +150,7 @@
         <ul>
           <li><strong>Proxy:</strong> I bring, negotiate and acquire on your behalf to protect privacy and pricing.</li>
           <li><strong>Escrow:</strong> Funds held safely by me until account is successfully secured. All Users come from very reputable sellers.</li>
-          <li><strong>Fees:</strong> Varies Case-by-case,depending on the username.</li>
+          <li><strong>Fees:</strong> Varies Case-by-case, depending on the username.</li>
         </ul>
       </div>
 
@@ -170,12 +171,64 @@
       <button class="modal-close" data-modal-close type="button" aria-label="Close">×</button>
       <h2 id="vouchTitle">Client Vouches</h2>
       <div class="card big">
-        <p>Highly Rated Seller, over 400+ succesful transactions. Fast, smooth, & stress free.</p>
-        <a class="card-button" href="https://t.me/id7221" target="_blank" rel="noopener">View Vouches</a>
+        <p>Highly Rated Seller, over 400+ successful transactions. Fast, smooth, & stress free.</p>
+        <a class="card-button" href="https://t.me/Now0pen" target="_blank" rel="noopener">View Vouches</a>
       </div>
-      
-  <script src="script.js" defer></script>
+    </div>
+  </div>
 
+  <!-- Sold Usernames (NEW) -->
+  <div class="modal" id="modal-sold" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="soldTitle">
+    <div class="modal-content" role="document">
+      <button class="modal-close" data-modal-close type="button" aria-label="Close">×</button>
+      <h2 id="soldTitle">Sold Usernames</h2>
+
+      <!-- Platform tabs (hooked via CSS/JS later) -->
+      <div class="filter-bar" role="tablist" aria-label="Sold platforms">
+        <button class="filter active" role="tab" aria-selected="true" data-sold-tab="sold-ig">Instagram</button>
+        <button class="filter" role="tab" aria-selected="false" data-sold-tab="sold-tt">TikTok</button>
+        <button class="filter" role="tab" aria-selected="false" data-sold-tab="sold-cc">CapCut</button>
+        <button class="filter" role="tab" aria-selected="false" data-sold-tab="sold-x">X</button>
+      </div>
+
+      <!-- Instagram sold list -->
+      <section id="sold-ig" class="sold-panel" role="tabpanel" aria-label="Instagram sold" data-visible="true">
+        <div class="card-grid">
+          <!-- Paste your sold Instagram usernames here as cards -->
+          <!-- Example: -->
+          <div class="card"><p>@afed</p></div>
+          <div class="card"><p>@ai7g</p></div>
+          <div class="card"><p>@allaying</p></div>
+          <div class="card"><p>@apah</p></div>
+          <div class="card"><p>@apoy</p></div>
+          <div class="card"><p>@azjb</p></div>
+          <!-- ...continue pasting the rest of your list here... -->
+        </div>
+      </section>
+
+      <!-- TikTok sold list -->
+      <section id="sold-tt" class="sold-panel" role="tabpanel" aria-label="TikTok sold" hidden>
+        <div class="card-grid">
+          <!-- Add TikTok sold usernames here -->
+        </div>
+      </section>
+
+      <!-- CapCut sold list -->
+      <section id="sold-cc" class="sold-panel" role="tabpanel" aria-label="CapCut sold" hidden>
+        <div class="card-grid">
+          <!-- Add CapCut sold usernames here -->
+        </div>
+      </section>
+
+      <!-- X sold list -->
+      <section id="sold-x" class="sold-panel" role="tabpanel" aria-label="X sold" hidden>
+        <div class="card-grid">
+          <!-- Add X sold usernames here -->
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script src="script.js" defer></script>
 </body>
 </html>
-
