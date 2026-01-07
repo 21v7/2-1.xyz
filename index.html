@@ -25,43 +25,32 @@
 </head>
 
 <body>
- <!-- Floating contact button -->
-<div class="contact-float" id="contactFloat">
-  <button
-    class="contact-float__btn"
-    id="contactToggle"
-    type="button"
-    aria-haspopup="dialog"
-    aria-expanded="false"
-    aria-controls="contactPanel"
-  >
-    Contact
-  </button>
+<!-- Floating Contact Button -->
+<button
+  class="contact-float__btn"
+  id="contactToggle"
+  type="button"
+  aria-label="Open contact links"
+  aria-expanded="false"
+  aria-controls="contactPanel"
+>
+  Contact
+</button>
 
-  <div
-    class="contact-float__panel"
-    id="contactPanel"
-    role="dialog"
-    aria-modal="false"
-    aria-label="Contact links"
-    hidden
-  >
-    <div class="contact-float__header">
-      <span class="contact-float__label">Links</span>
-      <button class="contact-float__close" id="contactClose" type="button" aria-label="Close">
-        ×
-      </button>
-    </div>
-
-    <nav class="contact-float__links" aria-label="Contact links list">
-      <a class="pill-link" href="https://oguser.com/21" target="_blank" rel="noopener">OGU</a>
-      <a class="pill-link" href="https://www.instagram.com/7521" target="_blank" rel="noopener">Instagram</a>
-      <a class="pill-link" href="https://t.me/id7321" target="_blank" rel="noopener">Telegram</a>
-      <a class="pill-link" href="https://solo.to/219" target="_blank" rel="noopener">more</a>
-    </nav>
+<!-- Floating Contact Panel -->
+<aside class="contact-float__panel" id="contactPanel" hidden aria-label="Contact links">
+  <div class="contact-float__panelHead">
+    <div class="contact-float__panelTitle">Links</div>
+    <button class="contact-float__close" id="contactClose" type="button" aria-label="Close contact panel">×</button>
   </div>
-</div>
 
+  <div class="contact-float__panelBody">
+    <a class="pill-link" href="https://oguser.com/21" target="_blank" rel="noopener">OGU</a>
+    <a class="pill-link" href="https://www.instagram.com/7521" target="_blank" rel="noopener">Instagram</a>
+    <a class="pill-link" href="https://t.me/id7321" target="_blank" rel="noopener">Telegram</a>
+    <a class="pill-link" href="https://solo.to/219" target="_blank" rel="noopener">more</a>
+  </div>
+</aside>
 
   <!-- Page shell (forces mobile look on desktop) -->
   <div class="page">
