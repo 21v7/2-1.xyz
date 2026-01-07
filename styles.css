@@ -438,3 +438,127 @@ html[data-theme="light"] .theme-toggle{
 body.modal-open{
   overflow:hidden;
 }
+/* ===========================
+   DESKTOP FIX PACK
+   Paste at bottom of styles.css
+   =========================== */
+
+/* 1) Desktop background intensity: less "busy" on web */
+@media (min-width: 820px){
+  .site::before{
+    opacity: .35; /* was heavier; desktop needs calmer grid */
+  }
+  .site::after{
+    opacity: .70;
+  }
+}
+
+/* 2) Give the whole page a stronger centered "frame" */
+@media (min-width: 820px){
+  .hero-header{
+    padding: 46px 18px 18px;
+  }
+
+  .content-section{
+    padding: 18px 18px 130px;
+  }
+
+  .hero-header__inner,
+  .content-section,
+  .site-footer{
+    max-width: 960px; /* tighter than 1000 for desktop */
+  }
+}
+
+/* 3) Header/hero: better desktop proportions */
+@media (min-width: 820px){
+  .brand-block{
+    padding: 20px 22px;
+    border-radius: 28px;
+  }
+  .brand-logo{
+    width: 64px;
+    height: 64px;
+    border-radius: 18px;
+  }
+  .brand-text h1{
+    font-size: 26px;
+  }
+  .intro{
+    font-size: 14px;
+    max-width: 56ch;
+  }
+}
+
+/* 4) Desktop launcher grid: no awkward huge buttons */
+@media (min-width: 820px){
+  .launcher-grid{
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+  }
+  .launcher{
+    height: 52px;
+    font-size: 14px;
+    letter-spacing: .03em;
+  }
+}
+
+/* 5) Modals: make them a true centered panel, not too tall/wide */
+@media (min-width: 820px){
+  .modal-content{
+    width: min(780px, calc(100vw - 44px)); /* narrower */
+    max-height: min(74vh, calc(100dvh - 90px)); /* less towering */
+    padding: 18px 18px 18px;
+    border-radius: 26px;
+  }
+
+  /* smoother scrolling in modal */
+  .modal-content{
+    scrollbar-gutter: stable;
+  }
+}
+
+/* 6) Desktop card grids: denser, more consistent */
+@media (min-width: 820px){
+  .card-grid{
+    grid-template-columns: repeat(3, minmax(0, 1fr)); /* stable */
+    gap: 12px;
+  }
+}
+@media (min-width: 1100px){
+  .card-grid{
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* 7) Card sizing: stop weird heights and spacing */
+@media (min-width: 820px){
+  .card{
+    padding: 14px;
+    border-radius: 18px;
+  }
+  .card p{
+    font-size: 13.5px;
+  }
+  .card a{
+    height: 38px;
+  }
+}
+
+/* 8) Floating bar: keep it clean on desktop (not huge) */
+@media (min-width: 820px){
+  .social-floating{
+    left: 18px;
+    right: 18px;
+    bottom: 18px;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+}
+
+/* 9) Minor: text rendering + crispness */
+@media (min-width: 820px){
+  body{
+    text-rendering: geometricPrecision;
+  }
+}
