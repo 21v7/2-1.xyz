@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
   <title>21 | Usernames & Social Media Services</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700&display=swap" rel="stylesheet">
 
   <!-- Prevent theme flash before CSS loads -->
@@ -20,37 +22,43 @@
 
   <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
-  <!-- Floating contacts (toggle lives INSIDE to avoid overlap everywhere) -->
-  <div class="social-floating visible" id="contactBar" role="navigation" aria-label="Contact links">
-    <span>Links</span>
+  <!-- Floating contact / quick links -->
+  <nav class="social-floating visible" id="contactBar" aria-label="Quick links">
+    <span class="bar-title">Links</span>
+
     <a href="https://oguser.com/21" target="_blank" rel="noopener">OGU</a>
     <a href="https://www.instagram.com/7521" target="_blank" rel="noopener">Instagram</a>
     <a href="https://t.me/id7321" target="_blank" rel="noopener">Telegram</a>
-    <a href="https://solo.to/219" target="_blank" rel="noopener">more</a>
+    <a href="https://solo.to/219" target="_blank" rel="noopener">More</a>
 
     <div class="bar-spacer" aria-hidden="true"></div>
 
-    <!-- Theme toggle inside the bar -->
-    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode">🌙</button>
-  </div>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle theme">🌙</button>
+  </nav>
 
-  <header>
-    <img
-      src="93C40C80-79AB-4157-89A6-7EE8F0284D88.jpeg?v=2"
-      alt="21 brand logo"
-      onerror="this.onerror=null; this.src='21.jpeg?v=2';"
-    >
-    <h1>𝟐𝟏® Shop</h1>
-    <p class="intro">Established 2023 | 550+ Vouches<br>Highly Rated, Well Connected.</p>
+  <header class="site-header">
+    <div class="brand">
+      <img
+        class="brand-logo"
+        src="93C40C80-79AB-4157-89A6-7EE8F0284D88.jpeg?v=2"
+        alt="21 brand logo"
+        onerror="this.onerror=null; this.src='21.jpeg?v=2';"
+      />
+      <div class="brand-text">
+        <h1 class="brand-title">𝟐𝟏® Shop</h1>
+        <p class="brand-subtitle">Established 2023 | 550+ Vouches<br>Highly Rated, Well Connected.</p>
+      </div>
+    </div>
   </header>
 
-  <main class="content-section" id="main">
-    <section class="stock-section" aria-labelledby="stockHeading">
-      <h2 id="stockHeading">Stock, Services & More</h2>
+  <main class="content" id="main" tabindex="-1">
+    <section class="section" aria-labelledby="stockHeading">
+      <h2 class="section-title" id="stockHeading">Stock, Services & More</h2>
 
-      <!-- Platform Launchers -->
-      <div class="launcher-grid" aria-label="Open a platform to view stock">
+      <!-- Launchers -->
+      <div class="launcher-grid" aria-label="Open a category">
         <button class="launcher" type="button" data-modal-target="#modal-instagram">Instagram</button>
         <button class="launcher" type="button" data-modal-target="#modal-tiktok">TikTok</button>
         <button class="launcher" type="button" data-modal-target="#modal-xdigits">𝕏</button>
@@ -63,66 +71,80 @@
     </section>
   </main>
 
-  <footer>
+  <footer class="site-footer">
     &copy; 2-1.xyz (2025) owned by @7521 (IG). All rights reserved.
   </footer>
 
-  <!-- ===== Modals ===== -->
+  <!-- ===================== -->
+  <!-- Modals / Bottom Sheets -->
+  <!-- ===================== -->
 
-<!-- Instagram -->
-<div class="modal" id="modal-instagram" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="igTitle">
-  <div class="modal-content" role="document">
-    <button class="modal-close" data-modal-close type="button" aria-label="Close">×</button>
+  <!-- Instagram -->
+  <div class="modal" id="modal-instagram" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="igTitle">
+    <div class="modal-content" role="document">
+      <div class="modal-bar">
+        <button class="modal-back" type="button" data-modal-back aria-label="Go back">← Back</button>
+        <button class="modal-close" type="button" data-modal-close aria-label="Close">×</button>
+      </div>
 
-    <h2 id="igTitle">Instagram</h2>
+      <h2 id="igTitle">Instagram</h2>
 
-    <div class="card-grid">
-      <div class="card"><p>@guia – $500</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-      <div class="card"><p>@gawx – $200</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-      <div class="card"><p>@la1o – $120</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-      <div class="card"><p>@qyjo – $80</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-      <div class="card"><p>@gr8b – $65</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-      <div class="card"><p>@epjg – $50</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-      <div class="card"><p>@qdhv – $40</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-      <div class="card"><p>@5ucy – $40</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-      <div class="card"><p>@bmo9 – $40</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-      <div class="card"><p>@qdhv – $35</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-      <div class="card"><p>@6ihv – $35</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+      <div class="card-grid">
+        <div class="card"><p>@guia – $500</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@gawx – $200</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@la1o – $120</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@qyjo – $80</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@gr8b – $65</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@epjg – $50</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@qdhv – $40</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@5ucy – $40</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@bmo9 – $40</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@qdhv – $35</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@6ihv – $35</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+      </div>
+
+      <h3 class="subhead">Available via Proxy</h3>
+      <div class="card-grid">
+        <div class="card">
+          <p>No users available</p>
+          <a href="https://t.me/id7321" target="_blank" rel="noopener">Unavailable</a>
+        </div>
+      </div>
     </div>
-
-    <!-- Proxy section -->
-    <h2 class="subhead">Available via Proxy</h2>
-
-    <div class="card-grid">
-      <div class="card"><p>no users available</p><a href="https://t.me/id7321" target="_blank" rel="noopener">unavailable</a></div>
-    </div>
-
   </div>
-</div>
-  
+
   <!-- TikTok -->
-<div class="modal" id="modal-tiktok" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="tiktokTitle">
-  <div class="modal-content" role="document">
-    <button class="modal-close" data-modal-close type="button" aria-label="Close">×</button>
-    <h2 id="tiktokTitle">TikTok</h2>
-    <div class="card-grid">
-      <div class="card"><p>@cgkq - $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-      <div class="card"><p>@fnzg - $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-      <div class="card"><p>@qcml - $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-      <div class="card"><p>@qpgs - $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-      <div class="card"><p>@tgzk - $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-      <div class="card"><p>@tpqg - $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-      <div class="card"><p>@ywtb - $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+  <div class="modal" id="modal-tiktok" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="tiktokTitle">
+    <div class="modal-content" role="document">
+      <div class="modal-bar">
+        <button class="modal-back" type="button" data-modal-back aria-label="Go back">← Back</button>
+        <button class="modal-close" type="button" data-modal-close aria-label="Close">×</button>
+      </div>
+
+      <h2 id="tiktokTitle">TikTok</h2>
+
+      <div class="card-grid">
+        <div class="card"><p>@cgkq - $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@fnzg - $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@qcml - $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@qpgs - $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@tgzk - $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@tpqg - $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@ywtb - $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+      </div>
     </div>
   </div>
-</div>
 
-  
   <!-- X -->
   <div class="modal" id="modal-xdigits" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="xTitle">
     <div class="modal-content" role="document">
-      <button class="modal-close" data-modal-close type="button" aria-label="Close">×</button>
+      <div class="modal-bar">
+        <button class="modal-back" type="button" data-modal-back aria-label="Go back">← Back</button>
+        <button class="modal-close" type="button" data-modal-close aria-label="Close">×</button>
+      </div>
+
       <h2 id="xTitle">𝕏</h2>
+
       <div class="card-grid">
         <div class="card"><p>@296945 – $20</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
         <div class="card"><p>@359893 – $20</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
@@ -135,114 +157,132 @@
     </div>
   </div>
 
-<!-- CapCut -->
-<div class="modal" id="modal-capcut" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="capcutTitle">
-  <div class="modal-content" role="document">
-    <button class="modal-close" data-modal-close type="button">×</button>
+  <!-- CapCut (launcher) -->
+  <div class="modal" id="modal-capcut" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="capcutTitle">
+    <div class="modal-content" role="document">
+      <div class="modal-bar">
+        <button class="modal-back" type="button" data-modal-back aria-label="Go back">← Back</button>
+        <button class="modal-close" type="button" data-modal-close aria-label="Close">×</button>
+      </div>
 
-    <h2 id="capcutTitle">CapCut</h2>
+      <h2 id="capcutTitle">CapCut</h2>
+      <p class="helper">Choose a category:</p>
 
-    <p style="margin-bottom:1rem;">Choose a category:</p>
-
-    <div class="launcher-grid">
-      <button class="launcher" type="button" data-modal-target="#modal-capcut-emotions">Emotions / Mental States</button>
-      <button class="launcher" type="button" data-modal-target="#modal-capcut-verbs">Verbs</button>
-      <button class="launcher" type="button" data-modal-target="#modal-capcut-concepts">Concepts</button>
+      <div class="launcher-grid" aria-label="CapCut categories">
+        <button class="launcher" type="button" data-modal-target="#modal-capcut-emotions">Emotions / Mental States</button>
+        <button class="launcher" type="button" data-modal-target="#modal-capcut-verbs">Verbs</button>
+        <button class="launcher" type="button" data-modal-target="#modal-capcut-concepts">Concepts</button>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- CapCut: Emotions and Mental States -->
-<div class="modal" id="modal-capcut-emotions" aria-hidden="true" role="dialog" aria-modal="true">
-  <div class="modal-content" role="document">
-    <button class="modal-close" data-modal-close type="button">×</button>
-    <h2>CapCut — Emotions / Mental States</h2>
+  <!-- CapCut: Emotions -->
+  <div class="modal" id="modal-capcut-emotions" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="capcutEmotionsTitle">
+    <div class="modal-content" role="document">
+      <div class="modal-bar">
+        <button class="modal-back" type="button" data-modal-back aria-label="Go back">← Back</button>
+        <button class="modal-close" type="button" data-modal-close aria-label="Close">×</button>
+      </div>
 
-    <div class="card-grid">
-      <div class="card"><p>@antisociality – $5</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
-      <div class="card"><p>@awful – $5</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
-      <div class="card"><p>@delusional – $5</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
-      <div class="card"><p>@ecstasy – $5</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
-      <div class="card"><p>@grateful – $5</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
-      <div class="card"><p>@impatient – $5</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
-      <div class="card"><p>@inferior – $5</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
-      <div class="card"><p>@irresponsible – $5</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
-      <div class="card"><p>@sore – $5</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
-      <div class="card"><p>@timid – $5</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
+      <h2 id="capcutEmotionsTitle">CapCut — Emotions / Mental States</h2>
+
+      <div class="card-grid">
+        <div class="card"><p>@antisociality – $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@awful – $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@delusional – $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@ecstasy – $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@grateful – $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@impatient – $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@inferior – $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@irresponsible – $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@sore – $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@timid – $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- CapCut: Verbs -->
-<div class="modal" id="modal-capcut-verbs" aria-hidden="true" role="dialog" aria-modal="true">
-  <div class="modal-content" role="document">
-    <button class="modal-close" data-modal-close type="button">×</button>
-    <h2>CapCut — Verbs</h2>
+  <!-- CapCut: Verbs -->
+  <div class="modal" id="modal-capcut-verbs" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="capcutVerbsTitle">
+    <div class="modal-content" role="document">
+      <div class="modal-bar">
+        <button class="modal-back" type="button" data-modal-back aria-label="Go back">← Back</button>
+        <button class="modal-close" type="button" data-modal-close aria-label="Close">×</button>
+      </div>
 
-    <div class="card-grid">
-      <div class="card"><p>@adjust – $5</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
-      <div class="card"><p>@alter – $5</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
-      <div class="card"><p>@avoid – $5</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
-      <div class="card"><p>@clap – $5</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
-      <div class="card"><p>@clean – $5</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
-      <div class="card"><p>@crop – $5</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
-      <div class="card"><p>@grasp – $5</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
-      <div class="card"><p>@jailbreak – $5</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
-      <div class="card"><p>@reap – $5</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
-      <div class="card"><p>@talk – $5</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
-      <div class="card"><p>@thread – $5</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
-      <div class="card"><p>@tied – $5</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
+      <h2 id="capcutVerbsTitle">CapCut — Verbs</h2>
+
+      <div class="card-grid">
+        <div class="card"><p>@adjust – $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@alter – $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@avoid – $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@clap – $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@clean – $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@crop – $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@grasp – $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@jailbreak – $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@reap – $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@talk – $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@thread – $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@tied – $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- CapCut: Concepts -->
-<div class="modal" id="modal-capcut-concepts" aria-hidden="true" role="dialog" aria-modal="true">
-  <div class="modal-content" role="document">
-    <button class="modal-close" data-modal-close type="button">×</button>
-    <h2>CapCut — Concepts</h2>
+  <!-- CapCut: Concepts -->
+  <div class="modal" id="modal-capcut-concepts" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="capcutConceptsTitle">
+    <div class="modal-content" role="document">
+      <div class="modal-bar">
+        <button class="modal-back" type="button" data-modal-back aria-label="Go back">← Back</button>
+        <button class="modal-close" type="button" data-modal-close aria-label="Close">×</button>
+      </div>
 
-    <div class="card-grid">
-      <div class="card"><p>@Bankroll – $8</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
-      <div class="card"><p>@Boost – $8</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
-      <div class="card"><p>@burden – $8</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
-      <div class="card"><p>@color – $8</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
-      <div class="card"><p>@creature – $8</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
-      <div class="card"><p>@hazard – $8</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
-      <div class="card"><p>@heroism – $8</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
-      <div class="card"><p>@offense – $8</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
-      <div class="card"><p>@orphan – $8</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
-      <div class="card"><p>@physic – $8</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
-      <div class="card"><p>@place – $8</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
-      <div class="card"><p>@producer – $8</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
-      <div class="card"><p>@rack – $8</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
-      <div class="card"><p>@ransom – $8</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
-      <div class="card"><p>@request – $8</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
-      <div class="card"><p>@sack – $8</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
-      <div class="card"><p>@science – $8</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
-      <div class="card"><p>@selfless – $8</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
-      <div class="card"><p>@spain – $8</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
-      <div class="card"><p>@spine – $8</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
-      <div class="card"><p>@stair – $8</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
-      <div class="card"><p>@stolen – $8</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
-      <div class="card"><p>@street – $8</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
-      <div class="card"><p>@supervillain – $8</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
-      <div class="card"><p>@tier – $8</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
-      <div class="card"><p>@tool – $8</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
-      <div class="card"><p>@topic – $8</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
-      <div class="card"><p>@turf – $8</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
-      <div class="card"><p>@want – $8</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
-      <div class="card"><p>@writer – $8</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
+      <h2 id="capcutConceptsTitle">CapCut — Concepts</h2>
+
+      <div class="card-grid">
+        <div class="card"><p>@Bankroll – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@Boost – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@burden – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@color – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@creature – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@hazard – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@heroism – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@offense – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@orphan – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@physic – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@place – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@producer – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@rack – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@ransom – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@request – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@sack – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@science – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@selfless – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@spain – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@spine – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@stair – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@stolen – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@street – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@supervillain – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@tier – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@tool – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@topic – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@turf – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@want – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@writer – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+      </div>
     </div>
   </div>
-</div>
-
 
   <!-- Vouches -->
   <div class="modal" id="modal-vouches" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="vouchTitle">
     <div class="modal-content" role="document">
-      <button class="modal-close" data-modal-close type="button" aria-label="Close">×</button>
+      <div class="modal-bar">
+        <button class="modal-back" type="button" data-modal-back aria-label="Go back">← Back</button>
+        <button class="modal-close" type="button" data-modal-close aria-label="Close">×</button>
+      </div>
+
       <h2 id="vouchTitle">Vouches</h2>
+
       <div class="card big">
         <p>Highly Rated Seller, Swapper & Escrow with over 550+ successful transactions.<br>Dealing with me is Fast, smooth & stress free.</p>
         <a class="card-button" href="https://t.me/id8121/53" target="_blank" rel="noopener">View Vouches</a>
@@ -250,50 +290,56 @@
     </div>
   </div>
 
-<!-- Escrow -->
-<div class="modal" id="modal-escrow" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="escrowTitle">
-  <div class="modal-content" role="document">
-    <button class="modal-close" data-modal-close type="button" aria-label="Close">×</button>
-    <h2 id="escrowTitle">Escrow</h2>
-    <div class="card big">
-      <p>
-        <strong>middleman service:</strong> with over 550+ successful deals.
-        I securely hold funds and assist with swaps to ensure safe, smooth,
-        and stress-free transactions.
-        <p><strong>fee:</strong> is <strong>8%</strong> of the deal.<br><strong>MM + Swap:</strong> if swap is required, no mm fee will be charged. only swap fee.<p>
-      <a class="card-button" href="https://t.me/id7321" target="_blank" rel="noopener">
-        Contact for Escrow
-      </a>
+  <!-- Escrow -->
+  <div class="modal" id="modal-escrow" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="escrowTitle">
+    <div class="modal-content" role="document">
+      <div class="modal-bar">
+        <button class="modal-back" type="button" data-modal-back aria-label="Go back">← Back</button>
+        <button class="modal-close" type="button" data-modal-close aria-label="Close">×</button>
+      </div>
+
+      <h2 id="escrowTitle">Escrow</h2>
+
+      <div class="card big">
+        <p><strong>Middleman service:</strong> with over 550+ successful deals. I securely hold funds and assist with swaps to ensure safe, smooth, and stress-free transactions.</p>
+        <p><strong>Fee:</strong> <strong>8%</strong> of the deal.<br><strong>MM + Swap:</strong> if a swap is required, no MM fee is charged — only swap fee.</p>
+
+        <a class="card-button" href="https://t.me/id7321" target="_blank" rel="noopener">Contact for Escrow</a>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- Swap -->
-<div class="modal" id="modal-swap" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="swapTitle">
-  <div class="modal-content" role="document">
-    <button class="modal-close" data-modal-close type="button" aria-label="Close">×</button>
-    <h2 id="swapTitle">Swap Service</h2>
-    <div class="card big">
-      <p>
-        Secure Instagram swap service available with or without insurance.
-        <p>
-          <strong>Uninsured:</strong> 8% (minimum $5). 
-        <p>
-          <strong>Insured:</strong> 15% (minimum $10).
-      </p>
-      <a class="card-button" href="https://t.me/id7321" target="_blank" rel="noopener">
-        Contact for Swap
-      </a>
+  <!-- Swap -->
+  <div class="modal" id="modal-swap" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="swapTitle">
+    <div class="modal-content" role="document">
+      <div class="modal-bar">
+        <button class="modal-back" type="button" data-modal-back aria-label="Go back">← Back</button>
+        <button class="modal-close" type="button" data-modal-close aria-label="Close">×</button>
+      </div>
+
+      <h2 id="swapTitle">Swap Service</h2>
+
+      <div class="card big">
+        <p>Secure Instagram swap service available with or without insurance.</p>
+        <p><strong>Uninsured:</strong> 8% (minimum $5).</p>
+        <p><strong>Insured:</strong> 15% (minimum $10).</p>
+
+        <a class="card-button" href="https://t.me/id7321" target="_blank" rel="noopener">Contact for Swap</a>
+      </div>
     </div>
   </div>
-</div>
 
-  <!-- Sold Usernames (launcher modal) -->
+  <!-- Sold Usernames (launcher) -->
   <div class="modal" id="modal-sold" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="soldTitle">
     <div class="modal-content" role="document">
-      <button class="modal-close" data-modal-close type="button" aria-label="Close">×</button>
+      <div class="modal-bar">
+        <button class="modal-back" type="button" data-modal-back aria-label="Go back">← Back</button>
+        <button class="modal-close" type="button" data-modal-close aria-label="Close">×</button>
+      </div>
+
       <h2 id="soldTitle">Sold Usernames</h2>
-      <div class="launcher-grid">
+
+      <div class="launcher-grid" aria-label="Sold username categories">
         <button class="launcher" type="button" data-modal-target="#modal-sold-ig">Instagram</button>
         <button class="launcher" type="button" data-modal-target="#modal-sold-tt">TikTok</button>
         <button class="launcher" type="button" data-modal-target="#modal-sold-cc">CapCut</button>
@@ -302,11 +348,19 @@
     </div>
   </div>
 
-  <!-- Sold: Instagram (FULL LIST) -->
+  <!-- Sold: Instagram -->
   <div class="modal" id="modal-sold-ig" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="soldIgTitle">
     <div class="modal-content" role="document">
-      <button class="modal-close" data-modal-close type="button" aria-label="Close">×</button>
+      <div class="modal-bar">
+        <button class="modal-back" type="button" data-modal-back aria-label="Go back">← Back</button>
+        <button class="modal-close" type="button" data-modal-close aria-label="Close">×</button>
+      </div>
+
       <h2 id="soldIgTitle">Instagrams Sold: 200+</h2>
+
+      <!-- Optional: add search later via CSS/JS -->
+      <!-- <input class="search" type="search" placeholder="Search sold usernames…" data-filter="#modal-sold-ig"> -->
+
       <div class="card-grid">
         <div class="card"><p>@afed</p></div>
         <div class="card"><p>@ai7g</p></div>
@@ -524,50 +578,54 @@
   <!-- Sold: TikTok -->
   <div class="modal" id="modal-sold-tt" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="soldTtTitle">
     <div class="modal-content" role="document">
-      <button class="modal-close" data-modal-close type="button" aria-label="Close">×</button>
-      <h2 id="soldTtTitle">TikToks Sold TikToks</h2>
+      <div class="modal-bar">
+        <button class="modal-back" type="button" data-modal-back aria-label="Go back">← Back</button>
+        <button class="modal-close" type="button" data-modal-close aria-label="Close">×</button>
+      </div>
+
+      <h2 id="soldTtTitle">TikToks Sold</h2>
+
       <div class="card-grid">
-      <div class="card"><p>@aa (font)</p></div>
-      <div class="card"><p>@anmp</p></div>
-      <div class="card"><p>@bm73</p></div>
-      <div class="card"><p>@c (font)</p></div>
-      <div class="card"><p>@cjly</p></div>
-      <div class="card"><p>@dd (font)</p></div>
-      <div class="card"><p>@eotv</p></div>
-      <div class="card"><p>@god (font)</p></div>
-      <div class="card"><p>@gb3</p></div>
-      <div class="card"><p>@m3me</p></div>
-      <div class="card"><p>@mtwi</p></div>
-      <div class="card"><p>@hgfx</p></div>
-      <div class="card"><p>@ibga</p></div>
-      <div class="card"><p>@jlmo</p></div>
-      <div class="card"><p>@kczs</p></div>
-      <div class="card"><p>@kfex</p></div>
-      <div class="card"><p>@kbry</p></div>
-      <div class="card"><p>@los (font)</p></div>
-      <div class="card"><p>@luey</p></div>
-      <div class="card"><p>@peqw</p></div>
-      <div class="card"><p>@tazn</p></div>
-      <div class="card"><p>@tnsg</p></div>
-      <div class="card"><p>@uhvf</p></div>
-      <div class="card"><p>@uftl</p></div>
-      <div class="card"><p>@v1to</p></div>
-      <div class="card"><p>@xywr</p></div>
-      <div class="card"><p>@xdmi</p></div>
-      <div class="card"><p>@zmqr</p></div>
-      <div class="card"><p>@00 (font)</p></div>
-      <div class="card"><p>@11 (font)</p></div>
-      <div class="card"><p>@21 (font)</p></div>
-      <div class="card"><p>@99 (font)</p></div>
-      <div class="card"><p>@55854 (font)</p></div>
-      <div class="card"><p>@318502 (font)</p></div>
-      <div class="card"><p>@520491 (font)</p></div>
-      <div class="card"><p>@529416 (font)</p></div>
-      <div class="card"><p>@810153 (font)</p></div>
-      <div class="card"><p>@827513 (font)</p></div>
-      <div class="card"><p>@829114 (font)</p></div>
-      <div class="card"><p>@ invisibleuser(font)</p></div>
-      
+        <div class="card"><p>@aa (font)</p></div>
+        <div class="card"><p>@anmp</p></div>
+        <div class="card"><p>@bm73</p></div>
+        <div class="card"><p>@c (font)</p></div>
+        <div class="card"><p>@cjly</p></div>
+        <div class="card"><p>@dd (font)</p></div>
+        <div class="card"><p>@eotv</p></div>
+        <div class="card"><p>@god (font)</p></div>
+        <div class="card"><p>@gb3</p></div>
+        <div class="card"><p>@m3me</p></div>
+        <div class="card"><p>@mtwi</p></div>
+        <div class="card"><p>@hgfx</p></div>
+        <div class="card"><p>@ibga</p></div>
+        <div class="card"><p>@jlmo</p></div>
+        <div class="card"><p>@kczs</p></div>
+        <div class="card"><p>@kfex</p></div>
+        <div class="card"><p>@kbry</p></div>
+        <div class="card"><p>@los (font)</p></div>
+        <div class="card"><p>@luey</p></div>
+        <div class="card"><p>@peqw</p></div>
+        <div class="card"><p>@tazn</p></div>
+        <div class="card"><p>@tnsg</p></div>
+        <div class="card"><p>@uhvf</p></div>
+        <div class="card"><p>@uftl</p></div>
+        <div class="card"><p>@v1to</p></div>
+        <div class="card"><p>@xywr</p></div>
+        <div class="card"><p>@xdmi</p></div>
+        <div class="card"><p>@zmqr</p></div>
+        <div class="card"><p>@00 (font)</p></div>
+        <div class="card"><p>@11 (font)</p></div>
+        <div class="card"><p>@21 (font)</p></div>
+        <div class="card"><p>@99 (font)</p></div>
+        <div class="card"><p>@55854 (font)</p></div>
+        <div class="card"><p>@318502 (font)</p></div>
+        <div class="card"><p>@520491 (font)</p></div>
+        <div class="card"><p>@529416 (font)</p></div>
+        <div class="card"><p>@810153 (font)</p></div>
+        <div class="card"><p>@827513 (font)</p></div>
+        <div class="card"><p>@829114 (font)</p></div>
+        <div class="card"><p>@invisibleuser (font)</p></div>
       </div>
     </div>
   </div>
@@ -575,12 +633,17 @@
   <!-- Sold: CapCut -->
   <div class="modal" id="modal-sold-cc" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="soldCcTitle">
     <div class="modal-content" role="document">
-      <button class="modal-close" data-modal-close type="button" aria-label="Close">×</button>
+      <div class="modal-bar">
+        <button class="modal-back" type="button" data-modal-back aria-label="Go back">← Back</button>
+        <button class="modal-close" type="button" data-modal-close aria-label="Close">×</button>
+      </div>
+
       <h2 id="soldCcTitle">Sold — CapCut</h2>
+
       <div class="card-grid">
-       <div class="card"><p>@riot</p></div>
-       <div class="card"><p>@tool</p></div>
-      <div class="card"><p>@ecstacy</p></div>
+        <div class="card"><p>@riot</p></div>
+        <div class="card"><p>@tool</p></div>
+        <div class="card"><p>@ecstacy</p></div>
       </div>
     </div>
   </div>
@@ -588,30 +651,36 @@
   <!-- Sold: X -->
   <div class="modal" id="modal-sold-x" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="soldXTitle">
     <div class="modal-content" role="document">
-      <button class="modal-close" data-modal-close type="button" aria-label="Close">×</button>
+      <div class="modal-bar">
+        <button class="modal-back" type="button" data-modal-back aria-label="Go back">← Back</button>
+        <button class="modal-close" type="button" data-modal-close aria-label="Close">×</button>
+      </div>
+
       <h2 id="soldXTitle">Sold — X</h2>
+
       <div class="card-grid">
-      <div class="card"><p>@o2x_</p></div>
-      <div class="card"><p>@codq</p></div>
-      <div class="card"><p>@r0un</p></div>
-      <div class="card"><p>@yg65</p></div>
-      <div class="card"><p>@_dine</p></div>
-      <div class="card"><p>@billi0n</p></div>
-      <div class="card"><p>@topage</p></div>
-      <div class="card"><p>@delacree</p></div>
-      <div class="card"><p>@paqmane</p></div>
-      <div class="card"><p>@vendetta_</p></div>
-      <div class="card"><p>@062183</p></div>
-      <div class="card"><p>@173601</p></div>
-      <div class="card"><p>@179170</p></div>
-      <div class="card"><p>@222824</p></div>
-      <div class="card"><p>@230204</p></div>
-      <div class="card"><p>@313178</p></div>
-      <div class="card"><p>@337723</p></div>
+        <div class="card"><p>@o2x_</p></div>
+        <div class="card"><p>@codq</p></div>
+        <div class="card"><p>@r0un</p></div>
+        <div class="card"><p>@yg65</p></div>
+        <div class="card"><p>@_dine</p></div>
+        <div class="card"><p>@billi0n</p></div>
+        <div class="card"><p>@topage</p></div>
+        <div class="card"><p>@delacree</p></div>
+        <div class="card"><p>@paqmane</p></div>
+        <div class="card"><p>@vendetta_</p></div>
+        <div class="card"><p>@062183</p></div>
+        <div class="card"><p>@173601</p></div>
+        <div class="card"><p>@179170</p></div>
+        <div class="card"><p>@222824</p></div>
+        <div class="card"><p>@230204</p></div>
+        <div class="card"><p>@313178</p></div>
+        <div class="card"><p>@337723</p></div>
       </div>
     </div>
   </div>
 
+  <!-- Script -->
   <script src="script.js" defer></script>
 </body>
 </html>
