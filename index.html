@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
   <title>21 | Usernames & Social Media Services</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700&display=swap" rel="stylesheet">
 
   <!-- Prevent theme flash before CSS loads -->
@@ -23,42 +22,43 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 
-<body>
-  <!-- Floating contact / quick links -->
-  <nav class="social-floating visible" id="contactBar" aria-label="Quick links">
-    <span class="bar-title">Links</span>
-
+<body class="site">
+  <!-- Floating contacts -->
+  <div class="social-floating visible" id="contactBar" role="navigation" aria-label="Contact links">
+    <span class="links-label">Links</span>
     <a href="https://oguser.com/21" target="_blank" rel="noopener">OGU</a>
     <a href="https://www.instagram.com/7521" target="_blank" rel="noopener">Instagram</a>
     <a href="https://t.me/id7321" target="_blank" rel="noopener">Telegram</a>
-    <a href="https://solo.to/219" target="_blank" rel="noopener">More</a>
+    <a href="https://solo.to/219" target="_blank" rel="noopener">more</a>
 
     <div class="bar-spacer" aria-hidden="true"></div>
 
-    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle theme">🌙</button>
-  </nav>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode">🌙</button>
+  </div>
 
-  <header class="site-header">
-    <div class="brand">
-      <img
-        class="brand-logo"
-        src="93C40C80-79AB-4157-89A6-7EE8F0284D88.jpeg?v=2"
-        alt="21 brand logo"
-        onerror="this.onerror=null; this.src='21.jpeg?v=2';"
-      />
-      <div class="brand-text">
-        <h1 class="brand-title">𝟐𝟏® Shop</h1>
-        <p class="brand-subtitle">Established 2023 | 550+ Vouches<br>Highly Rated, Well Connected.</p>
+  <header class="hero-header">
+    <div class="hero-header__inner">
+      <div class="brand-block">
+        <img
+          class="brand-logo"
+          src="93C40C80-79AB-4157-89A6-7EE8F0284D88.jpeg?v=2"
+          alt="21 brand logo"
+          onerror="this.onerror=null; this.src='21.jpeg?v=2';"
+        >
+        <div class="brand-text">
+          <h1>𝟐𝟏® Shop</h1>
+          <p class="intro">Established 2023 | 550+ Vouches<br>Highly Rated, Well Connected.</p>
+        </div>
       </div>
     </div>
   </header>
 
-  <main class="content" id="main" tabindex="-1">
-    <section class="section" aria-labelledby="stockHeading">
-      <h2 class="section-title" id="stockHeading">Stock, Services & More</h2>
+  <main class="content-section" id="main">
+    <section class="stock-section" aria-labelledby="stockHeading">
+      <h2 id="stockHeading">Stock, Services & More</h2>
 
-      <!-- Launchers -->
-      <div class="launcher-grid" aria-label="Open a category">
+      <!-- Platform Launchers -->
+      <div class="launcher-grid" aria-label="Open a platform to view stock">
         <button class="launcher" type="button" data-modal-target="#modal-instagram">Instagram</button>
         <button class="launcher" type="button" data-modal-target="#modal-tiktok">TikTok</button>
         <button class="launcher" type="button" data-modal-target="#modal-xdigits">𝕏</button>
@@ -75,17 +75,17 @@
     &copy; 2-1.xyz (2025) owned by @7521 (IG). All rights reserved.
   </footer>
 
-  <!-- ===================== -->
-  <!-- Modals / Bottom Sheets -->
-  <!-- ===================== -->
+  <!-- =======================
+       MODALS (PRESERVED DATA)
+       JS will:
+       - convert the X to a Back button
+       - wire history navigation
+       ======================= -->
 
   <!-- Instagram -->
   <div class="modal" id="modal-instagram" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="igTitle">
     <div class="modal-content" role="document">
-      <div class="modal-bar">
-        <button class="modal-back" type="button" data-modal-back aria-label="Go back">← Back</button>
-        <button class="modal-close" type="button" data-modal-close aria-label="Close">×</button>
-      </div>
+      <button class="modal-close" data-modal-close type="button" aria-label="Back">×</button>
 
       <h2 id="igTitle">Instagram</h2>
 
@@ -103,12 +103,9 @@
         <div class="card"><p>@6ihv – $35</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
       </div>
 
-      <h3 class="subhead">Available via Proxy</h3>
+      <h2 class="subhead">Available via Proxy</h2>
       <div class="card-grid">
-        <div class="card">
-          <p>No users available</p>
-          <a href="https://t.me/id7321" target="_blank" rel="noopener">Unavailable</a>
-        </div>
+        <div class="card"><p>no users available</p><a href="https://t.me/id7321" target="_blank" rel="noopener">unavailable</a></div>
       </div>
     </div>
   </div>
@@ -116,13 +113,8 @@
   <!-- TikTok -->
   <div class="modal" id="modal-tiktok" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="tiktokTitle">
     <div class="modal-content" role="document">
-      <div class="modal-bar">
-        <button class="modal-back" type="button" data-modal-back aria-label="Go back">← Back</button>
-        <button class="modal-close" type="button" data-modal-close aria-label="Close">×</button>
-      </div>
-
+      <button class="modal-close" data-modal-close type="button" aria-label="Back">×</button>
       <h2 id="tiktokTitle">TikTok</h2>
-
       <div class="card-grid">
         <div class="card"><p>@cgkq - $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
         <div class="card"><p>@fnzg - $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
@@ -138,13 +130,8 @@
   <!-- X -->
   <div class="modal" id="modal-xdigits" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="xTitle">
     <div class="modal-content" role="document">
-      <div class="modal-bar">
-        <button class="modal-back" type="button" data-modal-back aria-label="Go back">← Back</button>
-        <button class="modal-close" type="button" data-modal-close aria-label="Close">×</button>
-      </div>
-
+      <button class="modal-close" data-modal-close type="button" aria-label="Back">×</button>
       <h2 id="xTitle">𝕏</h2>
-
       <div class="card-grid">
         <div class="card"><p>@296945 – $20</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
         <div class="card"><p>@359893 – $20</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
@@ -157,18 +144,13 @@
     </div>
   </div>
 
-  <!-- CapCut (launcher) -->
+  <!-- CapCut -->
   <div class="modal" id="modal-capcut" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="capcutTitle">
     <div class="modal-content" role="document">
-      <div class="modal-bar">
-        <button class="modal-back" type="button" data-modal-back aria-label="Go back">← Back</button>
-        <button class="modal-close" type="button" data-modal-close aria-label="Close">×</button>
-      </div>
-
+      <button class="modal-close" data-modal-close type="button" aria-label="Back">×</button>
       <h2 id="capcutTitle">CapCut</h2>
-      <p class="helper">Choose a category:</p>
-
-      <div class="launcher-grid" aria-label="CapCut categories">
+      <p class="soft">Choose a category:</p>
+      <div class="launcher-grid">
         <button class="launcher" type="button" data-modal-target="#modal-capcut-emotions">Emotions / Mental States</button>
         <button class="launcher" type="button" data-modal-target="#modal-capcut-verbs">Verbs</button>
         <button class="launcher" type="button" data-modal-target="#modal-capcut-concepts">Concepts</button>
@@ -176,16 +158,11 @@
     </div>
   </div>
 
-  <!-- CapCut: Emotions -->
-  <div class="modal" id="modal-capcut-emotions" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="capcutEmotionsTitle">
+  <!-- CapCut: Emotions and Mental States -->
+  <div class="modal" id="modal-capcut-emotions" aria-hidden="true" role="dialog" aria-modal="true">
     <div class="modal-content" role="document">
-      <div class="modal-bar">
-        <button class="modal-back" type="button" data-modal-back aria-label="Go back">← Back</button>
-        <button class="modal-close" type="button" data-modal-close aria-label="Close">×</button>
-      </div>
-
-      <h2 id="capcutEmotionsTitle">CapCut — Emotions / Mental States</h2>
-
+      <button class="modal-close" data-modal-close type="button" aria-label="Back">×</button>
+      <h2>CapCut — Emotions / Mental States</h2>
       <div class="card-grid">
         <div class="card"><p>@antisociality – $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
         <div class="card"><p>@awful – $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
@@ -202,15 +179,10 @@
   </div>
 
   <!-- CapCut: Verbs -->
-  <div class="modal" id="modal-capcut-verbs" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="capcutVerbsTitle">
+  <div class="modal" id="modal-capcut-verbs" aria-hidden="true" role="dialog" aria-modal="true">
     <div class="modal-content" role="document">
-      <div class="modal-bar">
-        <button class="modal-back" type="button" data-modal-back aria-label="Go back">← Back</button>
-        <button class="modal-close" type="button" data-modal-close aria-label="Close">×</button>
-      </div>
-
-      <h2 id="capcutVerbsTitle">CapCut — Verbs</h2>
-
+      <button class="modal-close" data-modal-close type="button" aria-label="Back">×</button>
+      <h2>CapCut — Verbs</h2>
       <div class="card-grid">
         <div class="card"><p>@adjust – $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
         <div class="card"><p>@alter – $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
@@ -229,15 +201,10 @@
   </div>
 
   <!-- CapCut: Concepts -->
-  <div class="modal" id="modal-capcut-concepts" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="capcutConceptsTitle">
+  <div class="modal" id="modal-capcut-concepts" aria-hidden="true" role="dialog" aria-modal="true">
     <div class="modal-content" role="document">
-      <div class="modal-bar">
-        <button class="modal-back" type="button" data-modal-back aria-label="Go back">← Back</button>
-        <button class="modal-close" type="button" data-modal-close aria-label="Close">×</button>
-      </div>
-
-      <h2 id="capcutConceptsTitle">CapCut — Concepts</h2>
-
+      <button class="modal-close" data-modal-close type="button" aria-label="Back">×</button>
+      <h2>CapCut — Concepts</h2>
       <div class="card-grid">
         <div class="card"><p>@Bankroll – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
         <div class="card"><p>@Boost – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
@@ -276,13 +243,8 @@
   <!-- Vouches -->
   <div class="modal" id="modal-vouches" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="vouchTitle">
     <div class="modal-content" role="document">
-      <div class="modal-bar">
-        <button class="modal-back" type="button" data-modal-back aria-label="Go back">← Back</button>
-        <button class="modal-close" type="button" data-modal-close aria-label="Close">×</button>
-      </div>
-
+      <button class="modal-close" data-modal-close type="button" aria-label="Back">×</button>
       <h2 id="vouchTitle">Vouches</h2>
-
       <div class="card big">
         <p>Highly Rated Seller, Swapper & Escrow with over 550+ successful transactions.<br>Dealing with me is Fast, smooth & stress free.</p>
         <a class="card-button" href="https://t.me/id8121/53" target="_blank" rel="noopener">View Vouches</a>
@@ -293,17 +255,15 @@
   <!-- Escrow -->
   <div class="modal" id="modal-escrow" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="escrowTitle">
     <div class="modal-content" role="document">
-      <div class="modal-bar">
-        <button class="modal-back" type="button" data-modal-back aria-label="Go back">← Back</button>
-        <button class="modal-close" type="button" data-modal-close aria-label="Close">×</button>
-      </div>
-
+      <button class="modal-close" data-modal-close type="button" aria-label="Back">×</button>
       <h2 id="escrowTitle">Escrow</h2>
-
       <div class="card big">
-        <p><strong>Middleman service:</strong> with over 550+ successful deals. I securely hold funds and assist with swaps to ensure safe, smooth, and stress-free transactions.</p>
-        <p><strong>Fee:</strong> <strong>8%</strong> of the deal.<br><strong>MM + Swap:</strong> if a swap is required, no MM fee is charged — only swap fee.</p>
-
+        <p>
+          <strong>middleman service:</strong> with over 550+ successful deals.
+          I securely hold funds and assist with swaps to ensure safe, smooth,
+          and stress-free transactions.
+        </p>
+        <p><strong>fee:</strong> is <strong>8%</strong> of the deal.<br><strong>MM + Swap:</strong> if swap is required, no mm fee will be charged. only swap fee.</p>
         <a class="card-button" href="https://t.me/id7321" target="_blank" rel="noopener">Contact for Escrow</a>
       </div>
     </div>
@@ -312,34 +272,23 @@
   <!-- Swap -->
   <div class="modal" id="modal-swap" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="swapTitle">
     <div class="modal-content" role="document">
-      <div class="modal-bar">
-        <button class="modal-back" type="button" data-modal-back aria-label="Go back">← Back</button>
-        <button class="modal-close" type="button" data-modal-close aria-label="Close">×</button>
-      </div>
-
+      <button class="modal-close" data-modal-close type="button" aria-label="Back">×</button>
       <h2 id="swapTitle">Swap Service</h2>
-
       <div class="card big">
         <p>Secure Instagram swap service available with or without insurance.</p>
         <p><strong>Uninsured:</strong> 8% (minimum $5).</p>
         <p><strong>Insured:</strong> 15% (minimum $10).</p>
-
         <a class="card-button" href="https://t.me/id7321" target="_blank" rel="noopener">Contact for Swap</a>
       </div>
     </div>
   </div>
 
-  <!-- Sold Usernames (launcher) -->
+  <!-- Sold Usernames (launcher modal) -->
   <div class="modal" id="modal-sold" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="soldTitle">
     <div class="modal-content" role="document">
-      <div class="modal-bar">
-        <button class="modal-back" type="button" data-modal-back aria-label="Go back">← Back</button>
-        <button class="modal-close" type="button" data-modal-close aria-label="Close">×</button>
-      </div>
-
+      <button class="modal-close" data-modal-close type="button" aria-label="Back">×</button>
       <h2 id="soldTitle">Sold Usernames</h2>
-
-      <div class="launcher-grid" aria-label="Sold username categories">
+      <div class="launcher-grid">
         <button class="launcher" type="button" data-modal-target="#modal-sold-ig">Instagram</button>
         <button class="launcher" type="button" data-modal-target="#modal-sold-tt">TikTok</button>
         <button class="launcher" type="button" data-modal-target="#modal-sold-cc">CapCut</button>
@@ -348,19 +297,11 @@
     </div>
   </div>
 
-  <!-- Sold: Instagram -->
+  <!-- Sold: Instagram (FULL LIST) -->
   <div class="modal" id="modal-sold-ig" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="soldIgTitle">
     <div class="modal-content" role="document">
-      <div class="modal-bar">
-        <button class="modal-back" type="button" data-modal-back aria-label="Go back">← Back</button>
-        <button class="modal-close" type="button" data-modal-close aria-label="Close">×</button>
-      </div>
-
+      <button class="modal-close" data-modal-close type="button" aria-label="Back">×</button>
       <h2 id="soldIgTitle">Instagrams Sold: 200+</h2>
-
-      <!-- Optional: add search later via CSS/JS -->
-      <!-- <input class="search" type="search" placeholder="Search sold usernames…" data-filter="#modal-sold-ig"> -->
-
       <div class="card-grid">
         <div class="card"><p>@afed</p></div>
         <div class="card"><p>@ai7g</p></div>
@@ -578,13 +519,8 @@
   <!-- Sold: TikTok -->
   <div class="modal" id="modal-sold-tt" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="soldTtTitle">
     <div class="modal-content" role="document">
-      <div class="modal-bar">
-        <button class="modal-back" type="button" data-modal-back aria-label="Go back">← Back</button>
-        <button class="modal-close" type="button" data-modal-close aria-label="Close">×</button>
-      </div>
-
-      <h2 id="soldTtTitle">TikToks Sold</h2>
-
+      <button class="modal-close" data-modal-close type="button" aria-label="Back">×</button>
+      <h2 id="soldTtTitle">TikToks Sold TikToks</h2>
       <div class="card-grid">
         <div class="card"><p>@aa (font)</p></div>
         <div class="card"><p>@anmp</p></div>
@@ -625,7 +561,7 @@
         <div class="card"><p>@810153 (font)</p></div>
         <div class="card"><p>@827513 (font)</p></div>
         <div class="card"><p>@829114 (font)</p></div>
-        <div class="card"><p>@invisibleuser (font)</p></div>
+        <div class="card"><p>@ invisibleuser(font)</p></div>
       </div>
     </div>
   </div>
@@ -633,13 +569,8 @@
   <!-- Sold: CapCut -->
   <div class="modal" id="modal-sold-cc" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="soldCcTitle">
     <div class="modal-content" role="document">
-      <div class="modal-bar">
-        <button class="modal-back" type="button" data-modal-back aria-label="Go back">← Back</button>
-        <button class="modal-close" type="button" data-modal-close aria-label="Close">×</button>
-      </div>
-
+      <button class="modal-close" data-modal-close type="button" aria-label="Back">×</button>
       <h2 id="soldCcTitle">Sold — CapCut</h2>
-
       <div class="card-grid">
         <div class="card"><p>@riot</p></div>
         <div class="card"><p>@tool</p></div>
@@ -651,13 +582,8 @@
   <!-- Sold: X -->
   <div class="modal" id="modal-sold-x" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="soldXTitle">
     <div class="modal-content" role="document">
-      <div class="modal-bar">
-        <button class="modal-back" type="button" data-modal-back aria-label="Go back">← Back</button>
-        <button class="modal-close" type="button" data-modal-close aria-label="Close">×</button>
-      </div>
-
+      <button class="modal-close" data-modal-close type="button" aria-label="Back">×</button>
       <h2 id="soldXTitle">Sold — X</h2>
-
       <div class="card-grid">
         <div class="card"><p>@o2x_</p></div>
         <div class="card"><p>@codq</p></div>
@@ -680,7 +606,6 @@
     </div>
   </div>
 
-  <!-- Script -->
   <script src="script.js" defer></script>
 </body>
 </html>
