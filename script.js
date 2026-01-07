@@ -287,3 +287,86 @@
   // Init
   syncThemeIcon();
 })();
+/* ===========================
+   Floating Contact Panel
+   =========================== */
+(function () {
+  "use strict";
+
+  const toggleBtn = document.getElementById("contactToggle");
+  const panel = document.getElementById("contactPanel");
+  const closeBtn = document.getElementById("contactClose");
+
+  if (!toggleBtn || !panel || !closeBtn) return;
+
+  let lastFocused = null;
+
+  function openPanel() {
+    if (!panel.hasAttribute("hidden")) return;
+
+    lastFocused = document.activeElement;
+
+    panel.removeAttribute("hidden");
+    // allow CSS transition to run
+    requestAnimationFrame(() => panel.classList.add("is-open"));
+
+    toggleBtn.setAttribute("aria-expanded", "true");
+
+    const firstFocusable = panel.querySelector("a, button, [tabindex]:not([tabindex='-1'])");
+    if (firstFocusable) firstFocusable.focus({ preventScroll: true });
+  }
+
+  function closePanel() {
+    if (panel.hasAttribute("hidden")) return;
+
+    panel.classList.remove("is-open");
+    toggleBtn.setAttribute("aria-expanded", "false");
+
+    // wait for transition to finish before hiding
+    setTimeout(() => {
+      panel.setAttribute("hidden", "");
+      if (lastFocused && typeof lastFocused.focus === "function") {
+        lastFocused.focus({ preventScroll: true });
+      } else {
+        toggleBtn.focus({ preventScroll: true });
+      }
+    }, 190);
+  }
+
+  function togglePanel() {
+    const isOpen = !panel.hasAttribute("hidden");
+    if (isOpen) closePanel();
+    else openPanel();
+  }
+
+  toggleBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    togglePanel();
+  });
+
+  closeBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    closePanel();
+  });
+
+  // Prevent clicks inside panel from bubbling and closing it
+  panel.addEventListener("click", (e) => e.stopPropagation());
+
+  // Close on outside click
+  document.addEventListener("click", () => {
+    const isOpen = !panel.hasAttribute("hidden");
+    if (!isOpen) return;
+    closePanel();
+  });
+
+  // Close on ESC
+  document.addEventListener("keydown", (e) => {
+    const isOpen = !panel.hasAttribute("hidden");
+    if (!isOpen) return;
+
+    if (e.key === "Escape") {
+      e.preventDefault();
+      closePanel();
+    }
+  });
+})();
