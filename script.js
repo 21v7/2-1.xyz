@@ -196,3 +196,80 @@
   // Init
   syncThemeIcon();
 })();
+/* ===========================
+   Floating Contact Panel
+   =========================== */
+(function () {
+  const toggleBtn = document.getElementById("contactToggle");
+  const panel = document.getElementById("contactPanel");
+  const closeBtn = document.getElementById("contactClose");
+
+  if (!toggleBtn || !panel || !closeBtn) return;
+
+  let lastFocused = null;
+
+  function openPanel() {
+    if (!panel.hasAttribute("hidden")) return;
+
+    lastFocused = document.activeElement;
+
+    panel.removeAttribute("hidden");
+    requestAnimationFrame(() => panel.classList.add("is-open"));
+    toggleBtn.setAttribute("aria-expanded", "true");
+
+    const firstFocusable = panel.querySelector("a, button, [tabindex]:not([tabindex='-1'])");
+    if (firstFocusable) firstFocusable.focus();
+  }
+
+  function closePanel() {
+    if (panel.hasAttribute("hidden")) return;
+
+    panel.classList.remove("is-open");
+    toggleBtn.setAttribute("aria-expanded", "false");
+
+    setTimeout(() => {
+      panel.setAttribute("hidden", "");
+      if (lastFocused && typeof lastFocused.focus === "function") {
+        lastFocused.focus();
+      } else {
+        toggleBtn.focus();
+      }
+    }, 180);
+  }
+
+  function togglePanel() {
+    const isOpen = !panel.hasAttribute("hidden");
+    if (isOpen) closePanel();
+    else openPanel();
+  }
+
+  toggleBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    togglePanel();
+  });
+
+  closeBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    closePanel();
+  });
+
+  panel.addEventListener("click", (e) => e.stopPropagation());
+
+  document.addEventListener("click", (e) => {
+    const isOpen = !panel.hasAttribute("hidden");
+    if (!isOpen) return;
+
+    const clickedInside = panel.contains(e.target) || toggleBtn.contains(e.target);
+    if (!clickedInside) closePanel();
+  });
+
+  document.addEventListener("keydown", (e) => {
+    const isOpen = !panel.hasAttribute("hidden");
+    if (!isOpen) return;
+
+    if (e.key === "Escape") {
+      e.preventDefault();
+      closePanel();
+    }
+  });
+})();
