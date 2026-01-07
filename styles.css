@@ -156,6 +156,7 @@ body.modal-open{ overflow: hidden; }
   cursor: pointer;
   transition: transform 120ms var(--ease), border-color 120ms var(--ease), background 120ms var(--ease);
   backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 html[data-theme="dark"] .launcher{ background: rgba(0,0,0,.20); }
@@ -180,43 +181,7 @@ html[data-theme="dark"] .launcher{ background: rgba(0,0,0,.20); }
   font-size: 12.5px;
 }
 
-/* Floating bar */
-.social-floating{
-  position: fixed;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: 14px;
-  width: min(var(--page-max), calc(100vw - 24px));
-  z-index: 999;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  padding: 10px 10px;
-  border-radius: 18px;
-
-  background: rgba(255,255,255,.70);
-  border: 1px solid var(--border);
-  box-shadow: 0 20px 70px rgba(0,0,0,.22);
-  backdrop-filter: blur(14px);
-}
-
-html[data-theme="dark"] .social-floating{ background: rgba(18,18,28,.72); }
-
-.social-floating__left{
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-
-.social-floating__label{
-  font-size: 12px;
-  color: var(--muted);
-  padding: 0 4px;
-}
-
+/* Global pill style (site-wide, light/dark) */
 .pill-link{
   text-decoration: none;
   color: var(--text);
@@ -226,7 +191,7 @@ html[data-theme="dark"] .social-floating{ background: rgba(18,18,28,.72); }
   border-radius: 999px;
   font-size: 12.5px;
   font-weight: 600;
-  transition: transform 120ms var(--ease), border-color 120ms var(--ease);
+  transition: transform 120ms var(--ease), border-color 120ms var(--ease), background 120ms var(--ease);
 }
 
 html[data-theme="dark"] .pill-link{ background: rgba(0,0,0,.18); }
@@ -236,20 +201,7 @@ html[data-theme="dark"] .pill-link{ background: rgba(0,0,0,.18); }
   border-color: rgba(107,107,255,.35);
 }
 
-.theme-toggle{
-  border: 1px solid var(--border);
-  background: rgba(255,255,255,.18);
-  border-radius: 14px;
-  width: 42px;
-  height: 38px;
-  display: grid;
-  place-items: center;
-  cursor: pointer;
-}
-
-html[data-theme="dark"] .theme-toggle{ background: rgba(0,0,0,.18); }
-
-.theme-toggle__icon{ font-size: 16px; }
+.pill-link:active{ transform: translateY(0); }
 
 /* ===========================
    MODALS
@@ -265,6 +217,7 @@ html[data-theme="dark"] .theme-toggle{ background: rgba(0,0,0,.18); }
 
   background: rgba(0,0,0,.48);
   backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 .modal.is-open{ display: flex; }
@@ -427,85 +380,110 @@ html[data-theme="dark"] .card a{ background: rgba(0,0,0,.18); }
   font-weight: 900;
   letter-spacing: .02em;
 }
-/* ===========================
-   Floating Contact Button + Panel
-   =========================== */
 
-.contact-float__btn {
-  position: fixed;
-  right: 14px;
-  bottom: 14px;
-  z-index: 9999;
+/* =========================================================
+   Floating Contact Button + Panel (REPLACES old link bar)
+   - conflict-proof against global button rules
+   ========================================================= */
 
-  appearance: none;
-  border: 0;
-  cursor: pointer;
+/* Button */
+#contactToggle.contact-float__btn{
+  position: fixed !important;
+  right: 14px !important;
+  bottom: 14px !important;
+  left: auto !important;
+  top: auto !important;
+  z-index: 99999 !important;
 
-  padding: 12px 14px;
-  border-radius: 999px;
+  /* prevent “giant vertical bar” bug from global button styles */
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
 
-  font: 600 14px/1 "Outfit", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  letter-spacing: 0.2px;
+  width: auto !important;
+  height: auto !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
 
-  background: rgba(20, 20, 24, 0.92);
-  color: #fff;
+  padding: 12px 14px !important;
+  border-radius: 999px !important;
+
+  appearance: none !important;
+  -webkit-appearance: none !important;
+
+  border: 0 !important;
+  cursor: pointer !important;
+
+  writing-mode: horizontal-tb !important;
+  transform: none !important;
+  rotate: 0deg !important;
+
+  font: 600 14px/1 var(--font) !important;
+  letter-spacing: 0.2px !important;
+
+  background: rgba(20, 20, 24, 0.92) !important;
+  color: #fff !important;
 
   box-shadow:
     0 10px 30px rgba(0,0,0,0.35),
-    0 1px 0 rgba(255,255,255,0.06) inset;
+    0 1px 0 rgba(255,255,255,0.06) inset !important;
 
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
 
-  transition: transform 160ms ease, opacity 160ms ease;
+  transition: transform 160ms ease, opacity 160ms ease !important;
 }
 
-.contact-float__btn:hover {
-  transform: translateY(-1px);
+#contactToggle.contact-float__btn:hover{
+  transform: translateY(-1px) !important;
 }
 
-.contact-float__btn:active {
-  transform: translateY(0);
+#contactToggle.contact-float__btn:active{
+  transform: translateY(0) !important;
 }
 
-.contact-float__btn:focus-visible {
-  outline: 2px solid rgba(255,255,255,0.75);
-  outline-offset: 3px;
+#contactToggle.contact-float__btn:focus-visible{
+  outline: 2px solid rgba(255,255,255,0.75) !important;
+  outline-offset: 3px !important;
 }
 
-.contact-float__panel {
-  position: fixed;
-  right: 14px;
-  bottom: 64px; /* sits above button */
-  z-index: 9999;
+/* Panel container */
+#contactPanel.contact-float__panel{
+  position: fixed !important;
+  right: 14px !important;
+  bottom: 64px !important; /* sits above button */
+  left: auto !important;
+  top: auto !important;
+  z-index: 99999 !important;
 
-  width: min(320px, calc(100vw - 28px));
-  border-radius: 16px;
+  width: min(320px, calc(100vw - 28px)) !important;
+  border-radius: 16px !important;
 
-  background: rgba(18, 18, 22, 0.95);
-  color: #fff;
+  background: rgba(18, 18, 22, 0.95) !important;
+  color: #fff !important;
 
   box-shadow:
     0 18px 50px rgba(0,0,0,0.45),
-    0 1px 0 rgba(255,255,255,0.06) inset;
+    0 1px 0 rgba(255,255,255,0.06) inset !important;
 
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
 
-  transform: translateY(10px) scale(0.98);
-  opacity: 0;
-  pointer-events: none;
+  transform: translateY(10px) scale(0.98) !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
 
-  transition: transform 180ms ease, opacity 180ms ease;
+  transition: transform 180ms ease, opacity 180ms ease !important;
 }
 
-.contact-float__panel.is-open {
-  transform: translateY(0) scale(1);
-  opacity: 1;
-  pointer-events: auto;
+#contactPanel.contact-float__panel.is-open{
+  transform: translateY(0) scale(1) !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
 }
 
-.contact-float__panelHead {
+/* Panel header */
+.contact-float__panelHead{
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -514,13 +492,13 @@ html[data-theme="dark"] .card a{ background: rgba(0,0,0,.18); }
   border-bottom: 1px solid rgba(255,255,255,0.07);
 }
 
-.contact-float__panelTitle {
-  font: 700 14px/1 "Outfit", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+.contact-float__panelTitle{
+  font: 700 14px/1 var(--font);
   letter-spacing: 0.2px;
   opacity: 0.95;
 }
 
-.contact-float__close {
+#contactClose.contact-float__close{
   appearance: none;
   border: 0;
   background: transparent;
@@ -540,23 +518,23 @@ html[data-theme="dark"] .card a{ background: rgba(0,0,0,.18); }
   transition: background 160ms ease, transform 160ms ease;
 }
 
-.contact-float__close:hover {
+#contactClose.contact-float__close:hover{
   background: rgba(255,255,255,0.08);
 }
 
-.contact-float__close:active {
+#contactClose.contact-float__close:active{
   transform: scale(0.98);
 }
 
-.contact-float__panelBody {
+/* Panel body */
+.contact-float__panelBody{
   display: grid;
   gap: 10px;
   padding: 12px;
 }
 
-/* Reuse your existing .pill-link if you have one.
-   If you DON'T, this provides a clean pill style. */
-.pill-link {
+/* Panel-only pills (dark UI, doesn’t touch your site-wide .pill-link) */
+.contact-pill{
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -565,7 +543,7 @@ html[data-theme="dark"] .card a{ background: rgba(0,0,0,.18); }
   border-radius: 999px;
 
   text-decoration: none;
-  font: 600 13px/1 "Outfit", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font: 600 13px/1 var(--font);
 
   background: rgba(255,255,255,0.08);
   color: rgba(255,255,255,0.95);
@@ -575,17 +553,17 @@ html[data-theme="dark"] .card a{ background: rgba(0,0,0,.18); }
   transition: transform 160ms ease, background 160ms ease, border-color 160ms ease;
 }
 
-.pill-link:hover {
+.contact-pill:hover{
   background: rgba(255,255,255,0.12);
   border-color: rgba(255,255,255,0.16);
   transform: translateY(-1px);
 }
 
-.pill-link:active {
+.contact-pill:active{
   transform: translateY(0);
 }
 
-.pill-link:focus-visible {
+.contact-pill:focus-visible{
   outline: 2px solid rgba(255,255,255,0.75);
   outline-offset: 3px;
 }
