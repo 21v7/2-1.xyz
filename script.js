@@ -1,22 +1,22 @@
 /* ===========================
-   21 — Script
+   script.js — 21
    - Modal open/close
    - Nested modal “Back” stack
    - Click outside to close
-   - ESC support
-   - Floating Contact button + panel
+   - ESC closes modal / panel
+   - Contact floating panel open/close (X works)
    =========================== */
 
 (function () {
   "use strict";
 
-  const qs = (sel, root = document) => root.querySelector(sel);
+  const qs  = (sel, root = document) => root.querySelector(sel);
   const qsa = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 
   const body = document.body;
 
   // ---------------------------
-  // MODALS
+  // Modal state
   // ---------------------------
   let activeModal = null;
   const modalStack = [];
@@ -28,7 +28,7 @@
   }
 
   function closeAllModals() {
-    qsa(".modal.is-open").forEach((m) => {
+    qsa(".modal.is-open").forEach(m => {
       m.classList.remove("is-open");
       m.setAttribute("aria-hidden", "true");
     });
@@ -45,7 +45,7 @@
     const content = qs(".modal-content", modalEl);
     if (!content) return;
 
-    // already created
+    // already injected
     if (qs(".modal-topbar", content)) return;
 
     const h2 = qs("h2", content);
@@ -70,7 +70,7 @@
 
     content.insertBefore(topbar, content.firstChild);
 
-    // hide visible h2 to prevent duplicate title line
+    // hide visible h2 (aria-labelledby still works)
     if (h2) h2.style.display = "none";
   }
 
@@ -78,7 +78,7 @@
     const modalEl = qs(selector);
     if (!modalEl) return;
 
-    // Stack previous modal if we’re opening from within another modal
+    // stack previous
     if (activeModal && pushHistory) {
       modalStack.push("#" + activeModal.id);
       activeModal.classList.remove("is-open");
@@ -94,7 +94,6 @@
     lockScroll(true);
     ensureTopbar(modalEl);
 
-    // focus back button first (best UX), else close button, else first focusable
     const focusTarget =
       qs(".modal-back", modalEl) ||
       qs("[data-modal-close]", modalEl) ||
@@ -104,8 +103,6 @@
   }
 
   function goBack(modalEl) {
-    if (!modalEl) return;
-
     const prev = modalStack.pop();
     if (prev) {
       modalEl.classList.remove("is-open");
@@ -114,16 +111,86 @@
       openModal(prev, { pushHistory: false });
       return;
     }
-
-    // No previous modal: back behaves like close at root
     closeAllModals();
   }
 
   // ---------------------------
-  // CLICK DELEGATION
+  // Contact panel state
+  // ---------------------------
+  const contactToggle = qs("#contactToggle");
+  const contactPanel  = qs("#contactPanel");
+  const contactClose  = qs("#contactClose");
+
+  let panelLastFocused = null;
+
+  function panelIsOpen() {
+    return contactPanel && !contactPanel.hasAttribute("hidden");
+  }
+
+  function openPanel() {
+    if (!contactPanel || !contactToggle) return;
+    if (panelIsOpen()) return;
+
+    panelLastFocused = document.activeElement;
+
+    contactPanel.removeAttribute("hidden");
+    // allow transition
+    requestAnimationFrame(() => contactPanel.classList.add("is-open"));
+
+    contactToggle.setAttribute("aria-expanded", "true");
+
+    const firstFocusable = qs("a, button, [tabindex]:not([tabindex='-1'])", contactPanel);
+    if (firstFocusable) firstFocusable.focus({ preventScroll: true });
+  }
+
+  function closePanel() {
+    if (!contactPanel || !contactToggle) return;
+    if (!panelIsOpen()) return;
+
+    contactPanel.classList.remove("is-open");
+    contactToggle.setAttribute("aria-expanded", "false");
+
+    // match CSS transition duration
+    window.setTimeout(() => {
+      contactPanel.setAttribute("hidden", "");
+      if (panelLastFocused && typeof panelLastFocused.focus === "function") {
+        panelLastFocused.focus({ preventScroll: true });
+      } else {
+        contactToggle.focus({ preventScroll: true });
+      }
+    }, 180);
+  }
+
+  function togglePanel() {
+    if (panelIsOpen()) closePanel();
+    else openPanel();
+  }
+
+  if (contactToggle) {
+    contactToggle.addEventListener("click", (e) => {
+      e.stopPropagation();
+      togglePanel();
+    });
+  }
+
+  if (contactClose) {
+    contactClose.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      closePanel();
+    });
+  }
+
+  if (contactPanel) {
+    // prevent “outside click” handler from firing when clicking inside panel
+    contactPanel.addEventListener("click", (e) => e.stopPropagation());
+  }
+
+  // ---------------------------
+  // Global click handling (delegated)
   // ---------------------------
   document.addEventListener("click", (e) => {
-    // open modal
+    // Open modal
     const launcher = e.target.closest("[data-modal-target]");
     if (launcher) {
       const target = launcher.getAttribute("data-modal-target");
@@ -131,26 +198,37 @@
       return;
     }
 
-    // close via X
+    // Close modals via X
     const closer = e.target.closest("[data-modal-close]");
     if (closer) {
       closeAllModals();
       return;
     }
 
-    // click outside modal-content closes (overlay click)
-    const overlay = e.target.classList && e.target.classList.contains("modal") ? e.target : null;
-    if (overlay && overlay.classList.contains("is-open")) {
+    // Click outside modal-content closes all
+    const backdrop = e.target.classList && e.target.classList.contains("modal") ? e.target : null;
+    if (backdrop && backdrop.classList.contains("is-open")) {
       closeAllModals();
       return;
     }
+
+    // Outside click closes contact panel
+    if (panelIsOpen()) {
+      const clickedInside = contactPanel.contains(e.target) || (contactToggle && contactToggle.contains(e.target));
+      if (!clickedInside) closePanel();
+    }
   });
 
-  // ESC closes modals OR contact panel (handled below too)
+  // ESC closes: panel first, otherwise modals
   document.addEventListener("keydown", (e) => {
     if (e.key !== "Escape") return;
 
-    // if any modal open, close modals
+    if (panelIsOpen()) {
+      e.preventDefault();
+      closePanel();
+      return;
+    }
+
     if (qsa(".modal.is-open").length) {
       e.preventDefault();
       closeAllModals();
@@ -158,86 +236,4 @@
     }
   });
 
-  // ---------------------------
-  // FLOATING CONTACT PANEL
-  // ---------------------------
-  (function initContactPanel() {
-    const toggleBtn = document.getElementById("contactToggle");
-    const panel = document.getElementById("contactPanel");
-    const closeBtn = document.getElementById("contactClose");
-
-    if (!toggleBtn || !panel || !closeBtn) return;
-
-    let lastFocused = null;
-
-    function openPanel() {
-      if (!panel.hasAttribute("hidden")) return;
-
-      lastFocused = document.activeElement;
-
-      panel.removeAttribute("hidden");
-      requestAnimationFrame(() => panel.classList.add("is-open"));
-      toggleBtn.setAttribute("aria-expanded", "true");
-
-      const firstFocusable = panel.querySelector("a, button, [tabindex]:not([tabindex='-1'])");
-      if (firstFocusable) firstFocusable.focus({ preventScroll: true });
-    }
-
-    function closePanel() {
-      if (panel.hasAttribute("hidden")) return;
-
-      panel.classList.remove("is-open");
-      toggleBtn.setAttribute("aria-expanded", "false");
-
-      // match CSS transition timing
-      window.setTimeout(() => {
-        panel.setAttribute("hidden", "");
-        if (lastFocused && typeof lastFocused.focus === "function") {
-          lastFocused.focus({ preventScroll: true });
-        } else {
-          toggleBtn.focus({ preventScroll: true });
-        }
-      }, 180);
-    }
-
-    function togglePanel() {
-      const isOpen = !panel.hasAttribute("hidden");
-      if (isOpen) closePanel();
-      else openPanel();
-    }
-
-    toggleBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      togglePanel();
-    });
-
-    closeBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      closePanel();
-    });
-
-    panel.addEventListener("click", (e) => e.stopPropagation());
-
-    // click outside closes
-    document.addEventListener("click", (e) => {
-      const isOpen = !panel.hasAttribute("hidden");
-      if (!isOpen) return;
-
-      const clickedInside = panel.contains(e.target) || toggleBtn.contains(e.target);
-      if (!clickedInside) closePanel();
-    });
-
-    // ESC closes panel (if no modals are open)
-    document.addEventListener("keydown", (e) => {
-      const isOpen = !panel.hasAttribute("hidden");
-      if (!isOpen) return;
-      if (e.key !== "Escape") return;
-
-      // if modals are open, modal handler owns ESC
-      if (qsa(".modal.is-open").length) return;
-
-      e.preventDefault();
-      closePanel();
-    });
-  })();
 })();
