@@ -439,126 +439,135 @@ body.modal-open{
   overflow:hidden;
 }
 /* ===========================
-   DESKTOP FIX PACK
+   DESKTOP FIX PACK (MATCHES YOUR HTML)
    Paste at bottom of styles.css
    =========================== */
 
-/* 1) Desktop background intensity: less "busy" on web */
-@media (min-width: 820px){
-  .site::before{
-    opacity: .35; /* was heavier; desktop needs calmer grid */
+/* 0) Hard proof this file is loading (remove after you confirm)
+   If you don't see the red outline on desktop, your CSS isn't loading. */
+@media (min-width: 900px){
+  header { outline: 2px solid red !important; }
+}
+
+/* 1) Desktop layout: stop stretching wide, tighten page */
+@media (min-width: 900px){
+  body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
-  .site::after{
-    opacity: .70;
+
+  header,
+  main.content-section,
+  footer{
+    width: min(980px, calc(100vw - 48px));
+  }
+
+  header{
+    margin-top: 22px;
+    margin-bottom: 14px;
+  }
+
+  main.content-section{
+    margin-bottom: 120px; /* room so footer + contact bar doesn't clash */
+  }
+
+  footer{
+    margin-bottom: 22px;
   }
 }
 
-/* 2) Give the whole page a stronger centered "frame" */
-@media (min-width: 820px){
-  .hero-header{
-    padding: 46px 18px 18px;
-  }
-
-  .content-section{
-    padding: 18px 18px 130px;
-  }
-
-  .hero-header__inner,
-  .content-section,
-  .site-footer{
-    max-width: 960px; /* tighter than 1000 for desktop */
-  }
-}
-
-/* 3) Header/hero: better desktop proportions */
-@media (min-width: 820px){
-  .brand-block{
-    padding: 20px 22px;
-    border-radius: 28px;
-  }
-  .brand-logo{
-    width: 64px;
-    height: 64px;
+/* 2) Header scaling on desktop */
+@media (min-width: 900px){
+  header img{
+    width: 72px;   /* adjust if your CSS sets it already */
+    height: 72px;
     border-radius: 18px;
   }
-  .brand-text h1{
-    font-size: 26px;
+
+  header h1{
+    font-size: 28px;
+    letter-spacing: 0.02em;
+    margin-top: 10px;
   }
-  .intro{
+
+  header .intro{
     font-size: 14px;
-    max-width: 56ch;
+    line-height: 1.35;
+    max-width: 58ch;
+    margin: 8px auto 0;
   }
 }
 
-/* 4) Desktop launcher grid: no awkward huge buttons */
-@media (min-width: 820px){
+/* 3) Launcher grid: make it look clean on desktop (not stretched) */
+@media (min-width: 900px){
   .launcher-grid{
+    display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 12px;
   }
+
   .launcher{
     height: 52px;
     font-size: 14px;
-    letter-spacing: .03em;
+    letter-spacing: 0.03em;
+    border-radius: 14px;
   }
 }
 
-/* 5) Modals: make them a true centered panel, not too tall/wide */
-@media (min-width: 820px){
+@media (min-width: 1200px){
+  .launcher-grid{
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+/* 4) Modals: turn them into a centered panel on desktop */
+@media (min-width: 900px){
+  .modal{
+    padding: 28px; /* if your modal uses padding, desktop needs more */
+  }
+
   .modal-content{
-    width: min(780px, calc(100vw - 44px)); /* narrower */
-    max-height: min(74vh, calc(100dvh - 90px)); /* less towering */
+    width: min(820px, calc(100vw - 64px));
+    max-height: min(78vh, calc(100dvh - 120px));
+    margin: 0 auto;
     padding: 18px 18px 18px;
-    border-radius: 26px;
-  }
-
-  /* smoother scrolling in modal */
-  .modal-content{
-    scrollbar-gutter: stable;
+    border-radius: 22px;
   }
 }
 
-/* 6) Desktop card grids: denser, more consistent */
-@media (min-width: 820px){
+/* 5) Card grid: denser columns so it doesn’t look “empty” */
+@media (min-width: 900px){
   .card-grid{
-    grid-template-columns: repeat(3, minmax(0, 1fr)); /* stable */
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 12px;
   }
+
+  .card{
+    border-radius: 16px;
+    padding: 14px;
+  }
+
+  .card p{
+    font-size: 13.5px;
+    line-height: 1.25;
+  }
 }
-@media (min-width: 1100px){
+
+@media (min-width: 1200px){
   .card-grid{
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
 
-/* 7) Card sizing: stop weird heights and spacing */
-@media (min-width: 820px){
-  .card{
-    padding: 14px;
-    border-radius: 18px;
-  }
-  .card p{
-    font-size: 13.5px;
-  }
-  .card a{
-    height: 38px;
-  }
-}
-
-/* 8) Floating bar: keep it clean on desktop (not huge) */
-@media (min-width: 820px){
+/* 6) Floating contact bar: center it and cap width on desktop */
+@media (min-width: 900px){
   .social-floating{
-    left: 18px;
-    right: 18px;
+    left: 24px;
+    right: 24px;
     bottom: 18px;
-    max-width: 960px;
+    max-width: 980px;
     margin: 0 auto;
-  }
-}
-
-/* 9) Minor: text rendering + crispness */
-@media (min-width: 820px){
-  body{
-    text-rendering: geometricPrecision;
   }
 }
