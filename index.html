@@ -1,336 +1,598 @@
-<!doctype html>
+<!-- =========================
+     index.html
+     ========================= -->
+<!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
-  <!--
-    Goals for this template:
-    - High-end "digital studio" hero with blueprint grid + subtle glow
-    - Mobile-first layout that looks excellent inside Instagram in-app browser
-    - Accessible UI: proper semantics, aria attributes, focus management
-    - Overlay menu + slide-in panels with a true Back button experience
-    - No external JS dependencies
-  -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>21 | Usernames & Social Media Services</title>
 
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="color-scheme" content="dark light" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700&display=swap" rel="stylesheet">
 
-  <title>Perfect Harmony — Digital Innovation Studio</title>
+  <!-- Prevent theme flash before CSS loads -->
+  <script>
+    (function () {
+      try {
+        var stored = localStorage.getItem('theme');
+        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        // Default to dark if nothing stored
+        document.documentElement.setAttribute('data-theme', stored || (prefersDark ? 'dark' : 'dark'));
+      } catch(e) {}
+    })();
+  </script>
 
-  <!-- Basic SEO (keep minimal, you can expand later) -->
-  <meta name="description" content="Web Development, App Development, Design — a digital innovation studio delivering calm, precise, high-performance experiences." />
-  <meta name="theme-color" content="#061425" />
-
-  <!-- Optional font. If you want zero network calls, remove these and rely on system fonts. -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-
-  <link rel="stylesheet" href="styles.css" />
+  <!-- Cache-bust so you actually see changes -->
+  <link rel="stylesheet" href="./styles.css?v=99">
 </head>
 
 <body>
-  <!--
-    Background is layered with:
-    - Blueprint grid (CSS gradients)
-    - Subtle glow bloom (radial gradients)
-    - Soft scanline sheen (optional)
-    Implemented in CSS on .app-shell via pseudo-elements.
-  -->
+  <!-- Floating Contact Button -->
+  <button
+    class="contact-float__btn"
+    id="contactToggle"
+    type="button"
+    aria-label="Open contact links"
+    aria-expanded="false"
+    aria-controls="contactPanel"
+  >
+    Contact
+  </button>
 
-  <a class="skip-link" href="#main">Skip to content</a>
-
-  <div class="app-shell" id="appShell">
-    <!-- Top header -->
-    <header class="topbar" role="banner">
-      <div class="topbar__inner">
-        <a class="brand" href="#" aria-label="Home">
-          <span class="brand__mark" aria-hidden="true">p</span>
-          <span class="brand__text">Perfect Harmony</span>
-        </a>
-
-        <div class="topbar__actions">
-          <!-- Mobile menu button -->
-          <button
-            class="icon-btn"
-            type="button"
-            id="menuBtn"
-            aria-label="Open menu"
-            aria-controls="menuOverlay"
-            aria-expanded="false"
-          >
-            <span class="icon-btn__bars" aria-hidden="true"></span>
-          </button>
-        </div>
-      </div>
-    </header>
-
-    <!-- Overlay menu (mobile) -->
-    <div
-      class="menu-overlay"
-      id="menuOverlay"
-      aria-hidden="true"
-      role="dialog"
-      aria-modal="true"
-      aria-label="Site menu"
-    >
-      <div class="menu-overlay__scrim" data-action="close-menu" tabindex="-1"></div>
-
-      <div class="menu-overlay__panel" role="document">
-        <div class="menu-overlay__header">
-          <div class="menu-overlay__title">Menu</div>
-
-          <button
-            class="icon-btn icon-btn--close"
-            type="button"
-            aria-label="Close menu"
-            data-action="close-menu"
-          >
-            <span class="icon-btn__x" aria-hidden="true"></span>
-          </button>
-        </div>
-
-        <nav class="menu-overlay__nav" aria-label="Primary">
-          <a class="menu-link" href="#services" data-action="close-menu">Services</a>
-          <a class="menu-link" href="#work" data-action="close-menu">Work</a>
-          <a class="menu-link" href="#process" data-action="close-menu">Process</a>
-          <a class="menu-link" href="#contact" data-action="close-menu">Contact</a>
-
-          <div class="menu-overlay__divider" aria-hidden="true"></div>
-
-          <!-- These open panels (with Back behavior) -->
-          <button class="menu-link menu-link--button" type="button" data-open-panel="panelProject">
-            Start a Project
-          </button>
-          <button class="menu-link menu-link--button" type="button" data-open-panel="panelServices">
-            Explore Services
-          </button>
-        </nav>
-
-        <div class="menu-overlay__footer">
-          <div class="menu-overlay__hint">Built for calm performance. No noise.</div>
-        </div>
-      </div>
+  <!-- Floating Contact Panel -->
+  <aside class="contact-float__panel" id="contactPanel" hidden aria-label="Contact links">
+    <div class="contact-float__panelHead">
+      <div class="contact-float__panelTitle">Links</div>
+      <button class="contact-float__close" id="contactClose" type="button" aria-label="Close contact panel">×</button>
     </div>
 
-    <!-- Main content -->
-    <main id="main" class="main" role="main">
-      <section class="hero" aria-label="Hero">
-        <div class="hero__inner">
-          <div class="hero__kicker" aria-label="Category">
-            <span class="hero__kicker-pill">DIGITAL INNOVATION STUDIO</span>
-          </div>
+    <div class="contact-float__panelBody">
+      <a class="pill-link" href="https://oguser.com/21" target="_blank" rel="noopener">OGU</a>
+      <a class="pill-link" href="https://www.instagram.com/7521" target="_blank" rel="noopener">Instagram</a>
+      <a class="pill-link" href="https://t.me/id7321" target="_blank" rel="noopener">Telegram</a>
+      <a class="pill-link" href="https://solo.to/219" target="_blank" rel="noopener">more</a>
+    </div>
+  </aside>
 
-          <h1 class="hero__title">
-            <span class="hero__title-top">PERFECT</span>
-            <span class="hero__title-accent">HARMONY</span>
-          </h1>
+  <!-- Page shell -->
+  <div class="page">
+    <header class="hero">
+      <div class="hero__logoWrap">
+        <img
+          class="hero__logo"
+          src="93C40C80-79AB-4157-89A6-7EE8F0284D88.jpeg?v=2"
+          alt="21 brand logo"
+          onerror="this.onerror=null; this.src='21.jpeg?v=2';"
+        />
+      </div>
 
-          <p class="hero__subhead">
-            Web Development <span aria-hidden="true">•</span> App Development <span aria-hidden="true">•</span> Design
-          </p>
+      <h1 class="hero__title">𝟐𝟏® Shop</h1>
+      <p class="hero__sub">Established 2023 | 550+ Vouches<br>Highly Rated, Well Connected.</p>
+    </header>
 
-          <div class="hero__cta">
-            <button class="btn btn--primary" type="button" data-open-panel="panelProject">
-              Start a Project
-            </button>
-
-            <button class="btn btn--ghost" type="button" data-open-panel="panelServices">
-              Explore Services
-              <span class="btn__arrow" aria-hidden="true">→</span>
-            </button>
-          </div>
-
-          <!-- Service chips (like your screenshot) -->
-          <div class="chips" id="services" aria-label="Service categories">
-            <button class="chip" type="button" data-service="uiux">UI/UX Design</button>
-            <button class="chip" type="button" data-service="branding">Branding</button>
-            <button class="chip" type="button" data-service="ecom">E-commerce</button>
-            <button class="chip" type="button" data-service="web">Web Services</button>
-            <button class="chip" type="button" data-service="mobile">Mobile Apps</button>
-            <button class="chip" type="button" data-service="social">Social Media Posts</button>
-            <button class="chip" type="button" data-service="api">API Development</button>
-          </div>
-
-          <!-- Scroll hint -->
-          <div class="scroll-hint" aria-label="Scroll">
-            <div class="scroll-hint__text">Scroll</div>
-            <div class="scroll-hint__mouse" aria-hidden="true">
-              <div class="scroll-hint__wheel"></div>
-            </div>
-          </div>
+    <main class="content" id="main">
+      <section class="panel" aria-labelledby="stockHeading">
+        <div class="panel__head">
+          <h2 class="panel__title" id="stockHeading">Stock, Services &amp; More</h2>
+          <p class="panel__desc">Tap a platform to view stock, sold history, or services.</p>
         </div>
-      </section>
 
-      <!-- Placeholder sections for anchors (you can build later) -->
-      <section id="work" class="section section--thin" aria-label="Work">
-        <div class="section__inner">
-          <h2 class="section__title">Selected Work</h2>
-          <p class="section__body">Add case studies here when you’re ready. Keep it minimal and clean.</p>
-        </div>
-      </section>
-
-      <section id="process" class="section section--thin" aria-label="Process">
-        <div class="section__inner">
-          <h2 class="section__title">Process</h2>
-          <p class="section__body">A calm, structured pipeline: discovery → design → build → launch → support.</p>
-        </div>
-      </section>
-
-      <section id="contact" class="section section--thin" aria-label="Contact">
-        <div class="section__inner">
-          <h2 class="section__title">Contact</h2>
-          <p class="section__body">Drop your preferred contact method here (email / IG / form).</p>
+        <div class="launcher-grid" aria-label="Open a platform to view stock">
+          <button class="launcher" type="button" data-modal-target="#modal-instagram">Instagram</button>
+          <button class="launcher" type="button" data-modal-target="#modal-tiktok">TikTok</button>
+          <button class="launcher" type="button" data-modal-target="#modal-xdigits">𝕏</button>
+          <button class="launcher" type="button" data-modal-target="#modal-capcut">CapCut</button>
+          <button class="launcher" type="button" data-modal-target="#modal-vouches">Vouches</button>
+          <button class="launcher" type="button" data-modal-target="#modal-escrow">Escrow</button>
+          <button class="launcher" type="button" data-modal-target="#modal-swap">Swap Service</button>
+          <button class="launcher launcher--ghost" type="button" data-modal-target="#modal-sold">Sold Usernames</button>
         </div>
       </section>
     </main>
 
-    <footer class="footer" role="contentinfo">
-      <div class="footer__inner">
-        <div class="footer__left">© <span id="year"></span> Perfect Harmony</div>
-        <div class="footer__right">Built with precision.</div>
-      </div>
+    <footer class="footer">
+      <p>&copy; 2-1.xyz (2025) owned by @7521 (IG). All rights reserved.</p>
     </footer>
   </div>
 
-  <!-- Slide-in panels (Back button behavior + history integration) -->
-  <section
-    class="panel"
-    id="panelProject"
-    aria-hidden="true"
-    role="dialog"
-    aria-modal="true"
-    aria-label="Start a project"
-  >
-    <div class="panel__scrim" data-action="close-panel" tabindex="-1"></div>
+  <!-- =========================================================
+       MODALS (All content preserved)
+       ========================================================= -->
 
-    <div class="panel__card" role="document">
-      <div class="panel__top">
-        <button class="panel__back" type="button" data-action="close-panel" aria-label="Back">
-          <span aria-hidden="true">←</span> Back
-        </button>
+  <!-- Instagram -->
+  <div class="modal" id="modal-instagram" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="igTitle">
+    <div class="modal-content" role="document">
+      <button class="modal-close" data-modal-close type="button" aria-label="Close">×</button>
+      <h2 id="igTitle">Instagram</h2>
 
-        <div class="panel__title">Start a Project</div>
-
-        <button class="icon-btn icon-btn--close" type="button" data-action="close-panel" aria-label="Close">
-          <span class="icon-btn__x" aria-hidden="true"></span>
-        </button>
+      <div class="card-grid">
+        <div class="card"><p>@guia – $500</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@gawx – $200</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@la1o – $120</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@qyjo – $80</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@gr8b – $65</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@epjg – $50</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@qdhv – $40</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@5ucy – $40</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@bmo9 – $40</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@qdhv – $35</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@6ihv – $35</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
       </div>
 
-      <div class="panel__content">
-        <p class="panel__lead">
-          Send a clean request. Keep it simple. We’ll reply with scope + timeline + a quote.
-        </p>
-
-        <form class="form" id="projectForm">
-          <div class="form__row">
-            <label class="label" for="name">Name</label>
-            <input class="input" id="name" name="name" type="text" autocomplete="name" placeholder="Your name" />
-          </div>
-
-          <div class="form__row">
-            <label class="label" for="email">Email</label>
-            <input class="input" id="email" name="email" type="email" autocomplete="email" placeholder="you@email.com" />
-          </div>
-
-          <div class="form__row">
-            <label class="label" for="budget">Budget Range</label>
-            <select class="input" id="budget" name="budget">
-              <option value="">Select one</option>
-              <option value="starter">Starter (simple site)</option>
-              <option value="growth">Growth (site + content)</option>
-              <option value="product">Product (web app / platform)</option>
-              <option value="enterprise">Enterprise (custom)</option>
-            </select>
-          </div>
-
-          <div class="form__row">
-            <label class="label" for="details">Project Details</label>
-            <textarea class="input input--textarea" id="details" name="details" rows="5" placeholder="What are you building? What does success look like?"></textarea>
-          </div>
-
-          <div class="form__actions">
-            <button class="btn btn--primary" type="submit">Generate Request</button>
-            <button class="btn btn--ghost" type="button" data-action="close-panel">Not now</button>
-          </div>
-
-          <div class="form__note" id="formNote" aria-live="polite"></div>
-        </form>
+      <h3 class="subhead">Available via Proxy</h3>
+      <div class="card-grid">
+        <div class="card"><p>no users available</p><a href="https://t.me/id7321" target="_blank" rel="noopener">unavailable</a></div>
       </div>
     </div>
-  </section>
+  </div>
 
-  <section
-    class="panel"
-    id="panelServices"
-    aria-hidden="true"
-    role="dialog"
-    aria-modal="true"
-    aria-label="Explore services"
-  >
-    <div class="panel__scrim" data-action="close-panel" tabindex="-1"></div>
-
-    <div class="panel__card" role="document">
-      <div class="panel__top">
-        <button class="panel__back" type="button" data-action="close-panel" aria-label="Back">
-          <span aria-hidden="true">←</span> Back
-        </button>
-
-        <div class="panel__title">Explore Services</div>
-
-        <button class="icon-btn icon-btn--close" type="button" data-action="close-panel" aria-label="Close">
-          <span class="icon-btn__x" aria-hidden="true"></span>
-        </button>
-      </div>
-
-      <div class="panel__content">
-        <p class="panel__lead">
-          Choose a category. Everything is built for clarity, speed, and long-term maintainability.
-        </p>
-
-        <div class="service-grid" role="list">
-          <article class="service" role="listitem">
-            <h3 class="service__title">Web Development</h3>
-            <p class="service__desc">Fast, responsive, SEO-ready websites with clean architecture.</p>
-            <ul class="service__bullets">
-              <li>Landing pages & multi-page sites</li>
-              <li>Performance optimization</li>
-              <li>Analytics + conversion tracking</li>
-            </ul>
-          </article>
-
-          <article class="service" role="listitem">
-            <h3 class="service__title">App Development</h3>
-            <p class="service__desc">Practical product builds. Solid UX, stable code, scalable backend.</p>
-            <ul class="service__bullets">
-              <li>Web apps & dashboards</li>
-              <li>Auth, payments, admin tools</li>
-              <li>API integration</li>
-            </ul>
-          </article>
-
-          <article class="service" role="listitem">
-            <h3 class="service__title">Design</h3>
-            <p class="service__desc">Calm interface systems: typography, spacing, grid logic, motion restraint.</p>
-            <ul class="service__bullets">
-              <li>UI kits & design systems</li>
-              <li>Brand + visual direction</li>
-              <li>Prototypes + handoff</li>
-            </ul>
-          </article>
-        </div>
-
-        <div class="panel__content-actions">
-          <button class="btn btn--primary" type="button" data-open-panel="panelProject">
-            Start a Project
-          </button>
-          <button class="btn btn--ghost" type="button" data-action="close-panel">
-            Back to Home
-          </button>
-        </div>
+  <!-- TikTok -->
+  <div class="modal" id="modal-tiktok" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="tiktokTitle">
+    <div class="modal-content" role="document">
+      <button class="modal-close" data-modal-close type="button" aria-label="Close">×</button>
+      <h2 id="tiktokTitle">TikTok</h2>
+      <div class="card-grid">
+        <div class="card"><p>@cgkq - $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@fnzg - $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@qcml - $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@qpgs - $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@tgzk - $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@tpqg - $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@ywtb - $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
       </div>
     </div>
-  </section>
+  </div>
 
-  <script src="script.js" defer></script>
+  <!-- X -->
+  <div class="modal" id="modal-xdigits" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="xTitle">
+    <div class="modal-content" role="document">
+      <button class="modal-close" data-modal-close type="button" aria-label="Close">×</button>
+      <h2 id="xTitle">𝕏</h2>
+      <div class="card-grid">
+        <div class="card"><p>@296945 – $20</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@359893 – $20</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@522613 – $15</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@687286 – $15</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@964945 – $15</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@mmssqq – $20</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@wanted_criminal – $100</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CapCut (single list) -->
+  <div class="modal" id="modal-capcut" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="capcutTitle">
+    <div class="modal-content" role="document">
+      <button class="modal-close" data-modal-close type="button" aria-label="Close">×</button>
+      <h2 id="capcutTitle">CapCut</h2>
+      <p class="muted">All CapCut usernames (single list).</p>
+
+      <div class="card-grid">
+        <div class="card"><p>@antisociality – $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@awful – $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@delusional – $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@ecstasy – $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@grateful – $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@impatient – $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@inferior – $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@irresponsible – $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@sore – $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@timid – $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+
+        <div class="card"><p>@adjust – $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@alter – $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@avoid – $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@clap – $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@clean – $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@crop – $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@grasp – $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@jailbreak – $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@reap – $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@talk – $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@thread – $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@tied – $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+
+        <div class="card"><p>@Bankroll – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@Boost – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@burden – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@color – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@creature – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@hazard – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@heroism – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@offense – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@orphan – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@physic – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@place – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@producer – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@rack – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@ransom – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@request – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@sack – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@science – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@selfless – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@spain – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@spine – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@stair – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@stolen – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@street – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@supervillain – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@tier – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@tool – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@topic – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@turf – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@want – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+        <div class="card"><p>@writer – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Vouches -->
+  <div class="modal" id="modal-vouches" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="vouchTitle">
+    <div class="modal-content" role="document">
+      <button class="modal-close" data-modal-close type="button" aria-label="Close">×</button>
+      <h2 id="vouchTitle">Vouches</h2>
+      <div class="card big">
+        <p>Highly Rated Seller, Swapper &amp; Escrow with over 550+ successful transactions.<br>Dealing with me is Fast, smooth &amp; stress free.</p>
+        <a class="card-button" href="https://t.me/id8121/53" target="_blank" rel="noopener">View Vouches</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Escrow -->
+  <div class="modal" id="modal-escrow" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="escrowTitle">
+    <div class="modal-content" role="document">
+      <button class="modal-close" data-modal-close type="button" aria-label="Close">×</button>
+      <h2 id="escrowTitle">Escrow</h2>
+      <div class="card big">
+        <p><strong>middleman service:</strong> with over 550+ successful deals.
+          I securely hold funds and assist with swaps to ensure safe, smooth,
+          and stress-free transactions.</p>
+        <p><strong>fee:</strong> is <strong>8%</strong> of the deal.<br><strong>MM + Swap:</strong> if swap is required, no mm fee will be charged. only swap fee.</p>
+        <a class="card-button" href="https://t.me/id7321" target="_blank" rel="noopener">Contact for Escrow</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Swap -->
+  <div class="modal" id="modal-swap" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="swapTitle">
+    <div class="modal-content" role="document">
+      <button class="modal-close" data-modal-close type="button" aria-label="Close">×</button>
+      <h2 id="swapTitle">Swap Service</h2>
+      <div class="card big">
+        <p>Secure Instagram swap service available with or without insurance.</p>
+        <p><strong>Uninsured:</strong> 8% (minimum $5).</p>
+        <p><strong>Insured:</strong> 15% (minimum $10).</p>
+        <a class="card-button" href="https://t.me/id7321" target="_blank" rel="noopener">Contact for Swap</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sold Usernames (launcher modal) -->
+  <div class="modal" id="modal-sold" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="soldTitle">
+    <div class="modal-content" role="document">
+      <button class="modal-close" data-modal-close type="button" aria-label="Close">×</button>
+      <h2 id="soldTitle">Sold Usernames</h2>
+      <div class="launcher-grid">
+        <button class="launcher" type="button" data-modal-target="#modal-sold-ig">Instagram</button>
+        <button class="launcher" type="button" data-modal-target="#modal-sold-tt">TikTok</button>
+        <button class="launcher" type="button" data-modal-target="#modal-sold-cc">CapCut</button>
+        <button class="launcher" type="button" data-modal-target="#modal-sold-x">X</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sold: Instagram (FULL LIST) -->
+  <div class="modal" id="modal-sold-ig" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="soldIgTitle">
+    <div class="modal-content" role="document">
+      <button class="modal-close" data-modal-close type="button" aria-label="Close">×</button>
+      <h2 id="soldIgTitle">Instagrams Sold: 200+</h2>
+      <div class="card-grid">
+        <div class="card"><p>@afed</p></div>
+        <div class="card"><p>@ai7g</p></div>
+        <div class="card"><p>@allaying</p></div>
+        <div class="card"><p>@apah</p></div>
+        <div class="card"><p>@apoy</p></div>
+        <div class="card"><p>@apvc</p></div>
+        <div class="card"><p>@azjb</p></div>
+        <div class="card"><p>@azpi</p></div>
+        <div class="card"><p>@bbpc</p></div>
+        <div class="card"><p>@bdng</p></div>
+        <div class="card"><p>@bkcg</p></div>
+        <div class="card"><p>@bkwu</p></div>
+        <div class="card"><p>@bped</p></div>
+        <div class="card"><p>@b9y0</p></div>
+        <div class="card"><p>@c0dp</p></div>
+        <div class="card"><p>@cains</p></div>
+        <div class="card"><p>@cfib</p></div>
+        <div class="card"><p>@cgli</p></div>
+        <div class="card"><p>@crnp</p></div>
+        <div class="card"><p>@covp</p></div>
+        <div class="card"><p>@csjf</p></div>
+        <div class="card"><p>@d4pb</p></div>
+        <div class="card"><p>@deadland</p></div>
+        <div class="card"><p>@djmf</p></div>
+        <div class="card"><p>@dqki</p></div>
+        <div class="card"><p>@edvw</p></div>
+        <div class="card"><p>@elrj</p></div>
+        <div class="card"><p>@epjj</p></div>
+        <div class="card"><p>@epre</p></div>
+        <div class="card"><p>@enj9</p></div>
+        <div class="card"><p>@f40m</p></div>
+        <div class="card"><p>@fdqj</p></div>
+        <div class="card"><p>@fdwb</p></div>
+        <div class="card"><p>@fhug</p></div>
+        <div class="card"><p>@fligr</p></div>
+        <div class="card"><p>@fliu</p></div>
+        <div class="card"><p>@furled</p></div>
+        <div class="card"><p>@fzld</p></div>
+        <div class="card"><p>@gzev</p></div>
+        <div class="card"><p>@ghcm</p></div>
+        <div class="card"><p>@g3i9</p></div>
+        <div class="card"><p>@g3r1</p></div>
+        <div class="card"><p>@g6a9</p></div>
+        <div class="card"><p>@gepm</p></div>
+        <div class="card"><p>@gfsg</p></div>
+        <div class="card"><p>@ghif</p></div>
+        <div class="card"><p>@gohzilla</p></div>
+        <div class="card"><p>@gnx5</p></div>
+        <div class="card"><p>@gpvi</p></div>
+        <div class="card"><p>@gwrp</p></div>
+        <div class="card"><p>@gzw6</p></div>
+        <div class="card"><p>@_gt6</p></div>
+        <div class="card"><p>@hbxt</p></div>
+        <div class="card"><p>@hijt</p></div>
+        <div class="card"><p>@hiqr</p></div>
+        <div class="card"><p>@hjgo</p></div>
+        <div class="card"><p>@hopb</p></div>
+        <div class="card"><p>@horne</p></div>
+        <div class="card"><p>@htbv</p></div>
+        <div class="card"><p>@hwye</p></div>
+        <div class="card"><p>@hxgl</p></div>
+        <div class="card"><p>@hyoc</p></div>
+        <div class="card"><p>@igba</p></div>
+        <div class="card"><p>@iemf</p></div>
+        <div class="card"><p>@ijyb</p></div>
+        <div class="card"><p>@istb</p></div>
+        <div class="card"><p>@jdga</p></div>
+        <div class="card"><p>@jeyv</p></div>
+        <div class="card"><p>@jxuj</p></div>
+        <div class="card"><p>@jfxz</p></div>
+        <div class="card"><p>@jk16</p></div>
+        <div class="card"><p>@jn4e</p></div>
+        <div class="card"><p>@jnfy</p></div>
+        <div class="card"><p>@jol4</p></div>
+        <div class="card"><p>@j41x</p></div>
+        <div class="card"><p>@kdlv</p></div>
+        <div class="card"><p>@kjui</p></div>
+        <div class="card"><p>@ky2t</p></div>
+        <div class="card"><p>@ljpf</p></div>
+        <div class="card"><p>@lkfj</p></div>
+        <div class="card"><p>@lndc</p></div>
+        <div class="card"><p>@lxc3</p></div>
+        <div class="card"><p>@mo4p</p></div>
+        <div class="card"><p>@movk</p></div>
+        <div class="card"><p>@mzye</p></div>
+        <div class="card"><p>@nyqe</p></div>
+        <div class="card"><p>@nodg</p></div>
+        <div class="card"><p>@nc_t</p></div>
+        <div class="card"><p>@ngqo</p></div>
+        <div class="card"><p>@nlsd</p></div>
+        <div class="card"><p>@nqsz</p></div>
+        <div class="card"><p>@nfyb</p></div>
+        <div class="card"><p>@nyw0</p></div>
+        <div class="card"><p>@ne0o</p></div>
+        <div class="card"><p>@od4t</p></div>
+        <div class="card"><p>@ofqu</p></div>
+        <div class="card"><p>@ogjh</p></div>
+        <div class="card"><p>@orpc</p></div>
+        <div class="card"><p>@owgi</p></div>
+        <div class="card"><p>@ohqy</p></div>
+        <div class="card"><p>@oyql</p></div>
+        <div class="card"><p>@pc62</p></div>
+        <div class="card"><p>@pf7i</p></div>
+        <div class="card"><p>@pfrv</p></div>
+        <div class="card"><p>@pxuj</p></div>
+        <div class="card"><p>@pvmn</p></div>
+        <div class="card"><p>@pmrc</p></div>
+        <div class="card"><p>@pashed</p></div>
+        <div class="card"><p>@qpyj</p></div>
+        <div class="card"><p>@qtud</p></div>
+        <div class="card"><p>@qzip</p></div>
+        <div class="card"><p>@qt70</p></div>
+        <div class="card"><p>@qz37</p></div>
+        <div class="card"><p>@rbcy</p></div>
+        <div class="card"><p>@rhpt</p></div>
+        <div class="card"><p>@rtgn</p></div>
+        <div class="card"><p>@ryjw</p></div>
+        <div class="card"><p>@rm4c</p></div>
+        <div class="card"><p>@r46j</p></div>
+        <div class="card"><p>@raspado</p></div>
+        <div class="card"><p>@retightening</p></div>
+        <div class="card"><p>@stillen</p></div>
+        <div class="card"><p>@tae7</p></div>
+        <div class="card"><p>@tbgy</p></div>
+        <div class="card"><p>@tbpr</p></div>
+        <div class="card"><p>@tvrp</p></div>
+        <div class="card"><p>@t0ld</p></div>
+        <div class="card"><p>@tuqz</p></div>
+        <div class="card"><p>@udn4</p></div>
+        <div class="card"><p>@uvi6</p></div>
+        <div class="card"><p>@vaqz</p></div>
+        <div class="card"><p>@vcqw</p></div>
+        <div class="card"><p>@vqem</p></div>
+        <div class="card"><p>@wpvh</p></div>
+        <div class="card"><p>@wcmb</p></div>
+        <div class="card"><p>@wgta</p></div>
+        <div class="card"><p>@wkgo</p></div>
+        <div class="card"><p>@wu1b</p></div>
+        <div class="card"><p>@wxas</p></div>
+        <div class="card"><p>@wxzd</p></div>
+        <div class="card"><p>@wiqo</p></div>
+        <div class="card"><p>@wyk0</p></div>
+        <div class="card"><p>@xe74</p></div>
+        <div class="card"><p>@xem0</p></div>
+        <div class="card"><p>@xgqw</p></div>
+        <div class="card"><p>@xkrq</p></div>
+        <div class="card"><p>@xpdg</p></div>
+        <div class="card"><p>@y0k_</p></div>
+        <div class="card"><p>@y0se</p></div>
+        <div class="card"><p>@yg0t</p></div>
+        <div class="card"><p>@ykdp</p></div>
+        <div class="card"><p>@ylsk</p></div>
+        <div class="card"><p>@ylkz</p></div>
+        <div class="card"><p>@ylxt</p></div>
+        <div class="card"><p>@yphc</p></div>
+        <div class="card"><p>@ywpr</p></div>
+        <div class="card"><p>@yellowed</p></div>
+        <div class="card"><p>@z1gm</p></div>
+        <div class="card"><p>@zyqh</p></div>
+        <div class="card"><p>@1j8u</p></div>
+        <div class="card"><p>@14ld</p></div>
+        <div class="card"><p>@27hp</p></div>
+        <div class="card"><p>@31hn</p></div>
+        <div class="card"><p>@3ukl</p></div>
+        <div class="card"><p>@4lj_</p></div>
+        <div class="card"><p>@4nvq</p></div>
+        <div class="card"><p>@4ra5</p></div>
+        <div class="card"><p>@5341</p></div>
+        <div class="card"><p>@54jd</p></div>
+        <div class="card"><p>@54yg</p></div>
+        <div class="card"><p>@6bze</p></div>
+        <div class="card"><p>@7__i</p></div>
+        <div class="card"><p>@9ag4</p></div>
+        <div class="card"><p>@9xcg</p></div>
+        <div class="card"><p>@94ej</p></div>
+        <div class="card"><p>@3930</p></div>
+        <div class="card"><p>@4340</p></div>
+        <div class="card"><p>@6930</p></div>
+        <div class="card"><p>@8106</p></div>
+        <div class="card"><p>@8720</p></div>
+        <div class="card"><p>@1.6.4</p></div>
+        <div class="card"><p>@8.0.6</p></div>
+        <div class="card"><p>@00049</p></div>
+        <div class="card"><p>@009726</p></div>
+        <div class="card"><p>@01501</p></div>
+        <div class="card"><p>@01681</p></div>
+        <div class="card"><p>@111421</p></div>
+        <div class="card"><p>@10331</p></div>
+        <div class="card"><p>@13611</p></div>
+        <div class="card"><p>@15753</p></div>
+        <div class="card"><p>@21593</p></div>
+        <div class="card"><p>@26753</p></div>
+        <div class="card"><p>@36644</p></div>
+        <div class="card"><p>@39702</p></div>
+        <div class="card"><p>@41076</p></div>
+        <div class="card"><p>@43679</p></div>
+        <div class="card"><p>@5224367</p></div>
+        <div class="card"><p>@5235478</p></div>
+        <div class="card"><p>@54242</p></div>
+        <div class="card"><p>@67778</p></div>
+        <div class="card"><p>@73859</p></div>
+        <div class="card"><p>@81866</p></div>
+        <div class="card"><p>@86168</p></div>
+        <div class="card"><p>@92499</p></div>
+        <div class="card"><p>@94040</p></div>
+        <div class="card"><p>@94040499</p></div>
+        <div class="card"><p>@0817191439</p></div>
+        <div class="card"><p>@0892912917</p></div>
+        <div class="card"><p>@0988041686</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sold: TikTok -->
+  <div class="modal" id="modal-sold-tt" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="soldTtTitle">
+    <div class="modal-content" role="document">
+      <button class="modal-close" data-modal-close type="button" aria-label="Close">×</button>
+      <h2 id="soldTtTitle">TikToks Sold</h2>
+      <div class="card-grid">
+        <div class="card"><p>@aa (font)</p></div>
+        <div class="card"><p>@anmp</p></div>
+        <div class="card"><p>@bm73</p></div>
+        <div class="card"><p>@c (font)</p></div>
+        <div class="card"><p>@cjly</p></div>
+        <div class="card"><p>@dd (font)</p></div>
+        <div class="card"><p>@eotv</p></div>
+        <div class="card"><p>@god (font)</p></div>
+        <div class="card"><p>@gb3</p></div>
+        <div class="card"><p>@m3me</p></div>
+        <div class="card"><p>@mtwi</p></div>
+        <div class="card"><p>@hgfx</p></div>
+        <div class="card"><p>@ibga</p></div>
+        <div class="card"><p>@jlmo</p></div>
+        <div class="card"><p>@kczs</p></div>
+        <div class="card"><p>@kfex</p></div>
+        <div class="card"><p>@kbry</p></div>
+        <div class="card"><p>@los (font)</p></div>
+        <div class="card"><p>@luey</p></div>
+        <div class="card"><p>@peqw</p></div>
+        <div class="card"><p>@tazn</p></div>
+        <div class="card"><p>@tnsg</p></div>
+        <div class="card"><p>@uhvf</p></div>
+        <div class="card"><p>@uftl</p></div>
+        <div class="card"><p>@v1to</p></div>
+        <div class="card"><p>@xywr</p></div>
+        <div class="card"><p>@xdmi</p></div>
+        <div class="card"><p>@zmqr</p></div>
+        <div class="card"><p>@00 (font)</p></div>
+        <div class="card"><p>@11 (font)</p></div>
+        <div class="card"><p>@21 (font)</p></div>
+        <div class="card"><p>@99 (font)</p></div>
+        <div class="card"><p>@55854 (font)</p></div>
+        <div class="card"><p>@318502 (font)</p></div>
+        <div class="card"><p>@520491 (font)</p></div>
+        <div class="card"><p>@529416 (font)</p></div>
+        <div class="card"><p>@810153 (font)</p></div>
+        <div class="card"><p>@827513 (font)</p></div>
+        <div class="card"><p>@829114 (font)</p></div>
+        <div class="card"><p>@ invisibleuser(font)</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sold: CapCut -->
+  <div class="modal" id="modal-sold-cc" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="soldCcTitle">
+    <div class="modal-content" role="document">
+      <button class="modal-close" data-modal-close type="button" aria-label="Close">×</button>
+      <h2 id="soldCcTitle">Sold — CapCut</h2>
+      <div class="card-grid">
+        <div class="card"><p>@riot</p></div>
+        <div class="card"><p>@tool</p></div>
+        <div class="card"><p>@ecstacy</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sold: X -->
+  <div class="modal" id="modal-sold-x" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="soldXTitle">
+    <div class="modal-content" role="document">
+      <button class="modal-close" data-modal-close type="button" aria-label="Close">×</button>
+      <h2 id="soldXTitle">Sold — X</h2>
+      <div class="card-grid">
+        <div class="card"><p>@o2x_</p></div>
+        <div class="card"><p>@codq</p></div>
+        <div class="card"><p>@r0un</p></div>
+        <div class="card"><p>@yg65</p></div>
+        <div class="card"><p>@_dine</p></div>
+        <div class="card"><p>@billi0n</p></div>
+        <div class="card"><p>@topage</p></div>
+        <div class="card"><p>@delacree</p></div>
+        <div class="card"><p>@paqmane</p></div>
+        <div class="card"><p>@vendetta_</p></div>
+        <div class="card"><p>@062183</p></div>
+        <div class="card"><p>@173601</p></div>
+        <div class="card"><p>@179170</p></div>
+        <div class="card"><p>@222824</p></div>
+        <div class="card"><p>@230204</p></div>
+        <div class="card"><p>@313178</p></div>
+        <div class="card"><p>@337723</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cache-bust so you actually see changes -->
+  <script src="./script.js?v=99" defer></script>
 </body>
 </html>
