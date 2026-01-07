@@ -1,53 +1,679 @@
-<!-- =========================
-     index.html
-     ========================= -->
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
   <title>21 | Usernames & Social Media Services</title>
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-  <!-- Prevent theme flash before CSS loads -->
-  <script>
-    (function () {
-      try {
-        var stored = localStorage.getItem('theme');
-        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-        // Default to dark if nothing stored
-        document.documentElement.setAttribute('data-theme', stored || (prefersDark ? 'dark' : 'dark'));
-      } catch(e) {}
-    })();
-  </script>
+    :root {
+      --bg-primary: #0a0a0f;
+      --bg-secondary: #12121a;
+      --bg-tertiary: #1a1a28;
+      --accent-primary: #f09433;
+      --accent-secondary: #e6683c;
+      --accent-tertiary: #dc2743;
+      --accent-quaternary: #cc2366;
+      --accent-gradient: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+      --text-primary: #ffffff;
+      --text-secondary: #a1a1aa;
+      --text-muted: #71717a;
+      --border: rgba(255, 255, 255, 0.1);
+      --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+      --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.6);
+      --font-body: 'Outfit', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
 
-  <!-- Cache-bust so you actually see changes -->
-  <link rel="stylesheet" href="./styles.css?v=99">
+    body {
+      font-family: var(--font-body);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Animated background */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 20% 50%, rgba(240, 148, 51, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(220, 39, 67, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 40% 20%, rgba(188, 24, 136, 0.1) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+      animation: bgShift 20s ease infinite;
+    }
+
+    @keyframes bgShift {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.8; }
+    }
+
+    .page {
+      position: relative;
+      z-index: 1;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+    }
+
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      padding: 3rem 1rem 4rem;
+      position: relative;
+    }
+
+    .hero__logoWrap {
+      margin-bottom: 2rem;
+      display: inline-block;
+      position: relative;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+    }
+
+    .hero__logo {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      border: 3px solid transparent;
+      background: linear-gradient(var(--bg-secondary), var(--bg-secondary)) padding-box,
+                  var(--accent-gradient) border-box;
+      box-shadow: 0 0 60px rgba(240, 148, 51, 0.4);
+      transition: all 0.3s ease;
+    }
+
+    .hero__logo:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 80px rgba(240, 148, 51, 0.6);
+    }
+
+    .hero__content {
+      background: rgba(18, 18, 26, 0.6);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 2.5rem 2rem;
+      max-width: 700px;
+      margin: 0 auto;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero__content::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--accent-gradient);
+      opacity: 0.6;
+    }
+
+    .hero__title {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 800;
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+      letter-spacing: -0.02em;
+      animation: gradientShift 3s ease infinite;
+    }
+
+    @keyframes gradientShift {
+      0%, 100% { filter: hue-rotate(0deg); }
+      50% { filter: hue-rotate(10deg); }
+    }
+
+    .hero__sub {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.8;
+    }
+
+    /* Contact Float Button */
+    .contact-float__btn {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: var(--accent-gradient);
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow: var(--shadow-lg);
+      z-index: 1000;
+      transition: all 0.3s ease;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(240, 148, 51, 0.7); }
+      50% { box-shadow: 0 0 0 20px rgba(240, 148, 51, 0); }
+    }
+
+    .contact-float__btn:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 20px 60px rgba(240, 148, 51, 0.5);
+    }
+
+    /* Contact Panel */
+    .contact-float__panel {
+      position: fixed;
+      bottom: 6rem;
+      right: 2rem;
+      background: rgba(18, 18, 26, 0.95);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 1.5rem;
+      z-index: 1000;
+      box-shadow: var(--shadow-lg);
+      min-width: 250px;
+      animation: slideUp 0.3s ease;
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .contact-float__panel[hidden] {
+      display: none;
+    }
+
+    .contact-float__panelHead {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .contact-float__panelTitle {
+      font-weight: 700;
+      font-size: 1.2rem;
+    }
+
+    .contact-float__close {
+      background: none;
+      border: none;
+      color: var(--text-secondary);
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: color 0.2s;
+      padding: 0;
+      width: 30px;
+      height: 30px;
+    }
+
+    .contact-float__close:hover {
+      color: var(--text-primary);
+    }
+
+    .pill-link {
+      display: block;
+      background: var(--bg-tertiary);
+      color: var(--text-primary);
+      text-decoration: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 50px;
+      margin-bottom: 0.5rem;
+      text-align: center;
+      border: 1px solid var(--border);
+      transition: all 0.3s ease;
+      font-weight: 500;
+    }
+
+    .pill-link:hover {
+      background: var(--accent-gradient);
+      transform: translateX(5px);
+      border-color: transparent;
+    }
+
+    /* Panel Section */
+    .panel {
+      margin-bottom: 3rem;
+    }
+
+    .panel__head {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .panel__title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .panel__desc {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+    }
+
+    /* Launcher Grid */
+    .launcher-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .launcher {
+      background: var(--bg-secondary);
+      border: 2px solid var(--border);
+      color: var(--text-primary);
+      padding: 1.5rem;
+      border-radius: 16px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .launcher::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: var(--accent-gradient);
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+
+    .launcher:hover::before {
+      left: 0;
+      opacity: 0.1;
+    }
+
+    .launcher:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent-primary);
+      box-shadow: 0 10px 40px rgba(240, 148, 51, 0.3);
+    }
+
+    .launcher--ghost {
+      background: transparent;
+      border-style: dashed;
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(10px);
+      z-index: 2000;
+      padding: 1rem;
+      overflow-y: auto;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .modal[aria-hidden="false"] {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-content {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 2rem;
+      max-width: 900px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+      box-shadow: var(--shadow-lg);
+      animation: slideIn 0.3s ease;
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: scale(0.9) translateY(20px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      font-weight: 600;
+      padding: 0.5rem 1.25rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-body);
+    }
+
+    .modal-close:hover {
+      background: var(--accent-primary);
+      color: white;
+      border-color: var(--accent-primary);
+      transform: translateX(-3px);
+    }
+
+    .modal-close::before {
+      content: '←';
+      margin-right: 0.5rem;
+      font-size: 1.2rem;
+    }
+
+    .modal h2 {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .modal h3 {
+      margin: 2rem 0 1rem;
+      color: var(--text-secondary);
+      font-size: 1.2rem;
+    }
+
+    /* Search Bar */
+    .search-bar {
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+
+    .search-bar input {
+      width: 100%;
+      padding: 1rem 1rem 1rem 3rem;
+      background: var(--bg-tertiary);
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      color: var(--text-primary);
+      font-size: 1rem;
+      font-family: var(--font-mono);
+      transition: all 0.3s ease;
+    }
+
+    .search-bar input:focus {
+      outline: none;
+      border-color: var(--accent-primary);
+      box-shadow: 0 0 0 3px rgba(240, 148, 51, 0.2);
+    }
+
+    .search-bar::before {
+      content: '🔍';
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.2rem;
+    }
+
+    /* Card Grid */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1rem;
+    }
+
+    .card {
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--accent-gradient);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent-primary);
+      box-shadow: 0 10px 30px rgba(240, 148, 51, 0.3);
+    }
+
+    .card:hover::before {
+      opacity: 0.05;
+    }
+
+    .card p {
+      font-family: var(--font-mono);
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      color: var(--text-primary);
+      font-weight: 600;
+      position: relative;
+      z-index: 1;
+    }
+
+    .card a {
+      display: inline-block;
+      background: var(--accent-gradient);
+      color: white;
+      text-decoration: none;
+      padding: 0.5rem 1.5rem;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+      position: relative;
+      z-index: 1;
+    }
+
+    .card a:hover {
+      transform: scale(1.05);
+      box-shadow: 0 5px 15px rgba(240, 148, 51, 0.4);
+    }
+
+    .card.big {
+      grid-column: 1 / -1;
+      padding: 2rem;
+    }
+
+    .card.big p {
+      font-family: var(--font-body);
+      margin-bottom: 1rem;
+      line-height: 1.8;
+    }
+
+    .card-button {
+      display: inline-block;
+      background: var(--accent-gradient);
+      color: white;
+      text-decoration: none;
+      padding: 1rem 2rem;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      margin-top: 1rem;
+    }
+
+    .card-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(240, 148, 51, 0.4);
+    }
+
+    .subhead {
+      margin: 2rem 0 1rem;
+      color: var(--text-secondary);
+      font-size: 1.2rem;
+    }
+
+    .muted {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .service-section {
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+      transition: all 0.3s ease;
+    }
+
+    .service-section:hover {
+      border-color: var(--accent-primary);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(240, 148, 51, 0.2);
+    }
+
+    .service-section h3 {
+      color: var(--text-primary);
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+
+    .service-section p {
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 0.75rem;
+    }
+
+    .service-tier {
+      background: var(--bg-secondary);
+      border-left: 3px solid var(--accent-primary);
+      padding: 1rem 1.5rem;
+      margin: 1rem 0;
+      border-radius: 8px;
+    }
+
+    .service-tier p {
+      margin-bottom: 0.5rem;
+    }
+
+    .price-tag {
+      color: var(--accent-primary) !important;
+      font-weight: 700 !important;
+      font-size: 1.1rem !important;
+      font-family: var(--font-mono);
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      border-top: 1px solid var(--border);
+      margin-top: 4rem;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--bg-primary);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--accent-primary);
+      border-radius: 5px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--accent-secondary);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .contact-float__btn {
+        bottom: 1rem;
+        right: 1rem;
+        padding: 0.875rem 1.5rem;
+      }
+
+      .contact-float__panel {
+        bottom: 5rem;
+        right: 1rem;
+        left: 1rem;
+      }
+
+      .launcher-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .card-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 
 <body>
-  <!-- Floating Contact Button -->
-  <button
-    class="contact-float__btn"
-    id="contactToggle"
-    type="button"
-    aria-label="Open contact links"
-    aria-expanded="false"
-    aria-controls="contactPanel"
-  >
+  <button class="contact-float__btn" id="contactToggle" type="button">
     Contact
   </button>
 
-  <!-- Floating Contact Panel -->
-  <aside class="contact-float__panel" id="contactPanel" hidden aria-label="Contact links">
+  <aside class="contact-float__panel" id="contactPanel" hidden>
     <div class="contact-float__panelHead">
       <div class="contact-float__panelTitle">Links</div>
-      <button class="contact-float__close" id="contactClose" type="button" aria-label="Close contact panel">×</button>
+      <button class="contact-float__close" id="contactClose" type="button">×</button>
     </div>
-
     <div class="contact-float__panelBody">
       <a class="pill-link" href="https://oguser.com/21" target="_blank" rel="noopener">OGU</a>
       <a class="pill-link" href="https://www.instagram.com/7521" target="_blank" rel="noopener">Instagram</a>
@@ -56,34 +682,30 @@
     </div>
   </aside>
 
-  <!-- Page shell -->
   <div class="page">
     <header class="hero">
       <div class="hero__logoWrap">
-        <img
-          class="hero__logo"
-          src="93C40C80-79AB-4157-89A6-7EE8F0284D88.jpeg?v=2"
-          alt="21 brand logo"
-          onerror="this.onerror=null; this.src='21.jpeg?v=2';"
-        />
+        <img class="hero__logo" src="93C40C80-79AB-4157-89A6-7EE8F0284D88.jpeg?v=2" alt="21 brand logo" onerror="this.onerror=null; this.src='21.jpeg?v=2';" />
       </div>
-
-      <h1 class="hero__title">𝟐𝟏® Shop</h1>
-      <p class="hero__sub">Established 2023 | 550+ Vouches<br>Highly Rated, Well Connected.</p>
+      <div class="hero__content">
+        <h1 class="hero__title">𝟐𝟏® Shop</h1>
+        <p class="hero__sub">Established 2023 | 550+ Vouches<br>Highly Rated, Well Connected.</p>
+      </div>
     </header>
 
     <main class="content" id="main">
-      <section class="panel" aria-labelledby="stockHeading">
+      <section class="panel">
         <div class="panel__head">
-          <h2 class="panel__title" id="stockHeading">Stock, Services &amp; More</h2>
+          <h2 class="panel__title">Stock, Services &amp; More</h2>
           <p class="panel__desc">Tap a platform to view stock, sold history, or services.</p>
         </div>
 
-        <div class="launcher-grid" aria-label="Open a platform to view stock">
+        <div class="launcher-grid">
           <button class="launcher" type="button" data-modal-target="#modal-instagram">Instagram</button>
           <button class="launcher" type="button" data-modal-target="#modal-tiktok">TikTok</button>
           <button class="launcher" type="button" data-modal-target="#modal-xdigits">𝕏</button>
           <button class="launcher" type="button" data-modal-target="#modal-capcut">CapCut</button>
+          <button class="launcher" type="button" data-modal-target="#modal-services">Services</button>
           <button class="launcher" type="button" data-modal-target="#modal-escrow">Escrow</button>
           <button class="launcher" type="button" data-modal-target="#modal-swap">Swap Service</button>
           <button class="launcher" type="button" data-modal-target="#modal-vouches">Vouches</button>
@@ -97,183 +719,241 @@
     </footer>
   </div>
 
-  <!-- =========================================================
-       MODALS (All content preserved)
-       ========================================================= -->
-
-  <!-- Instagram -->
-  <div class="modal" id="modal-instagram" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="igTitle">
-    <div class="modal-content" role="document">
-      <button class="modal-close" data-modal-close type="button" aria-label="Close">×</button>
-      <h2 id="igTitle">Instagram</h2>
-
-      <div class="card-grid">
-        <div class="card"><p>@guia – $500</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-        <div class="card"><p>@gawx – $200</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-        <div class="card"><p>@la1o – $120</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-        <div class="card"><p>@qyjo – $80</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-        <div class="card"><p>@gr8b – $65</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-        <div class="card"><p>@epjg – $50</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-        <div class="card"><p>@qdhv – $40</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-        <div class="card"><p>@5ucy – $40</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-        <div class="card"><p>@bmo9 – $40</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-        <div class="card"><p>@qdhv – $35</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-        <div class="card"><p>@6ihv – $35</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+  <!-- Instagram Modal -->
+  <div class="modal" id="modal-instagram" aria-hidden="true" role="dialog">
+    <div class="modal-content">
+      <button class="modal-close" data-modal-close type="button">Back</button>
+      <h2>Instagram</h2>
+      <div class="search-bar">
+        <input type="text" placeholder="Search usernames..." class="search-input" />
       </div>
-
-      <h3 class="subhead">Available via Proxy</h3>
+      <div class="card-grid" data-grid="instagram">
+        <div class="card"><p>@guia – $500</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
+        <div class="card"><p>@gawx – $200</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
+        <div class="card"><p>@la1o – $120</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
+        <div class="card"><p>@qyjo – $80</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
+        <div class="card"><p>@gr8b – $65</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
+        <div class="card"><p>@epjg – $50</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
+        <div class="card"><p>@qdhv – $40</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
+        <div class="card"><p>@5ucy – $40</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
+        <div class="card"><p>@bmo9 – $40</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
+        <div class="card"><p>@qdhv – $35</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
+        <div class="card"><p>@6ihv – $35</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
+      </div>
+      <h3>Available via Proxy</h3>
       <div class="card-grid">
-        <div class="card"><p>no users available</p><a href="https://t.me/id7321" target="_blank" rel="noopener">unavailable</a></div>
+        <div class="card"><p>no users available</p><a href="https://t.me/id7321" target="_blank">unavailable</a></div>
       </div>
     </div>
   </div>
 
-  <!-- TikTok -->
-  <div class="modal" id="modal-tiktok" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="tiktokTitle">
-    <div class="modal-content" role="document">
-      <button class="modal-close" data-modal-close type="button" aria-label="Close">×</button>
-      <h2 id="tiktokTitle">TikTok</h2>
-      <div class="card-grid">
-        <div class="card"><p>@cgkq - $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-        <div class="card"><p>@fnzg - $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-        <div class="card"><p>@qcml - $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-        <div class="card"><p>@qpgs - $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-        <div class="card"><p>@tgzk - $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-        <div class="card"><p>@tpqg - $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-        <div class="card"><p>@ywtb - $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+  <!-- TikTok Modal -->
+  <div class="modal" id="modal-tiktok" aria-hidden="true" role="dialog">
+    <div class="modal-content">
+      <button class="modal-close" data-modal-close type="button">Back</button>
+      <h2>TikTok</h2>
+      <div class="search-bar">
+        <input type="text" placeholder="Search usernames..." class="search-input" />
+      </div>
+      <div class="card-grid" data-grid="tiktok">
+        <div class="card"><p>@cgkq - $5</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
+        <div class="card"><p>@fnzg - $5</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
+        <div class="card"><p>@qcml - $5</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
+        <div class="card"><p>@qpgs - $5</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
+        <div class="card"><p>@tgzk - $5</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
+        <div class="card"><p>@tpqg - $5</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
+        <div class="card"><p>@ywtb - $5</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
       </div>
     </div>
   </div>
 
-  <!-- X -->
-  <div class="modal" id="modal-xdigits" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="xTitle">
-    <div class="modal-content" role="document">
-      <button class="modal-close" data-modal-close type="button" aria-label="Close">×</button>
-      <h2 id="xTitle">𝕏</h2>
-      <div class="card-grid">
-        <div class="card"><p>@296945 – $20</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-        <div class="card"><p>@359893 – $20</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-        <div class="card"><p>@522613 – $15</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-        <div class="card"><p>@687286 – $15</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-        <div class="card"><p>@964945 – $15</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-        <div class="card"><p>@mmssqq – $20</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-        <div class="card"><p>@wanted_criminal – $100</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+  <!-- X Modal -->
+  <div class="modal" id="modal-xdigits" aria-hidden="true" role="dialog">
+    <div class="modal-content">
+      <button class="modal-close" data-modal-close type="button">Back</button>
+      <h2>𝕏</h2>
+      <div class="search-bar">
+        <input type="text" placeholder="Search usernames..." class="search-input" />
+      </div>
+      <div class="card-grid" data-grid="x">
+        <div class="card"><p>@296945 – $20</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
+        <div class="card"><p>@359893 – $20</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
+        <div class="card"><p>@522613 – $15</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
+        <div class="card"><p>@687286 – $15</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
+        <div class="card"><p>@964945 – $15</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
+        <div class="card"><p>@mmssqq – $20</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
+        <div class="card"><p>@wanted_criminal – $100</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
       </div>
     </div>
   </div>
 
-  <!-- CapCut (single list) -->
-  <div class="modal" id="modal-capcut" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="capcutTitle">
-    <div class="modal-content" role="document">
-      <button class="modal-close" data-modal-close type="button" aria-label="Close">×</button>
-      <h2 id="capcutTitle">CapCut</h2>
+  <!-- CapCut Modal -->
+  <div class="modal" id="modal-capcut" aria-hidden="true" role="dialog">
+    <div class="modal-content">
+      <button class="modal-close" data-modal-close type="button">Back</button>
+      <h2>CapCut</h2>
       <p class="muted">All CapCut usernames (single list).</p>
-
-      <div class="card-grid">
-        <div class="card"><p>@antisociality – $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-        <div class="card"><p>@awful – $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-        <div class="card"><p>@delusional – $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-        <div class="card"><p>@ecstasy – $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-        <div class="card"><p>@grateful – $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-        <div class="card"><p>@impatient – $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-        <div class="card"><p>@inferior – $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-        <div class="card"><p>@irresponsible – $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-        <div class="card"><p>@sore – $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-        <div class="card"><p>@timid – $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-
-        <div class="card"><p>@adjust – $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-        <div class="card"><p>@alter – $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-        <div class="card"><p>@avoid – $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-        <div class="card"><p>@clap – $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-        <div class="card"><p>@clean – $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-        <div class="card"><p>@crop – $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-        <div class="card"><p>@grasp – $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-        <div class="card"><p>@jailbreak – $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-        <div class="card"><p>@reap – $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-        <div class="card"><p>@talk – $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-        <div class="card"><p>@thread – $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-        <div class="card"><p>@tied – $5</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-
-        <div class="card"><p>@Bankroll – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-        <div class="card"><p>@Boost – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-        <div class="card"><p>@burden – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-        <div class="card"><p>@color – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-        <div class="card"><p>@creature – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-        <div class="card"><p>@hazard – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-        <div class="card"><p>@heroism – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-        <div class="card"><p>@offense – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-        <div class="card"><p>@orphan – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-        <div class="card"><p>@physic – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-        <div class="card"><p>@place – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-        <div class="card"><p>@producer – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-        <div class="card"><p>@rack – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-        <div class="card"><p>@ransom – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-        <div class="card"><p>@request – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-        <div class="card"><p>@sack – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-        <div class="card"><p>@science – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-        <div class="card"><p>@selfless – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-        <div class="card"><p>@spain – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-        <div class="card"><p>@spine – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-        <div class="card"><p>@stair – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-        <div class="card"><p>@stolen – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-        <div class="card"><p>@street – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-        <div class="card"><p>@supervillain – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-        <div class="card"><p>@tier – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-        <div class="card"><p>@tool – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-        <div class="card"><p>@topic – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-        <div class="card"><p>@turf – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-        <div class="card"><p>@want – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
-        <div class="card"><p>@writer – $8</p><a href="https://t.me/id7321" target="_blank" rel="noopener">Buy</a></div>
+      <div class="search-bar">
+        <input type="text" placeholder="Search usernames..." class="search-input" />
+      </div>
+      <div class="card-grid" data-grid="capcut">
+        <div class="card"><p>@antisociality – $5</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
+        <div class="card"><p>@awful – $5</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
+        <div class="card"><p>@delusional – $5</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
+        <div class="card"><p>@ecstasy – $5</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
+        <div class="card"><p>@grateful – $5</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
+        <div class="card"><p>@impatient – $5</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
+        <div class="card"><p>@inferior – $5</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
+        <div class="card"><p>@irresponsible – $5</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
+        <div class="card"><p>@sore – $5</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
+        <div class="card"><p>@timid – $5</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
+        <div class="card"><p>@adjust – $5</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
+        <div class="card"><p>@alter – $5</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
+        <div class="card"><p>@avoid – $5</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
+        <div class="card"><p>@clap – $5</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
+        <div class="card"><p>@clean – $5</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
+        <div class="card"><p>@crop – $5</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
+        <div class="card"><p>@grasp – $5</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
+        <div class="card"><p>@jailbreak – $5</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
+        <div class="card"><p>@reap – $5</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
+        <div class="card"><p>@talk – $5</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
+        <div class="card"><p>@thread – $5</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
+        <div class="card"><p>@tied – $5</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
+        <div class="card"><p>@Bankroll – $8</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
+        <div class="card"><p>@Boost – $8</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
+        <div class="card"><p>@burden – $8</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
+        <div class="card"><p>@color – $8</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
+        <div class="card"><p>@creature – $8</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
+        <div class="card"><p>@hazard – $8</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
+        <div class="card"><p>@heroism – $8</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
+        <div class="card"><p>@offense – $8</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
+        <div class="card"><p>@orphan – $8</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
+        <div class="card"><p>@physic – $8</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
+        <div class="card"><p>@place – $8</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
+        <div class="card"><p>@producer – $8</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
+        <div class="card"><p>@rack – $8</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
+        <div class="card"><p>@ransom – $8</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
+        <div class="card"><p>@request – $8</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
+        <div class="card"><p>@sack – $8</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
+        <div class="card"><p>@science – $8</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
+        <div class="card"><p>@selfless – $8</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
+        <div class="card"><p>@spain – $8</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
+        <div class="card"><p>@spine – $8</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
+        <div class="card"><p>@stair – $8</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
+        <div class="card"><p>@stolen – $8</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
+        <div class="card"><p>@street – $8</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
+        <div class="card"><p>@supervillain – $8</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
+        <div class="card"><p>@tier – $8</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
+        <div class="card"><p>@tool – $8</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
+        <div class="card"><p>@topic – $8</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
+        <div class="card"><p>@turf – $8</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
+        <div class="card"><p>@want – $8</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
+        <div class="card"><p>@writer – $8</p><a href="https://t.me/id7321" target="_blank">Buy</a></div>
       </div>
     </div>
   </div>
 
-  <!-- Vouches -->
-  <div class="modal" id="modal-vouches" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="vouchTitle">
-    <div class="modal-content" role="document">
-      <button class="modal-close" data-modal-close type="button" aria-label="Close">×</button>
-      <h2 id="vouchTitle">Vouches</h2>
+  <!-- Services Modal -->
+  <div class="modal" id="modal-services" aria-hidden="true" role="dialog">
+    <div class="modal-content">
+      <button class="modal-close" data-modal-close type="button">Back</button>
+      <h2>Services</h2>
+      
+      <div class="service-section">
+        <h3>🔍 Custom Username Sourcing</h3>
+        <p>Either from my own stock or from my personal list of friends, I can almost always find the kind of user you might be looking for if the budget is right.</p>
+        <p class="muted">POF (Proof of Funds) needed for broker deals</p>
+        <a class="card-button" href="https://t.me/id7321" target="_blank">Inquire</a>
+      </div>
+
+      <div class="service-section">
+        <h3>📅 Aged Instagram Accounts</h3>
+        <div class="service-tier">
+          <p><strong>2010 Accounts</strong> – Come with OGE / No # linked</p>
+          <p class="price-tag">Starting at $45</p>
+        </div>
+        <div class="service-tier">
+          <p><strong>2013-2015 Accounts</strong> – Uncreated email</p>
+          <p class="price-tag">Starting at $5</p>
+        </div>
+        <a class="card-button" href="https://t.me/id7321" target="_blank">Order Now</a>
+      </div>
+
+      <div class="service-section">
+        <h3>✓ Instagram Verifications</h3>
+        <p>Get verified with any name/photo without needing to use your own info.</p>
+        <p class="price-tag">Starting at $65</p>
+        <a class="card-button" href="https://t.me/id7321" target="_blank">Get Verified</a>
+      </div>
+
+      <div class="service-section">
+        <h3>🔓 Account Recoveries</h3>
+        <p>Depending on your budget & case type, I can almost always help you recover an Instagram from permanent suspension.</p>
+        <p class="price-tag">Starting at $80</p>
+        <a class="card-button" href="https://t.me/id7321" target="_blank">Request Recovery</a>
+      </div>
+
+      <div class="service-section">
+        <h3>📱 SMS Verification Numbers</h3>
+        <p>Stop burning your number by using it too frequently. I provide clean one-time use numbers for SMS verifications.</p>
+        <p class="price-tag">$3-$5 (depends on app)</p>
+        <a class="card-button" href="https://t.me/id7321" target="_blank">Get Number</a>
+      </div>
+
+      <div class="service-section">
+        <h3>📧 Custom Outlook Emails</h3>
+        <p>Custom outlook emails with your chosen prefix.</p>
+        <p class="muted">Example: welk@outlook.***</p>
+        <p class="price-tag">$10 each</p>
+        <a class="card-button" href="https://t.me/id7321" target="_blank">Order Email</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Vouches Modal -->
+  <div class="modal" id="modal-vouches" aria-hidden="true" role="dialog">
+    <div class="modal-content">
+      <button class="modal-close" data-modal-close type="button">Back</button>
+      <h2>Vouches</h2>
       <div class="card big">
         <p>Highly Rated Seller, Swapper &amp; Escrow with over 550+ successful transactions.<br>Dealing with me is Fast, smooth &amp; stress free.</p>
-        <a class="card-button" href="https://t.me/id8121/53" target="_blank" rel="noopener">View Vouches</a>
+        <a class="card-button" href="https://t.me/id8121/53" target="_blank">View Vouches</a>
       </div>
     </div>
   </div>
 
-  <!-- Escrow -->
-  <div class="modal" id="modal-escrow" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="escrowTitle">
-    <div class="modal-content" role="document">
-      <button class="modal-close" data-modal-close type="button" aria-label="Close">×</button>
-      <h2 id="escrowTitle">Escrow</h2>
+  <!-- Escrow Modal -->
+  <div class="modal" id="modal-escrow" aria-hidden="true" role="dialog">
+    <div class="modal-content">
+      <button class="modal-close" data-modal-close type="button">Back</button>
+      <h2>Escrow</h2>
       <div class="card big">
-        <p><strong>middleman service:</strong> with over 550+ successful deals.
-          I securely hold funds and assist with swaps to ensure safe, smooth,
-          and stress-free transactions.</p>
+        <p><strong>middleman service:</strong> with over 550+ successful deals. I securely hold funds and assist with swaps to ensure safe, smooth, and stress-free transactions.</p>
         <p><strong>fee:</strong> is <strong>8%</strong> of the deal.<br><strong>MM + Swap:</strong> if swap is required, no mm fee will be charged. only swap fee.</p>
-        <a class="card-button" href="https://t.me/id7321" target="_blank" rel="noopener">Contact for Escrow</a>
+        <a class="card-button" href="https://t.me/id7321" target="_blank">Contact for Escrow</a>
       </div>
     </div>
   </div>
 
-  <!-- Swap -->
-  <div class="modal" id="modal-swap" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="swapTitle">
-    <div class="modal-content" role="document">
-      <button class="modal-close" data-modal-close type="button" aria-label="Close">×</button>
-      <h2 id="swapTitle">Swap Service</h2>
+  <!-- Swap Modal -->
+  <div class="modal" id="modal-swap" aria-hidden="true" role="dialog">
+    <div class="modal-content">
+      <button class="modal-close" data-modal-close type="button">Back</button>
+      <h2>Swap Service</h2>
       <div class="card big">
         <p>Secure Instagram swap service available with or without insurance.</p>
         <p><strong>Uninsured:</strong> 8% (minimum $5).</p>
         <p><strong>Insured:</strong> 15% (minimum $10).</p>
-        <a class="card-button" href="https://t.me/id7321" target="_blank" rel="noopener">Contact for Swap</a>
+        <a class="card-button" href="https://t.me/id7321" target="_blank">Contact for Swap</a>
       </div>
     </div>
   </div>
 
-  <!-- Sold Usernames (launcher modal) -->
-  <div class="modal" id="modal-sold" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="soldTitle">
-    <div class="modal-content" role="document">
-      <button class="modal-close" data-modal-close type="button" aria-label="Close">×</button>
-      <h2 id="soldTitle">Sold Usernames</h2>
+  <!-- Sold Usernames Launcher Modal -->
+  <div class="modal" id="modal-sold" aria-hidden="true" role="dialog">
+    <div class="modal-content">
+      <button class="modal-close" data-modal-close type="button">Back</button>
+      <h2>Sold Usernames</h2>
       <div class="launcher-grid">
         <button class="launcher" type="button" data-modal-target="#modal-sold-ig">Instagram</button>
         <button class="launcher" type="button" data-modal-target="#modal-sold-tt">TikTok</button>
@@ -283,12 +963,15 @@
     </div>
   </div>
 
-  <!-- Sold: Instagram (FULL LIST) -->
-  <div class="modal" id="modal-sold-ig" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="soldIgTitle">
-    <div class="modal-content" role="document">
-      <button class="modal-close" data-modal-close type="button" aria-label="Close">×</button>
-      <h2 id="soldIgTitle">Instagrams Sold: 200+</h2>
-      <div class="card-grid">
+  <!-- Sold Instagram Modal -->
+  <div class="modal" id="modal-sold-ig" aria-hidden="true" role="dialog">
+    <div class="modal-content">
+      <button class="modal-close" data-modal-close type="button">Back</button>
+      <h2>Instagrams Sold: 200+</h2>
+      <div class="search-bar">
+        <input type="text" placeholder="Search sold usernames..." class="search-input" />
+      </div>
+      <div class="card-grid" data-grid="sold-ig">
         <div class="card"><p>@afed</p></div>
         <div class="card"><p>@ai7g</p></div>
         <div class="card"><p>@allaying</p></div>
@@ -502,12 +1185,15 @@
     </div>
   </div>
 
-  <!-- Sold: TikTok -->
-  <div class="modal" id="modal-sold-tt" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="soldTtTitle">
-    <div class="modal-content" role="document">
-      <button class="modal-close" data-modal-close type="button" aria-label="Close">×</button>
-      <h2 id="soldTtTitle">TikToks Sold</h2>
-      <div class="card-grid">
+  <!-- Sold TikTok Modal -->
+  <div class="modal" id="modal-sold-tt" aria-hidden="true" role="dialog">
+    <div class="modal-content">
+      <button class="modal-close" data-modal-close type="button">Back</button>
+      <h2>TikToks Sold</h2>
+      <div class="search-bar">
+        <input type="text" placeholder="Search sold usernames..." class="search-input" />
+      </div>
+      <div class="card-grid" data-grid="sold-tt">
         <div class="card"><p>@aa (font)</p></div>
         <div class="card"><p>@anmp</p></div>
         <div class="card"><p>@bm73</p></div>
@@ -547,16 +1233,16 @@
         <div class="card"><p>@810153 (font)</p></div>
         <div class="card"><p>@827513 (font)</p></div>
         <div class="card"><p>@829114 (font)</p></div>
-        <div class="card"><p>@ invisibleuser(font)</p></div>
+        <div class="card"><p>@invisibleuser (font)</p></div>
       </div>
     </div>
   </div>
 
-  <!-- Sold: CapCut -->
-  <div class="modal" id="modal-sold-cc" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="soldCcTitle">
-    <div class="modal-content" role="document">
-      <button class="modal-close" data-modal-close type="button" aria-label="Close">×</button>
-      <h2 id="soldCcTitle">Sold — CapCut</h2>
+  <!-- Sold CapCut Modal -->
+  <div class="modal" id="modal-sold-cc" aria-hidden="true" role="dialog">
+    <div class="modal-content">
+      <button class="modal-close" data-modal-close type="button">Back</button>
+      <h2>Sold — CapCut</h2>
       <div class="card-grid">
         <div class="card"><p>@riot</p></div>
         <div class="card"><p>@tool</p></div>
@@ -565,11 +1251,11 @@
     </div>
   </div>
 
-  <!-- Sold: X -->
-  <div class="modal" id="modal-sold-x" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="soldXTitle">
-    <div class="modal-content" role="document">
-      <button class="modal-close" data-modal-close type="button" aria-label="Close">×</button>
-      <h2 id="soldXTitle">Sold — X</h2>
+  <!-- Sold X Modal -->
+  <div class="modal" id="modal-sold-x" aria-hidden="true" role="dialog">
+    <div class="modal-content">
+      <button class="modal-close" data-modal-close type="button">Back</button>
+      <h2>Sold — X</h2>
       <div class="card-grid">
         <div class="card"><p>@o2x_</p></div>
         <div class="card"><p>@codq</p></div>
@@ -592,7 +1278,95 @@
     </div>
   </div>
 
-  <!-- Cache-bust so you actually see changes -->
-  <script src="./script.js?v=99" defer></script>
+  <script>
+    // Contact panel toggle
+    const contactBtn = document.getElementById('contactToggle');
+    const contactPanel = document.getElementById('contactPanel');
+    const contactClose = document.getElementById('contactClose');
+
+    contactBtn.addEventListener('click', () => {
+      const isHidden = contactPanel.hasAttribute('hidden');
+      if (isHidden) {
+        contactPanel.removeAttribute('hidden');
+        contactBtn.setAttribute('aria-expanded', 'true');
+      } else {
+        contactPanel.setAttribute('hidden', '');
+        contactBtn.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    contactClose.addEventListener('click', () => {
+      contactPanel.setAttribute('hidden', '');
+      contactBtn.setAttribute('aria-expanded', 'false');
+    });
+
+    // Modal functionality
+    const modalTriggers = document.querySelectorAll('[data-modal-target]');
+    const modalCloses = document.querySelectorAll('[data-modal-close]');
+    const modals = document.querySelectorAll('.modal');
+
+    modalTriggers.forEach(trigger => {
+      trigger.addEventListener('click', () => {
+        const targetId = trigger.getAttribute('data-modal-target');
+        const modal = document.querySelector(targetId);
+        if (modal) {
+          modal.setAttribute('aria-hidden', 'false');
+          document.body.style.overflow = 'hidden';
+        }
+      });
+    });
+
+    modalCloses.forEach(closeBtn => {
+      closeBtn.addEventListener('click', () => {
+        const modal = closeBtn.closest('.modal');
+        if (modal) {
+          modal.setAttribute('aria-hidden', 'true');
+          document.body.style.overflow = '';
+        }
+      });
+    });
+
+    // Close modal on backdrop click
+    modals.forEach(modal => {
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          modal.setAttribute('aria-hidden', 'true');
+          document.body.style.overflow = '';
+        }
+      });
+    });
+
+    // Search functionality
+    const searchInputs = document.querySelectorAll('.search-input');
+    
+    searchInputs.forEach(input => {
+      input.addEventListener('input', (e) => {
+        const searchTerm = e.target.value.toLowerCase();
+        const modal = input.closest('.modal');
+        const cards = modal.querySelectorAll('.card-grid[data-grid] .card');
+        
+        cards.forEach(card => {
+          const text = card.textContent.toLowerCase();
+          if (text.includes(searchTerm)) {
+            card.style.display = '';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // ESC key to close modals
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        modals.forEach(modal => {
+          if (modal.getAttribute('aria-hidden') === 'false') {
+            modal.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+          }
+        });
+      }
+    });
+  </script>
 </body>
 </html>
