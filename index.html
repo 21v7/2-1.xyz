@@ -861,10 +861,7 @@ document.getElementById('categories').innerHTML = cats.map(c => `
 `).join('');
 
 document.getElementById('services').innerHTML = `
-  <div class="grid-item" data-modal="services">
-    <div class="grid-item-name">All Services</div>
-    <div class="grid-item-count">View All</div>
-  </div>
+ 
   <div class="grid-item" data-modal="escrow">
     <div class="grid-item-name">Escrow</div>
     <div class="grid-item-count">8% Fee</div>
@@ -872,6 +869,10 @@ document.getElementById('services').innerHTML = `
   <div class="grid-item" data-modal="swap">
     <div class="grid-item-name">Swaps</div>
     <div class="grid-item-count">From $5</div>
+  </div>
+  <div class="grid-item" data-modal="services">
+    <div class="grid-item-name">Services</div>
+    <div class="grid-item-count">View All</div>
   </div>
   <div class="grid-item" data-modal="vouches">
     <div class="grid-item-name">Vouches</div>
