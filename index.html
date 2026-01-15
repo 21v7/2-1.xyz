@@ -827,8 +827,9 @@ document.getElementById('logo').src = D.logoImage;
 document.getElementById('logo').onerror = () => document.getElementById('logo').src = D.logoFallback;
 document.getElementById('stats').innerHTML = `
   <span class="stat">${D.vouchCount} Vouches</span>
-  <span class="stat">Trusted</span>
   <span class="stat">Est. ${D.establishedYear}</span>
+  <span class="stat">This Website Serves as a Portal</span>
+
 `;
 document.getElementById('soldCount').textContent = `${D.totalSales} Sales`;
 
