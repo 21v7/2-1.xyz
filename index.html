@@ -45,7 +45,7 @@ const SITE_DATA = {
   // 📱 INSTAGRAM STOCK
   // Format: username – price
   // ═══════════════════════════════════
-  instagram: [
+  instagramStock: [
     '@guia – $500',
     '@gawx – $200',
     '@la1o – $150',
@@ -67,7 +67,6 @@ const SITE_DATA = {
   // 𝕏 TWITTER STOCK
   // ═══════════════════════════════════
   twitter: [
-    '09 accounts - $20',
     '@wanted_criminal – $100',
     '@mmssqq – $30',
     '@359893 – $20',
@@ -308,6 +307,45 @@ const SITE_DATA = {
     text-transform: uppercase; 
     letter-spacing: 2px;
     border-radius: 6px;
+  }
+  
+  .tos-notice {
+    margin-top: 35px;
+    text-align: center;
+  }
+  
+  .tos-btn {
+    background: var(--glass-dark);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: 8px;
+    padding: 12px 28px;
+    color: var(--text-white);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Outfit', sans-serif;
+  }
+  
+  .tos-btn:hover {
+    background: var(--glass-darker);
+    border-color: var(--accent-cyan);
+    color: var(--accent-cyan);
+    transform: translateY(-2px);
+  }
+  
+  .tos-disclaimer {
+    font-size: 10px;
+    color: var(--text-dark);
+    margin-top: 12px;
+    font-style: italic;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
   }
   
   .category {
@@ -570,6 +608,11 @@ const SITE_DATA = {
     margin-bottom: 22px;
   }
   
+  .info.compact {
+    padding: 20px;
+    margin-bottom: 14px;
+  }
+  
   .info-title {
     font-size: 19px;
     font-weight: 600;
@@ -577,11 +620,22 @@ const SITE_DATA = {
     color: var(--accent-cyan);
   }
   
+  .info-title.compact {
+    font-size: 15px;
+    margin-bottom: 8px;
+  }
+  
   .info-text {
     font-size: 15px;
     color: var(--text-gray);
     line-height: 1.7;
     margin-bottom: 18px;
+  }
+  
+  .info-text.compact {
+    font-size: 13px;
+    line-height: 1.5;
+    margin-bottom: 0;
   }
   
   .info-price {
@@ -790,6 +844,10 @@ const SITE_DATA = {
     <h1 class="title">𝟐𝟏®</h1>
     <p class="subtitle">Social Media Services</p>
     <div class="stats" id="stats"></div>
+    <div class="tos-notice">
+      <button class="tos-btn" data-modal="tos">📋 Terms of Service</button>
+      <p class="tos-disclaimer">By making any purchase, you automatically agree to our Terms of Service, whether read or not.</p>
+    </div>
   </div>
   
   <div id="categories"></div>
@@ -809,7 +867,7 @@ const SITE_DATA = {
     </div>
   </div>
   
-  <div class="footer">© 2-1.xyz (2026) • @7521 (IG) • All Rights Reserved</div>
+  <div class="footer">© 2-1.xyz (2025) • @7521 (IG) • All Rights Reserved</div>
 </div>
 
 <div id="modals"></div>
@@ -820,10 +878,8 @@ const D = SITE_DATA;
 document.getElementById('logo').src = D.logoImage;
 document.getElementById('logo').onerror = () => document.getElementById('logo').src = D.logoFallback;
 document.getElementById('stats').innerHTML = `
-  <span class="stat">${D.vouchCount} Vouches</span>
   <span class="stat">Est. ${D.establishedYear}</span>
-  <span class="stat">This Website Serves as a Portal</span>
-
+  <span class="stat">${D.vouchCount} Vouches</span>
 `;
 document.getElementById('soldCount').textContent = `${D.totalSales} Sales`;
 
@@ -835,7 +891,7 @@ document.getElementById('contactPanel').innerHTML = `
 `;
 
 const cats = [
-  {name:'Instagram',count:D.instagram.length,desc:'Premium OG Handles starting at $35',id:'instagram'},
+  {name:'Instagram',count:D.instagramStock.length,desc:'Premium OG Handles starting at $35',id:'instagram'},
   {name:'TikTok',count:D.tiktok.length,desc:'Premium OG Handles starting $10',id:'tiktok'},
   {name:'𝕏 (Twitter)',count:D.twitter.length,desc:'Premium OG Handles starting at $20',id:'twitter'},
   {name:'CapCut',count:D.capcut.length,desc:'Premium OG Handles starting at $8',id:'capcut'}
@@ -909,7 +965,7 @@ function stockModal(id, t, arr) {
 }
 
 document.getElementById('modals').innerHTML = `
-  ${stockModal('instagram','Instagram',D.instagram)}
+  ${stockModal('instagram','Instagram',D.instagramStock)}
   ${stockModal('tiktok','TikTok',D.tiktok)}
   ${stockModal('twitter','𝕏 (Twitter)',D.twitter)}
   ${stockModal('capcut','CapCut',D.capcut)}
@@ -1090,6 +1146,135 @@ document.getElementById('modals').innerHTML = `
       </div>
       <div class="sold-grid" id="items-sold-cc">
         ${D.soldCapCut.map(u => `<div class="sold-item">${u}</div>`).join('')}
+      </div>
+    </div>
+  </div>
+  
+  <div class="modal" id="m-tos">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title">Terms of Service</h2>
+        <button class="modal-close" onclick="closeModal('tos')">×</button>
+      </div>
+      
+      <div class="info" style="border-left-color: #ff4444; background: rgba(255, 68, 68, 0.05);">
+        <div class="info-title" style="color: #ff6b6b;">⚠️ IMPORTANT NOTICE</div>
+        <div class="info-text" style="font-size: 14px; line-height: 1.6;"><strong>By making any purchase or using any service from 21, you automatically agree to ALL terms listed below, regardless of whether you have read them or not. Proceeding with a transaction constitutes full acceptance of these terms.</strong></div>
+      </div>
+      
+      <div class="info compact">
+        <div class="info-title compact">📋 Agreement to Terms</div>
+        <div class="info-text compact">By purchasing any username, service, or utilizing escrow/swap services from 21, you acknowledge that you have read, understood, and agree to be bound by these Terms of Service. If you do not agree to these terms, do not proceed with any transaction.</div>
+      </div>
+      
+      <div class="info compact">
+        <div class="info-title compact">🔒 No Refunds Policy</div>
+        <div class="info-text compact"><strong>All sales are final.</strong> Once a username or service has been delivered and you have confirmed receipt, no refunds will be issued under any circumstances. This includes but is not limited to:<br><br>
+        • Change of mind after purchase<br>
+        • Buyer's remorse<br>
+        • Issues arising from your own account management<br>
+        • Third-party platform policy changes</div>
+      </div>
+      
+      <div class="info compact">
+        <div class="info-title compact">⚠️ Platform Risk Acknowledgment</div>
+        <div class="info-text compact">You acknowledge and accept that social media platforms (Instagram, TikTok, Twitter/X, CapCut, etc.) may take action against accounts at their sole discretion. 21 is NOT responsible for:<br><br>
+        • Account suspensions, bans, or deletions by the platform<br>
+        • Username changes, removals, or reclaims by the platform<br>
+        • Platform policy changes affecting your purchase<br>
+        • Loss of verification badges or features<br>
+        • Any actions taken by the platform after delivery</div>
+      </div>
+      
+      <div class="info compact">
+        <div class="info-title compact">✅ Delivery and Verification</div>
+        <div class="info-text compact">Upon delivery, you must verify that the username/service matches what was agreed upon. You have <strong>24 hours</strong> to report any delivery discrepancies. After this period, the transaction is considered complete and final.<br><br>
+        Issues eligible for resolution within 24 hours:<br>
+        • Wrong username delivered<br>
+        • Account access issues (incorrect credentials)<br>
+        • Missing agreed-upon features at time of delivery</div>
+      </div>
+      
+      <div class="info compact">
+        <div class="info-title compact">🔐 Account Security Responsibility</div>
+        <div class="info-text compact">After delivery, YOU are solely responsible for:<br><br>
+        • Securing your account with strong passwords<br>
+        • Enabling two-factor authentication<br>
+        • Maintaining account security<br>
+        • Preventing unauthorized access<br><br>
+        21 is NOT liable for accounts compromised due to your security practices or sharing credentials with others.</div>
+      </div>
+      
+      <div class="info compact">
+        <div class="info-title compact">🔄 Swap Service Terms</div>
+        <div class="info-text compact"><strong>Uninsured Swaps:</strong> You accept the risk of username loss. No refund or compensation will be provided if the swap fails.<br><br>
+        <strong>Insured Swaps:</strong> Protection covers only losses directly caused by the swap process itself. Insurance does NOT cover:<br>
+        • Platform actions or policy enforcement<br>
+        • Your account being suspended/banned<br>
+        • Loss occurring outside the swap window<br>
+        • Third-party interference</div>
+      </div>
+      
+      <div class="info compact">
+        <div class="info-title compact">⚖️ Escrow/Middleman Service</div>
+        <div class="info-text compact">When using 21 as an escrow/middleman:<br><br>
+        • Both parties must agree to the terms before funds are held<br>
+        • The escrow fee is non-refundable once service begins<br>
+        • 21 acts as a neutral third party and makes final determinations in disputes<br>
+        • Decisions made during escrow are binding and final<br>
+        • 21 is not responsible for disputes arising after successful completion</div>
+      </div>
+      
+      <div class="info compact">
+        <div class="info-title compact">📱 Service-Specific Terms</div>
+        <div class="info-text compact"><strong>Instagram Verifications:</strong> Verification badges may be removed by Instagram at any time for any reason. No refunds for platform removal.<br><br>
+        <strong>Account Recoveries:</strong> Success is not guaranteed. Payment is for recovery attempt, not guaranteed results.<br><br>
+        <strong>Aged Accounts:</strong> Sold as-is. No guarantees regarding future platform compliance or longevity.<br><br>
+        <strong>SMS Numbers:</strong> One-time use only. No refunds for failed verifications due to platform restrictions.</div>
+      </div>
+      
+      <div class="info compact">
+        <div class="info-title compact">🚫 Prohibited Activities</div>
+        <div class="info-text compact">By purchasing, you agree NOT to:<br><br>
+        • Use services for illegal activities<br>
+        • Attempt chargebacks or payment disputes after delivery<br>
+        • Resell services claiming them as your own<br>
+        • Share account access during or immediately after swap/transfer<br>
+        • Violate any platform's Terms of Service knowingly<br><br>
+        Violation may result in blacklisting and forfeiture of all protections.</div>
+      </div>
+      
+      <div class="info compact">
+        <div class="info-title compact">💬 Dispute Resolution</div>
+        <div class="info-text compact">Disputes must be raised within 24 hours of delivery with clear evidence. 21's decision on disputes is final and binding. Acceptable evidence includes:<br><br>
+        • Screenshots with timestamps<br>
+        • Communication logs<br>
+        • Platform notifications<br><br>
+        Disputes raised after 24 hours will not be considered.</div>
+      </div>
+      
+      <div class="info compact">
+        <div class="info-title compact">📝 Limitation of Liability</div>
+        <div class="info-text compact">21's maximum liability for any claim shall not exceed the amount you paid for the specific transaction in question. 21 is not liable for:<br><br>
+        • Indirect, incidental, or consequential damages<br>
+        • Lost profits or business opportunities<br>
+        • Emotional distress or reputational damage<br>
+        • Actions by third parties or platforms</div>
+      </div>
+      
+      <div class="info compact">
+        <div class="info-title compact">🔄 Terms Modifications</div>
+        <div class="info-text compact">21 reserves the right to modify these Terms of Service at any time. Continued use of services after changes constitutes acceptance of updated terms. Major changes will be announced via Telegram channel.</div>
+      </div>
+      
+      <div class="info compact">
+        <div class="info-title compact">⚡ Contact & Questions</div>
+        <div class="info-text compact">If you have questions about these terms before purchasing, contact via Telegram. By proceeding with a purchase, you confirm understanding and acceptance of all terms listed above.<br><br>
+        <strong>Last Updated:</strong> January 2025</div>
+      </div>
+      
+      <div style="margin-top: 24px;">
+        <a href="${D.telegram}" class="info-btn" target="_blank">Contact on Telegram</a>
       </div>
     </div>
   </div>
