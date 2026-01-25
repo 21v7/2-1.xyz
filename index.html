@@ -34,6 +34,7 @@ const SITE_DATA = {
   ogu: 'https://oguser.com/21',
   moreLinks: 'https://solo.to/215',
   vouchesLink: 'https://t.me/Now0pen',
+  vouchesInstagram: 'https://www.instagram.com/21v7',
   
   // ═══════════════════════════════════
   // 🖼️ LOGO
@@ -309,6 +310,19 @@ const SITE_DATA = {
     border-radius: 6px;
   }
   
+  .stat-link {
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .stat-link:hover {
+    background: var(--glass-darker);
+    border-color: var(--accent-cyan);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 212, 255, 0.3);
+  }
+  
   .tos-notice {
     margin-top: 35px;
     text-align: center;
@@ -477,9 +491,6 @@ const SITE_DATA = {
   }
   
   .modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     margin-bottom: 32px;
     padding-top: 40px;
   }
@@ -492,10 +503,14 @@ const SITE_DATA = {
   }
   
   .modal-close {
+    position: fixed !important;
+    top: 40px !important;
+    right: 40px !important;
     width: 54px;
     height: 54px;
-    background: var(--glass-dark);
+    background: var(--glass-darker);
     backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     border: 1px solid var(--glass-border);
     border-radius: 50%;
     color: var(--text-white);
@@ -505,6 +520,39 @@ const SITE_DATA = {
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
+    z-index: 10000 !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  }
+  
+  .modal-close-floating {
+    position: fixed !important;
+    top: 40px !important;
+    right: 40px !important;
+    width: 54px;
+    height: 54px;
+    background: var(--glass-darker);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: 50%;
+    color: var(--text-white);
+    font-size: 32px;
+    font-weight: 300;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 10001 !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7);
+    border: none;
+    font-family: Arial, sans-serif;
+  }
+  
+  .modal-close-floating:hover {
+    background: var(--accent-cyan);
+    color: var(--bg-black);
+    transform: rotate(90deg) scale(1.1);
   }
   
   .modal-close:hover {
@@ -813,6 +861,13 @@ const SITE_DATA = {
       gap: 16px;
       text-align: center;
     }
+    .modal-close {
+      top: 20px;
+      right: 20px;
+      width: 48px;
+      height: 48px;
+      font-size: 28px;
+    }
   }
   
   ::-webkit-scrollbar {
@@ -879,7 +934,7 @@ document.getElementById('logo').src = D.logoImage;
 document.getElementById('logo').onerror = () => document.getElementById('logo').src = D.logoFallback;
 document.getElementById('stats').innerHTML = `
   <span class="stat">Est. ${D.establishedYear}</span>
-  <span class="stat">${D.vouchCount} Vouches</span>
+  <a href="${D.vouchesInstagram}" target="_blank" class="stat stat-link">${D.vouchCount} Vouches</a>
 `;
 document.getElementById('soldCount').textContent = `${D.totalSales} Sales`;
 
@@ -917,7 +972,7 @@ document.getElementById('services').innerHTML = `
   </div>
   <div class="grid-item" data-modal="swap">
     <div class="grid-item-name">Swaps</div>
-    <div class="grid-item-count">starts at 10% of username value</div>
+    <div class="grid-item-count">From $5</div>
   </div>
   <div class="grid-item" data-modal="services">
     <div class="grid-item-name">Services</div>
@@ -940,7 +995,6 @@ function stockModal(id, t, arr) {
       <div class="modal-content">
         <div class="modal-header">
           <h2 class="modal-title">${t}</h2>
-          <button class="modal-close" onclick="closeModal('${id}')">×</button>
         </div>
         <div class="search">
           <input type="text" placeholder="Search..." onkeyup="filter(this,'${id}')">
@@ -971,10 +1025,10 @@ document.getElementById('modals').innerHTML = `
   ${stockModal('capcut','CapCut',D.capcut)}
   
   <div class="modal" id="m-services">
+    
     <div class="modal-content">
       <div class="modal-header">
         <h2 class="modal-title">Services</h2>
-        <button class="modal-close" onclick="closeModal('services')">×</button>
       </div>
       
       <div class="info">
@@ -1021,10 +1075,10 @@ document.getElementById('modals').innerHTML = `
   </div>
   
   <div class="modal" id="m-vouches">
+    
     <div class="modal-content">
       <div class="modal-header">
         <h2 class="modal-title">Vouches</h2>
-        <button class="modal-close" onclick="closeModal('vouches')">×</button>
       </div>
       <div class="big-info">
         <p>Highly Rated Seller, Swapper & Escrow with over <strong>${D.vouchCount} successful transactions</strong>.</p>
@@ -1035,10 +1089,10 @@ document.getElementById('modals').innerHTML = `
   </div>
   
   <div class="modal" id="m-escrow">
+    
     <div class="modal-content">
       <div class="modal-header">
         <h2 class="modal-title">Escrow</h2>
-        <button class="modal-close" onclick="closeModal('escrow')">×</button>
       </div>
       <div class="big-info">
         <p><strong>Middleman service:</strong> with over ${D.vouchCount} successful deals. I securely hold funds and assist with swaps to ensure safe, smooth, and stress-free transactions.</p>
@@ -1049,25 +1103,25 @@ document.getElementById('modals').innerHTML = `
   </div>
   
   <div class="modal" id="m-swap">
+    
     <div class="modal-content">
       <div class="modal-header">
         <h2 class="modal-title">Swap Service</h2>
-        <button class="modal-close" onclick="closeModal('swap')">×</button>
       </div>
       <div class="big-info">
         <p><strong>Bypass the 14-day wait</strong> and transfer your username to another account safely.</p>
-        <p><strong>Uninsured:</strong> 10% of username value. If user value is less than $60, fixed price of $6.</p>
-        <p><strong>Insured:</strong> 15% (minimum $20). If user value is less than $60, fixed price of $20. Full user value refund if lost.</p>
+        <p><strong>Uninsured:</strong> 8% (minimum $5). If user value is less than $60, fixed price of $5.</p>
+        <p><strong>Insured:</strong> 15% (minimum $10). If user value is less than $60, fixed price of $10. Full user value refund if lost.</p>
         <a class="info-btn" href="${D.telegram}" target="_blank">Contact for Swap</a>
       </div>
     </div>
   </div>
   
   <div class="modal" id="m-sold">
+    
     <div class="modal-content">
       <div class="modal-header">
         <h2 class="modal-title">Sold History</h2>
-        <button class="modal-close" onclick="closeModal('sold')">×</button>
       </div>
       <div class="grid">
         <div class="grid-item" data-modal="sold-ig">
@@ -1091,10 +1145,10 @@ document.getElementById('modals').innerHTML = `
   </div>
   
   <div class="modal" id="m-sold-ig">
+    
     <div class="modal-content">
       <div class="modal-header">
         <h2 class="modal-title">Sold Instagram</h2>
-        <button class="modal-close" onclick="closeModal('sold-ig')">×</button>
       </div>
       <div class="search">
         <input type="text" placeholder="Search..." onkeyup="filter(this,'sold-ig')">
@@ -1106,10 +1160,10 @@ document.getElementById('modals').innerHTML = `
   </div>
   
   <div class="modal" id="m-sold-tt">
+    
     <div class="modal-content">
       <div class="modal-header">
         <h2 class="modal-title">Sold TikTok</h2>
-        <button class="modal-close" onclick="closeModal('sold-tt')">×</button>
       </div>
       <div class="search">
         <input type="text" placeholder="Search..." onkeyup="filter(this,'sold-tt')">
@@ -1121,10 +1175,10 @@ document.getElementById('modals').innerHTML = `
   </div>
   
   <div class="modal" id="m-sold-x">
+    
     <div class="modal-content">
       <div class="modal-header">
         <h2 class="modal-title">Sold Twitter</h2>
-        <button class="modal-close" onclick="closeModal('sold-x')">×</button>
       </div>
       <div class="search">
         <input type="text" placeholder="Search..." onkeyup="filter(this,'sold-x')">
@@ -1136,10 +1190,10 @@ document.getElementById('modals').innerHTML = `
   </div>
   
   <div class="modal" id="m-sold-cc">
+    
     <div class="modal-content">
       <div class="modal-header">
         <h2 class="modal-title">Sold CapCut</h2>
-        <button class="modal-close" onclick="closeModal('sold-cc')">×</button>
       </div>
       <div class="search">
         <input type="text" placeholder="Search..." onkeyup="filter(this,'sold-cc')">
@@ -1151,10 +1205,10 @@ document.getElementById('modals').innerHTML = `
   </div>
   
   <div class="modal" id="m-tos">
+    
     <div class="modal-content">
       <div class="modal-header">
         <h2 class="modal-title">Terms of Service</h2>
-        <button class="modal-close" onclick="closeModal('tos')">×</button>
       </div>
       
       <div class="info" style="border-left-color: #ff4444; background: rgba(255, 68, 68, 0.05);">
@@ -1281,13 +1335,35 @@ document.getElementById('modals').innerHTML = `
 `;
 
 function openModal(id) {
-  document.getElementById('m-' + id).classList.add('is-open');
+  const modal = document.getElementById('m-' + id);
+  modal.classList.add('is-open');
   document.body.style.overflow = 'hidden';
+  
+  // Create floating close button
+  let closeBtn = document.getElementById('floating-close-btn');
+  if (!closeBtn) {
+    closeBtn = document.createElement('button');
+    closeBtn.id = 'floating-close-btn';
+    closeBtn.className = 'modal-close-floating';
+    closeBtn.innerHTML = '×';
+    closeBtn.onclick = () => closeModal(id);
+    closeBtn.style.display = 'flex';
+    document.body.appendChild(closeBtn);
+  } else {
+    closeBtn.onclick = () => closeModal(id);
+    closeBtn.style.display = 'flex';
+  }
 }
 
 function closeModal(id) {
-  document.getElementById('m-' + id).classList.remove('is-open');
+  const modal = document.getElementById('m-' + id);
+  modal.classList.remove('is-open');
   document.body.style.overflow = '';
+  
+  const closeBtn = document.getElementById('floating-close-btn');
+  if (closeBtn) {
+    closeBtn.style.display = 'none';
+  }
 }
 
 function filter(input, id) {
