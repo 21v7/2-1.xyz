@@ -1725,19 +1725,49 @@ function openPaymentModal(itemName, itemPrice) {
 }
 
 function copyPayment(method, address, element) {
-  navigator.clipboard.writeText(address).then(() => {
-    // Remove copied class from all options
-    document.querySelectorAll('.payment-option').forEach(opt => {
-      opt.classList.remove('copied');
-      opt.querySelector('.payment-copy-icon').textContent = '📋';
+  // Try modern clipboard API first
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(address).then(() => {
+      updateCopyUI(element);
+      copiedPayment = method.toUpperCase();
+    }).catch(err => {
+      // Fallback if clipboard API fails
+      fallbackCopy(address, element, method);
     });
-    
-    // Add copied class to clicked option
-    element.classList.add('copied');
-    element.querySelector('.payment-copy-icon').textContent = '✓';
-    
+  } else {
+    // Use fallback for older browsers or non-HTTPS
+    fallbackCopy(address, element, method);
+  }
+}
+
+function fallbackCopy(text, element, method) {
+  const textarea = document.createElement('textarea');
+  textarea.value = text;
+  textarea.style.position = 'fixed';
+  textarea.style.opacity = '0';
+  document.body.appendChild(textarea);
+  textarea.select();
+  try {
+    document.execCommand('copy');
+    updateCopyUI(element);
     copiedPayment = method.toUpperCase();
+  } catch (err) {
+    console.error('Copy failed:', err);
+    alert('Copied: ' + text);
+  }
+  document.body.removeChild(textarea);
+}
+
+function updateCopyUI(element) {
+  // Remove copied class from all options
+  document.querySelectorAll('.payment-option').forEach(opt => {
+    opt.classList.remove('copied');
+    opt.querySelector('.payment-copy-icon').textContent = '📋';
   });
+  
+  // Add copied class to clicked option
+  element.classList.add('copied');
+  element.querySelector('.payment-copy-icon').textContent = '✓';
 }
 
 function openTelegramWithItem() {
