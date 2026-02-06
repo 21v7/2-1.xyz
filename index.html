@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -37,6 +38,17 @@ const SITE_DATA = {
   vouchesInstagram: 'https://www.instagram.com/21v7',
   
   // ═══════════════════════════════════
+  // 💳 PAYMENT METHODS
+  // ═══════════════════════════════════
+  payments: {
+    btc: '3JdyfEvjuPejtsbqvjbTePyWipcSe9T8df',
+    ltc: 'MRszpPK68Tmix7yBnXC7Bf73qih4rezjPr',
+    cashapp: '$w3lk',
+    paypal: '@we1k',
+    applepay: '21@y21.org'
+  },
+  
+  // ═══════════════════════════════════
   // 🖼️ LOGO
   // ═══════════════════════════════════
   logoImage: '93C40C80-79AB-4157-89A6-7EE8F0284D88.jpeg?v=2',
@@ -55,13 +67,6 @@ const SITE_DATA = {
     '@tydv – $50',
     '@fjke – $45',
   ],
- 
-  // ═══════════════════════════════════
-  // 📱 TIKTOK STOCK
-  // ═══════════════════════════════════
-  tiktok: [
-    '@c__p_m (stat) - $15',
-  ],
 
   // ═══════════════════════════════════
   // 𝕏 TWITTER STOCK
@@ -73,6 +78,20 @@ const SITE_DATA = {
     '@964945 – $30',
     '@mmssqq – $30',
     '@wanted_criminal – $50',
+  ],
+ 
+  // ═══════════════════════════════════
+  // 📱 TIKTOK STOCK
+  // ═══════════════════════════════════
+  tiktok: [
+    '@c__p_m (stat) - $15',
+  ],
+
+  // ═══════════════════════════════════
+  // 🎮 PSN STOCK
+  // ═══════════════════════════════════
+  psn: [
+    'llHw – $200',
   ],
 
   // ═══════════════════════════════════
@@ -131,6 +150,13 @@ const SITE_DATA = {
     '@turf – $8',
     '@want – $8',
     '@writer – $8',
+  ],
+
+  // ═══════════════════════════════════
+  // 🌐 PROXY
+  // ═══════════════════════════════════
+  proxy: [
+    'Contact for pricing',
   ],
 
   // ═══════════════════════════════════
@@ -546,12 +572,24 @@ const SITE_DATA = {
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7);
     border: none;
     font-family: Arial, sans-serif;
+    opacity: 0;
+    visibility: hidden;
   }
   
   .modal-close-floating:hover {
     background: var(--accent-cyan);
     color: var(--bg-black);
     transform: rotate(90deg) scale(1.1);
+  }
+  
+  @media (max-width: 600px) {
+    .modal-close-floating {
+      top: 20px !important;
+      right: 20px !important;
+      width: 48px;
+      height: 48px;
+      font-size: 28px;
+    }
   }
   
   .modal-close:hover {
@@ -848,6 +886,135 @@ const SITE_DATA = {
     margin: 38px 0 20px;
   }
   
+  .payment-modal-content {
+    background: var(--glass-darker);
+    backdrop-filter: blur(25px);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 40px;
+    max-width: 500px;
+    margin: 100px auto;
+    position: relative;
+  }
+  
+  .payment-title {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    text-align: center;
+    color: var(--text-white);
+  }
+  
+  .payment-subtitle {
+    font-size: 14px;
+    color: var(--text-gray);
+    text-align: center;
+    margin-bottom: 32px;
+  }
+  
+  .payment-options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+  
+  .payment-option {
+    background: var(--glass-dark);
+    border: 1px solid var(--glass-border);
+    border-radius: 10px;
+    padding: 18px 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .payment-option:hover {
+    background: var(--glass-darker);
+    border-color: var(--accent-cyan);
+    transform: translateX(4px);
+  }
+  
+  .payment-option.copied {
+    border-color: #00ff88;
+    background: rgba(0, 255, 136, 0.1);
+  }
+  
+  .payment-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  
+  .payment-icon {
+    font-size: 24px;
+    width: 32px;
+    text-align: center;
+  }
+  
+  .payment-info {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .payment-name {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-white);
+    margin-bottom: 2px;
+  }
+  
+  .payment-address {
+    font-size: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--text-gray);
+  }
+  
+  .payment-copy-icon {
+    font-size: 18px;
+    color: var(--text-dark);
+    transition: all 0.2s ease;
+  }
+  
+  .payment-option:hover .payment-copy-icon {
+    color: var(--accent-cyan);
+  }
+  
+  .payment-option.copied .payment-copy-icon {
+    color: #00ff88;
+  }
+  
+  .payment-telegram-btn {
+    width: 100%;
+    background: var(--accent-blue);
+    border: none;
+    border-radius: 10px;
+    padding: 16px;
+    color: var(--text-white);
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-top: 8px;
+  }
+  
+  .payment-telegram-btn:hover {
+    background: var(--accent-cyan);
+    transform: translateY(-2px);
+  }
+  
+  .payment-note {
+    text-align: center;
+    font-size: 11px;
+    color: var(--text-dark);
+    margin-top: 20px;
+    font-style: italic;
+  }
+  
   @media (max-width: 600px) {
     .title {
       font-size: 68px;
@@ -903,14 +1070,14 @@ const SITE_DATA = {
       <p class="tos-disclaimer">By making any purchase, you automatically agree to our Terms of Service, whether read or not.</p>
     </div>
   </div>
-  
+
   <div id="categories"></div>
-  
+
   <div class="section">
     <h2 class="section-title">Services</h2>
   </div>
   <div class="grid" id="services"></div>
-  
+
   <div class="category" data-modal="sold">
     <div class="category-content">
       <div class="category-top">
@@ -920,7 +1087,7 @@ const SITE_DATA = {
       <div class="category-desc">View past transactions</div>
     </div>
   </div>
-  
+
   <div class="footer">© 2-1.xyz (2025) • @7521 (IG) • All Rights Reserved</div>
 </div>
 
@@ -946,9 +1113,11 @@ document.getElementById('contactPanel').innerHTML = `
 
 const cats = [
   {name:'Instagram',count:D.instagramStock.length,desc:'Premium OG Handles starting at $35',id:'instagram'},
-  {name:'TikTok',count:D.tiktok.length,desc:'Premium OG Handles starting $10',id:'tiktok'},
   {name:'𝕏 (Twitter)',count:D.twitter.length,desc:'Premium OG Handles starting at $20',id:'twitter'},
-  {name:'CapCut',count:D.capcut.length,desc:'Premium OG Handles starting at $8',id:'capcut'}
+  {name:'TikTok',count:D.tiktok.length,desc:'Premium OG Handles starting $10',id:'tiktok'},
+  {name:'CapCut',count:D.capcut.length,desc:'Premium OG Handles starting at $8',id:'capcut'},
+  {name:'PSN',count:D.psn.length,desc:'Premium PSN Gamertags',id:'psn'},
+  {name:'Proxy',count:D.proxy.length,desc:'High-quality proxy services',id:'proxy'}
 ];
 
 document.getElementById('categories').innerHTML = cats.map(c => `
@@ -1007,7 +1176,7 @@ function stockModal(id, t, arr) {
                   <div class="item-name">${i.n}</div>
                   <div class="item-price">${i.p}</div>
                 </div>
-                <a href="${D.telegram}" class="item-btn" target="_blank">Buy</a>
+                <button class="item-btn" onclick="openPaymentModal('${i.n}', '${i.p}')">Buy</button>
               </div>
             `;
           }).join('')}
@@ -1019,9 +1188,11 @@ function stockModal(id, t, arr) {
 
 document.getElementById('modals').innerHTML = `
   ${stockModal('instagram','Instagram',D.instagramStock)}
-  ${stockModal('tiktok','TikTok',D.tiktok)}
   ${stockModal('twitter','𝕏 (Twitter)',D.twitter)}
+  ${stockModal('tiktok','TikTok',D.tiktok)}
+  ${stockModal('psn','PSN',D.psn)}
   ${stockModal('capcut','CapCut',D.capcut)}
+  ${stockModal('proxy','Proxy',D.proxy)}
   
   <div class="modal" id="m-services">
     
@@ -1333,6 +1504,110 @@ document.getElementById('modals').innerHTML = `
   </div>
 `;
 
+// Add payment modal
+document.getElementById('modals').innerHTML += `
+  <div class="modal" id="m-payment">
+    <div class="payment-modal-content">
+      <h2 class="payment-title">Select Payment Method</h2>
+      <p class="payment-subtitle">Click to copy payment info</p>
+      
+      <div class="payment-options">
+        <div class="payment-option" onclick="copyPayment('btc', '${D.payments.btc}', this)">
+          <div class="payment-left">
+            <div class="payment-icon">₿</div>
+            <div class="payment-info">
+              <div class="payment-name">Bitcoin (BTC)</div>
+              <div class="payment-address">${D.payments.btc.substring(0, 20)}...</div>
+            </div>
+          </div>
+          <div class="payment-copy-icon">📋</div>
+        </div>
+        
+        <div class="payment-option" onclick="copyPayment('ltc', '${D.payments.ltc}', this)">
+          <div class="payment-left">
+            <div class="payment-icon">Ł</div>
+            <div class="payment-info">
+              <div class="payment-name">Litecoin (LTC)</div>
+              <div class="payment-address">${D.payments.ltc.substring(0, 20)}...</div>
+            </div>
+          </div>
+          <div class="payment-copy-icon">📋</div>
+        </div>
+        
+        <div class="payment-option" onclick="copyPayment('cashapp', '${D.payments.cashapp}', this)">
+          <div class="payment-left">
+            <div class="payment-icon">💵</div>
+            <div class="payment-info">
+              <div class="payment-name">Cash App</div>
+              <div class="payment-address">${D.payments.cashapp}</div>
+            </div>
+          </div>
+          <div class="payment-copy-icon">📋</div>
+        </div>
+        
+        <div class="payment-option" onclick="copyPayment('paypal', '${D.payments.paypal}', this)">
+          <div class="payment-left">
+            <div class="payment-icon">💳</div>
+            <div class="payment-info">
+              <div class="payment-name">PayPal</div>
+              <div class="payment-address">${D.payments.paypal}</div>
+            </div>
+          </div>
+          <div class="payment-copy-icon">📋</div>
+        </div>
+        
+        <div class="payment-option" onclick="copyPayment('applepay', '${D.payments.applepay}', this)">
+          <div class="payment-left">
+            <div class="payment-icon">🍎</div>
+            <div class="payment-info">
+              <div class="payment-name">Apple Pay</div>
+              <div class="payment-address">${D.payments.applepay}</div>
+            </div>
+          </div>
+          <div class="payment-copy-icon">📋</div>
+        </div>
+      </div>
+      
+      <button class="payment-telegram-btn" onclick="openTelegramWithItem()">
+        Continue to Telegram →
+      </button>
+      
+      <p class="payment-note">Payment info will be copied to your clipboard</p>
+    </div>
+  </div>
+`;
+
+let selectedItem = { name: '', price: '' };
+let copiedPayment = '';
+
+function openPaymentModal(itemName, itemPrice) {
+  selectedItem = { name: itemName, price: itemPrice };
+  openModal('payment');
+}
+
+function copyPayment(method, address, element) {
+  navigator.clipboard.writeText(address).then(() => {
+    // Remove copied class from all options
+    document.querySelectorAll('.payment-option').forEach(opt => {
+      opt.classList.remove('copied');
+      opt.querySelector('.payment-copy-icon').textContent = '📋';
+    });
+    
+    // Add copied class to clicked option
+    element.classList.add('copied');
+    element.querySelector('.payment-copy-icon').textContent = '✓';
+    
+    copiedPayment = method.toUpperCase();
+  });
+}
+
+function openTelegramWithItem() {
+  const message = `Hi, I want to buy ${selectedItem.name} for ${selectedItem.price}`;
+  const encodedMessage = encodeURIComponent(message);
+  window.open(`${D.telegram}?text=${encodedMessage}`, '_blank');
+  closeModal('payment');
+}
+
 function openModal(id) {
   const modal = document.getElementById('m-' + id);
   modal.classList.add('is-open');
@@ -1345,13 +1620,15 @@ function openModal(id) {
     closeBtn.id = 'floating-close-btn';
     closeBtn.className = 'modal-close-floating';
     closeBtn.innerHTML = '×';
-    closeBtn.onclick = () => closeModal(id);
     closeBtn.style.display = 'flex';
     document.body.appendChild(closeBtn);
-  } else {
-    closeBtn.onclick = () => closeModal(id);
-    closeBtn.style.display = 'flex';
   }
+  
+  // Always update the onclick and show it
+  closeBtn.onclick = () => closeModal(id);
+  closeBtn.style.display = 'flex';
+  closeBtn.style.opacity = '1';
+  closeBtn.style.visibility = 'visible';
 }
 
 function closeModal(id) {
@@ -1362,6 +1639,8 @@ function closeModal(id) {
   const closeBtn = document.getElementById('floating-close-btn');
   if (closeBtn) {
     closeBtn.style.display = 'none';
+    closeBtn.style.opacity = '0';
+    closeBtn.style.visibility = 'hidden';
   }
 }
 
