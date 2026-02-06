@@ -239,13 +239,13 @@ const SITE_DATA = {
     --glass-dark: rgba(20, 20, 25, 0.6);
     --glass-darker: rgba(15, 15, 20, 0.8);
     --glass-border: rgba(255, 255, 255, 0.08);
-    --glass-border-hover: rgba(188, 42, 141, 0.4);
-    --accent-primary: #bc2a8d;
-    --accent-secondary: #c13584;
-    --accent-gradient-start: #f09433;
-    --accent-gradient-mid: #e6683c;
-    --accent-gradient-end: #dc2743;
-    --accent-purple: #bc2a8d;
+    --glass-border-hover: rgba(214, 41, 118, 0.4);
+    --accent-primary: #E1306C;
+    --accent-secondary: #C13584;
+    --accent-gradient-start: #FCAF45;
+    --accent-gradient-mid: #F77737;
+    --accent-gradient-end: #E1306C;
+    --accent-purple: #C13584;
     --text-white: #ffffff;
     --text-gray: #a0a0a0;
     --text-dark: #606060;
@@ -337,14 +337,17 @@ const SITE_DATA = {
     border: 1px solid var(--glass-border);
     padding: 10px 22px;
     font-size: 10px; 
-    background: linear-gradient(45deg, var(--accent-gradient-start), var(--accent-gradient-mid), var(--accent-gradient-end), var(--accent-purple));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
     font-weight: 600; 
     text-transform: uppercase; 
     letter-spacing: 2px;
     border-radius: 6px;
+  }
+  
+  .stat, .stat a {
+    background: linear-gradient(90deg, var(--accent-gradient-start), var(--accent-gradient-mid), var(--accent-gradient-end), var(--accent-purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
   
   .stat-link {
@@ -393,14 +396,8 @@ const SITE_DATA = {
                       linear-gradient(45deg, var(--accent-gradient-start), var(--accent-gradient-mid), var(--accent-gradient-end), var(--accent-purple));
     background-origin: border-box;
     background-clip: padding-box, border-box;
+    color: var(--accent-purple);
     transform: translateY(-2px);
-  }
-  
-  .tos-btn:hover {
-    background: linear-gradient(45deg, var(--accent-gradient-start), var(--accent-gradient-mid), var(--accent-gradient-end), var(--accent-purple));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
   }
   
   .tos-disclaimer {
@@ -417,20 +414,60 @@ const SITE_DATA = {
     background: var(--glass-dark);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border: 1px solid var(--glass-border);
+    border: 1px solid transparent;
+    background-image: 
+      linear-gradient(var(--glass-dark), var(--glass-dark)),
+      linear-gradient(135deg, 
+        rgba(252, 175, 69, 0.3) 0%,
+        rgba(247, 119, 55, 0.3) 33%,
+        rgba(225, 48, 108, 0.3) 66%,
+        rgba(193, 53, 132, 0.3) 100%);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
     border-radius: 12px;
     padding: 32px;
     margin-bottom: 20px;
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
+    overflow: hidden;
+  }
+  
+  .category::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, 
+      rgba(252, 175, 69, 0.05) 0%,
+      rgba(247, 119, 55, 0.05) 33%,
+      rgba(225, 48, 108, 0.05) 66%,
+      rgba(193, 53, 132, 0.08) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    z-index: 0;
+  }
+  
+  .category:hover::before {
+    opacity: 1;
   }
   
   .category:hover {
     transform: translateY(-6px);
-    background: var(--glass-darker);
-    border-color: var(--glass-border-hover);
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 80px rgba(188, 42, 141, 0.15);
+    background-image: 
+      linear-gradient(var(--glass-darker), var(--glass-darker)),
+      linear-gradient(135deg, 
+        rgba(252, 175, 69, 0.5) 0%,
+        rgba(247, 119, 55, 0.5) 33%,
+        rgba(225, 48, 108, 0.5) 66%,
+        rgba(193, 53, 132, 0.6) 100%);
+    box-shadow: 
+      0 20px 60px rgba(0, 0, 0, 0.8), 
+      0 0 80px rgba(225, 48, 108, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
   }
   
   .category-content {
@@ -630,15 +667,8 @@ const SITE_DATA = {
                       linear-gradient(45deg, var(--accent-gradient-start), var(--accent-gradient-mid), var(--accent-gradient-end), var(--accent-purple));
     background-origin: border-box;
     background-clip: padding-box, border-box;
+    color: var(--accent-purple);
     transform: rotate(90deg);
-  }
-  
-  .modal-close:hover {
-    color: transparent;
-    background: linear-gradient(45deg, var(--accent-gradient-start), var(--accent-gradient-mid), var(--accent-gradient-end), var(--accent-purple));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
   }
   
   .search {
@@ -1713,7 +1743,16 @@ function copyPayment(method, address, element) {
 function openTelegramWithItem() {
   const message = `Hi, I want to buy ${selectedItem.name} for ${selectedItem.price}`;
   const encodedMessage = encodeURIComponent(message);
-  window.open(`${D.telegram}?text=${encodedMessage}`, '_blank');
+  
+  // Create a temporary link and click it
+  const link = document.createElement('a');
+  link.href = `https://t.me/abuto?text=${encodedMessage}`;
+  link.target = '_blank';
+  link.rel = 'noopener noreferrer';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  
   closeModal('payment');
 }
 
