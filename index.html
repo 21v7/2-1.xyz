@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>𝟐𝟏® | Social Media Services</title>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@600&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -239,22 +239,32 @@ const SITE_DATA = {
     --glass-dark: rgba(20, 20, 25, 0.6);
     --glass-darker: rgba(15, 15, 20, 0.8);
     --glass-border: rgba(255, 255, 255, 0.08);
-    --glass-border-hover: rgba(100, 200, 255, 0.3);
-    --accent-cyan: #00d4ff;
-    --accent-blue: #0084ff;
+    --glass-border-hover: rgba(188, 42, 141, 0.4);
+    --accent-primary: #bc2a8d;
+    --accent-secondary: #c13584;
+    --accent-gradient-start: #f09433;
+    --accent-gradient-mid: #e6683c;
+    --accent-gradient-end: #dc2743;
+    --accent-purple: #bc2a8d;
     --text-white: #ffffff;
     --text-gray: #a0a0a0;
     --text-dark: #606060;
   }
   
   body { 
-    font-family: 'Outfit', sans-serif;
-    background: var(--bg-black);
+    font-family: 'Inter', sans-serif;
+    background: #000000;
+    background-color: #000000;
     color: var(--text-white); 
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     min-height: 100vh;
     position: relative;
+  }
+  
+  html {
+    background: #000000;
+    background-color: #000000;
   }
   
   body::before {
@@ -264,9 +274,7 @@ const SITE_DATA = {
     left: 0;
     right: 0;
     bottom: 0;
-    background: 
-      radial-gradient(circle at 20% 30%, rgba(0, 100, 180, 0.05) 0%, transparent 50%),
-      radial-gradient(circle at 80% 70%, rgba(0, 200, 255, 0.03) 0%, transparent 50%);
+    background: transparent;
     pointer-events: none;
     z-index: 0;
   }
@@ -274,7 +282,7 @@ const SITE_DATA = {
   .container { 
     max-width: 700px; 
     margin: 0 auto; 
-    padding: 50px 24px;
+    padding: 20px 24px 50px;
     position: relative;
     z-index: 1;
   }
@@ -282,6 +290,7 @@ const SITE_DATA = {
   .header { 
     text-align: center; 
     padding-bottom: 60px;
+    padding-top: 0;
   }
   
   .logo { 
@@ -292,7 +301,7 @@ const SITE_DATA = {
     background: var(--glass-darker);
     margin: 0 auto 30px;
     display: block;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6), 0 0 60px rgba(0, 212, 255, 0.15);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6), 0 0 60px rgba(188, 42, 141, 0.15);
     object-fit: cover;
   }
   
@@ -302,7 +311,7 @@ const SITE_DATA = {
     color: var(--text-white);
     margin-bottom: 12px;
     letter-spacing: -3px;
-    text-shadow: 0 0 80px rgba(0, 212, 255, 0.3);
+    text-shadow: 0 0 80px rgba(188, 42, 141, 0.3);
   }
   
   .subtitle { 
@@ -328,7 +337,10 @@ const SITE_DATA = {
     border: 1px solid var(--glass-border);
     padding: 10px 22px;
     font-size: 10px; 
-    color: var(--accent-cyan);
+    background: linear-gradient(45deg, var(--accent-gradient-start), var(--accent-gradient-mid), var(--accent-gradient-end), var(--accent-purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     font-weight: 600; 
     text-transform: uppercase; 
     letter-spacing: 2px;
@@ -343,9 +355,13 @@ const SITE_DATA = {
   
   .stat-link:hover {
     background: var(--glass-darker);
-    border-color: var(--accent-cyan);
+    border: 2px solid transparent;
+    background-image: linear-gradient(var(--glass-darker), var(--glass-darker)), 
+                      linear-gradient(45deg, var(--accent-gradient-start), var(--accent-gradient-mid), var(--accent-gradient-end), var(--accent-purple));
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
     transform: translateY(-2px);
-    box-shadow: 0 4px 16px rgba(0, 212, 255, 0.3);
+    box-shadow: 0 4px 16px rgba(188, 42, 141, 0.3);
   }
   
   .tos-notice {
@@ -367,14 +383,24 @@ const SITE_DATA = {
     letter-spacing: 1.5px;
     cursor: pointer;
     transition: all 0.3s ease;
-    font-family: 'Outfit', sans-serif;
+    font-family: 'Inter', sans-serif;
   }
   
   .tos-btn:hover {
     background: var(--glass-darker);
-    border-color: var(--accent-cyan);
-    color: var(--accent-cyan);
+    border: 2px solid transparent;
+    background-image: linear-gradient(var(--glass-darker), var(--glass-darker)), 
+                      linear-gradient(45deg, var(--accent-gradient-start), var(--accent-gradient-mid), var(--accent-gradient-end), var(--accent-purple));
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
     transform: translateY(-2px);
+  }
+  
+  .tos-btn:hover {
+    background: linear-gradient(45deg, var(--accent-gradient-start), var(--accent-gradient-mid), var(--accent-gradient-end), var(--accent-purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
   
   .tos-disclaimer {
@@ -404,7 +430,7 @@ const SITE_DATA = {
     transform: translateY(-6px);
     background: var(--glass-darker);
     border-color: var(--glass-border-hover);
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 80px rgba(0, 212, 255, 0.1);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 80px rgba(188, 42, 141, 0.15);
   }
   
   .category-content {
@@ -424,11 +450,15 @@ const SITE_DATA = {
     font-weight: 700;
     letter-spacing: -1px;
     color: var(--text-white);
+    font-family: 'Inter', sans-serif;
   }
   
   .category-count {
     font-size: 12px;
-    color: var(--accent-cyan);
+    background: linear-gradient(45deg, var(--accent-gradient-start), var(--accent-gradient-mid), var(--accent-gradient-end), var(--accent-purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     font-weight: 600;
     letter-spacing: 1px;
     text-transform: uppercase;
@@ -440,7 +470,7 @@ const SITE_DATA = {
   }
   
   .section {
-    margin: 70px 0 30px;
+    margin: 0 0 30px;
   }
   
   .section-title {
@@ -482,6 +512,7 @@ const SITE_DATA = {
     font-weight: 600;
     margin-bottom: 6px;
     color: var(--text-white);
+    font-family: 'Inter', sans-serif;
   }
   
   .grid-item-count {
@@ -577,8 +608,8 @@ const SITE_DATA = {
   }
   
   .modal-close-floating:hover {
-    background: var(--accent-cyan);
-    color: var(--bg-black);
+    background: linear-gradient(45deg, var(--accent-gradient-start), var(--accent-gradient-mid), var(--accent-gradient-end), var(--accent-purple));
+    color: var(--text-white);
     transform: rotate(90deg) scale(1.1);
   }
   
@@ -594,9 +625,20 @@ const SITE_DATA = {
   
   .modal-close:hover {
     background: var(--glass-darker);
-    border-color: var(--accent-cyan);
-    color: var(--accent-cyan);
+    border: 2px solid transparent;
+    background-image: linear-gradient(var(--glass-darker), var(--glass-darker)), 
+                      linear-gradient(45deg, var(--accent-gradient-start), var(--accent-gradient-mid), var(--accent-gradient-end), var(--accent-purple));
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
     transform: rotate(90deg);
+  }
+  
+  .modal-close:hover {
+    color: transparent;
+    background: linear-gradient(45deg, var(--accent-gradient-start), var(--accent-gradient-mid), var(--accent-gradient-end), var(--accent-purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
   
   .search {
@@ -612,7 +654,7 @@ const SITE_DATA = {
     padding: 18px 24px;
     color: var(--text-white);
     font-size: 16px;
-    font-family: 'Outfit', sans-serif;
+    font-family: 'Inter', sans-serif;
     transition: all 0.3s ease;
   }
   
@@ -630,7 +672,8 @@ const SITE_DATA = {
     background: var(--glass-dark);
     backdrop-filter: blur(20px);
     border: 1px solid var(--glass-border);
-    border-left: 3px solid var(--accent-cyan);
+    border-left: 3px solid;
+    border-image: linear-gradient(45deg, var(--accent-gradient-start), var(--accent-gradient-mid), var(--accent-gradient-end), var(--accent-purple)) 1;
     border-radius: 8px;
     padding: 22px 26px;
     margin-bottom: 16px;
@@ -651,10 +694,10 @@ const SITE_DATA = {
   }
   
   .item-name {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Inter', sans-serif;
     font-size: 20px;
     font-weight: 600;
-    color: var(--accent-cyan);
+    color: var(--text-white);
     margin-bottom: 4px;
   }
   
@@ -664,7 +707,7 @@ const SITE_DATA = {
   }
   
   .item-btn {
-    background: var(--accent-blue);
+    background: linear-gradient(45deg, var(--accent-gradient-start), var(--accent-gradient-mid), var(--accent-gradient-end), var(--accent-purple));
     border: none;
     border-radius: 8px;
     padding: 12px 32px;
@@ -679,15 +722,16 @@ const SITE_DATA = {
   }
   
   .item-btn:hover {
-    background: var(--accent-cyan);
     transform: scale(1.05);
+    box-shadow: 0 4px 20px rgba(188, 42, 141, 0.4);
   }
   
   .info {
     background: var(--glass-dark);
     backdrop-filter: blur(20px);
     border: 1px solid var(--glass-border);
-    border-left: 4px solid var(--accent-cyan);
+    border-left: 4px solid;
+    border-image: linear-gradient(45deg, var(--accent-gradient-start), var(--accent-gradient-mid), var(--accent-gradient-end), var(--accent-purple)) 1;
     border-radius: 10px;
     padding: 30px;
     margin-bottom: 22px;
@@ -702,7 +746,10 @@ const SITE_DATA = {
     font-size: 19px;
     font-weight: 600;
     margin-bottom: 14px;
-    color: var(--accent-cyan);
+    background: linear-gradient(45deg, var(--accent-gradient-start), var(--accent-gradient-mid), var(--accent-gradient-end), var(--accent-purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
   
   .info-title.compact {
@@ -732,7 +779,7 @@ const SITE_DATA = {
   
   .info-btn {
     display: block;
-    background: var(--accent-blue);
+    background: linear-gradient(45deg, var(--accent-gradient-start), var(--accent-gradient-mid), var(--accent-gradient-end), var(--accent-purple));
     border: none;
     border-radius: 8px;
     padding: 15px;
@@ -748,7 +795,8 @@ const SITE_DATA = {
   }
   
   .info-btn:hover {
-    background: var(--accent-cyan);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(188, 42, 141, 0.4);
   }
   
   .big-info {
@@ -768,7 +816,10 @@ const SITE_DATA = {
   }
   
   .big-info strong {
-    color: var(--accent-cyan);
+    background: linear-gradient(45deg, var(--accent-gradient-start), var(--accent-gradient-mid), var(--accent-gradient-end), var(--accent-purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     font-weight: 600;
   }
   
@@ -780,7 +831,7 @@ const SITE_DATA = {
   }
   
   .contact-btn {
-    background: var(--accent-blue);
+    background: linear-gradient(45deg, var(--accent-gradient-start), var(--accent-gradient-mid), var(--accent-gradient-end), var(--accent-purple));
     border: none;
     border-radius: 10px;
     padding: 16px 36px;
@@ -788,16 +839,15 @@ const SITE_DATA = {
     font-weight: 600;
     font-size: 13px;
     cursor: pointer;
-    box-shadow: 0 8px 32px rgba(0, 132, 255, 0.3);
+    box-shadow: 0 8px 32px rgba(188, 42, 141, 0.3);
     transition: all 0.3s ease;
     text-transform: uppercase;
     letter-spacing: 2px;
   }
   
   .contact-btn:hover {
-    background: var(--accent-cyan);
     transform: translateY(-2px);
-    box-shadow: 0 12px 48px rgba(0, 212, 255, 0.4);
+    box-shadow: 0 12px 48px rgba(188, 42, 141, 0.5);
   }
   
   .contact-panel {
@@ -840,8 +890,8 @@ const SITE_DATA = {
   }
   
   .contact-link:hover {
-    background: var(--accent-blue);
-    border-color: var(--accent-cyan);
+    background: linear-gradient(45deg, var(--accent-gradient-start), var(--accent-gradient-mid), var(--accent-gradient-end), var(--accent-purple));
+    border-color: transparent;
   }
   
   .footer {
@@ -867,7 +917,7 @@ const SITE_DATA = {
     border: 1px solid var(--glass-border);
     border-radius: 8px;
     padding: 18px;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Inter', sans-serif;
     font-size: 14px;
     color: var(--text-gray);
     text-align: center;
@@ -875,12 +925,19 @@ const SITE_DATA = {
   }
   
   .sold-item:hover {
-    border-color: var(--accent-cyan);
-    color: var(--accent-cyan);
+    border: 2px solid transparent;
+    background-image: linear-gradient(var(--glass-dark), var(--glass-dark)), 
+                      linear-gradient(45deg, var(--accent-gradient-start), var(--accent-gradient-mid), var(--accent-gradient-end), var(--accent-purple));
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    color: var(--text-white);
   }
   
   .sold-section-title {
-    color: var(--accent-cyan);
+    background: linear-gradient(45deg, var(--accent-gradient-start), var(--accent-gradient-mid), var(--accent-gradient-end), var(--accent-purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     font-size: 24px;
     font-weight: 600;
     margin: 38px 0 20px;
@@ -933,7 +990,11 @@ const SITE_DATA = {
   
   .payment-option:hover {
     background: var(--glass-darker);
-    border-color: var(--accent-cyan);
+    border: 2px solid transparent;
+    background-image: linear-gradient(var(--glass-darker), var(--glass-darker)), 
+                      linear-gradient(45deg, var(--accent-gradient-start), var(--accent-gradient-mid), var(--accent-gradient-end), var(--accent-purple));
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
     transform: translateX(4px);
   }
   
@@ -968,7 +1029,7 @@ const SITE_DATA = {
   
   .payment-address {
     font-size: 12px;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Inter', sans-serif;
     color: var(--text-gray);
   }
   
@@ -979,7 +1040,10 @@ const SITE_DATA = {
   }
   
   .payment-option:hover .payment-copy-icon {
-    color: var(--accent-cyan);
+    background: linear-gradient(45deg, var(--accent-gradient-start), var(--accent-gradient-mid), var(--accent-gradient-end), var(--accent-purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
   
   .payment-option.copied .payment-copy-icon {
@@ -988,7 +1052,7 @@ const SITE_DATA = {
   
   .payment-telegram-btn {
     width: 100%;
-    background: var(--accent-blue);
+    background: linear-gradient(45deg, var(--accent-gradient-start), var(--accent-gradient-mid), var(--accent-gradient-end), var(--accent-purple));
     border: none;
     border-radius: 10px;
     padding: 16px;
@@ -1003,8 +1067,8 @@ const SITE_DATA = {
   }
   
   .payment-telegram-btn:hover {
-    background: var(--accent-cyan);
     transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(188, 42, 141, 0.4);
   }
   
   .payment-note {
@@ -1050,7 +1114,7 @@ const SITE_DATA = {
   }
   
   ::-webkit-scrollbar-thumb:hover {
-    background: var(--accent-blue);
+    background: var(--accent-primary);
   }
 </style>
 
@@ -1071,12 +1135,10 @@ const SITE_DATA = {
     </div>
   </div>
 
-  <div id="categories"></div>
-
   <div class="section">
     <h2 class="section-title">Services</h2>
   </div>
-  <div class="grid" id="services"></div>
+  <div id="services"></div>
 
   <div class="category" data-modal="sold">
     <div class="category-content">
@@ -1111,44 +1173,56 @@ document.getElementById('contactPanel').innerHTML = `
   <a class="contact-link" href="${D.moreLinks}" target="_blank">MORE</a>
 `;
 
-const cats = [
-  {name:'Instagram',count:D.instagramStock.length,desc:'Premium OG Handles starting at $35',id:'instagram'},
-  {name:'𝕏 (Twitter)',count:D.twitter.length,desc:'Premium OG Handles starting at $20',id:'twitter'},
-  {name:'TikTok',count:D.tiktok.length,desc:'Premium OG Handles starting $10',id:'tiktok'},
-  {name:'CapCut',count:D.capcut.length,desc:'Premium OG Handles starting at $8',id:'capcut'},
-  {name:'PSN',count:D.psn.length,desc:'Premium PSN Gamertags',id:'psn'},
-  {name:'Proxy',count:D.proxy.length,desc:'High-quality proxy services',id:'proxy'}
-];
-
-document.getElementById('categories').innerHTML = cats.map(c => `
-  <div class="category" data-modal="${c.id}">
+// Build services as category boxes like Sold History
+document.getElementById('services').innerHTML = `
+  <div class="category" data-modal="stock" style="margin-bottom: 20px;">
     <div class="category-content">
       <div class="category-top">
-        <div class="category-name">${c.name}</div>
-        <div class="category-count">${c.count} Available</div>
+        <div class="category-name">Stock</div>
+        <div class="category-count">View Inventory</div>
       </div>
-      <div class="category-desc">${c.desc}</div>
+      <div class="category-desc">Browse available usernames across all platforms</div>
     </div>
   </div>
-`).join('');
-
-document.getElementById('services').innerHTML = `
- 
-  <div class="grid-item" data-modal="escrow">
-    <div class="grid-item-name">Escrow</div>
-    <div class="grid-item-count">8% Fee</div>
+  
+  <div class="category" data-modal="swap" style="margin-bottom: 20px;">
+    <div class="category-content">
+      <div class="category-top">
+        <div class="category-name">Swaps</div>
+        <div class="category-count">From $5</div>
+      </div>
+      <div class="category-desc">Bypass the 14-day wait with secure username transfers</div>
+    </div>
   </div>
-  <div class="grid-item" data-modal="swap">
-    <div class="grid-item-name">Swaps</div>
-    <div class="grid-item-count">From $5</div>
+  
+  <div class="category" data-modal="escrow" style="margin-bottom: 20px;">
+    <div class="category-content">
+      <div class="category-top">
+        <div class="category-name">Escrow</div>
+        <div class="category-count">8% Fee</div>
+      </div>
+      <div class="category-desc">Secure middleman service for safe transactions</div>
+    </div>
   </div>
-  <div class="grid-item" data-modal="services">
-    <div class="grid-item-name">Services</div>
-    <div class="grid-item-count">View All</div>
+  
+  <div class="category" data-modal="services" style="margin-bottom: 20px;">
+    <div class="category-content">
+      <div class="category-top">
+        <div class="category-name">More Services</div>
+        <div class="category-count">View All</div>
+      </div>
+      <div class="category-desc">Verifications, recoveries, aged accounts & more</div>
+    </div>
   </div>
-  <div class="grid-item" data-modal="vouches">
-    <div class="grid-item-name">Vouches</div>
-    <div class="grid-item-count">${D.vouchCount}</div>
+  
+  <div class="category" data-modal="vouches" style="margin-bottom: 20px;">
+    <div class="category-content">
+      <div class="category-top">
+        <div class="category-name">Vouches</div>
+        <div class="category-count">${D.vouchCount}</div>
+      </div>
+      <div class="category-desc">Highly rated seller with verified feedback</div>
+    </div>
   </div>
 `;
 
@@ -1187,6 +1261,40 @@ function stockModal(id, t, arr) {
 }
 
 document.getElementById('modals').innerHTML = `
+  <div class="modal" id="m-stock">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title">Stock Inventory</h2>
+      </div>
+      <div class="grid">
+        <div class="grid-item" data-modal="instagram">
+          <div class="grid-item-name">Instagram</div>
+          <div class="grid-item-count">${D.instagramStock.length} Available</div>
+        </div>
+        <div class="grid-item" data-modal="twitter">
+          <div class="grid-item-name">𝕏 (Twitter)</div>
+          <div class="grid-item-count">${D.twitter.length} Available</div>
+        </div>
+        <div class="grid-item" data-modal="tiktok">
+          <div class="grid-item-name">TikTok</div>
+          <div class="grid-item-count">${D.tiktok.length} Available</div>
+        </div>
+        <div class="grid-item" data-modal="capcut">
+          <div class="grid-item-name">CapCut</div>
+          <div class="grid-item-count">${D.capcut.length} Available</div>
+        </div>
+        <div class="grid-item" data-modal="psn">
+          <div class="grid-item-name">PSN</div>
+          <div class="grid-item-count">${D.psn.length} Available</div>
+        </div>
+        <div class="grid-item" data-modal="proxy">
+          <div class="grid-item-name">Proxy</div>
+          <div class="grid-item-count">${D.proxy.length} Available</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
   ${stockModal('instagram','Instagram',D.instagramStock)}
   ${stockModal('twitter','𝕏 (Twitter)',D.twitter)}
   ${stockModal('tiktok','TikTok',D.tiktok)}
@@ -1579,6 +1687,7 @@ document.getElementById('modals').innerHTML += `
 
 let selectedItem = { name: '', price: '' };
 let copiedPayment = '';
+let modalStack = []; // Track open modals
 
 function openPaymentModal(itemName, itemPrice) {
   selectedItem = { name: itemName, price: itemPrice };
@@ -1610,8 +1719,13 @@ function openTelegramWithItem() {
 
 function openModal(id) {
   const modal = document.getElementById('m-' + id);
+  if (!modal) return;
+  
   modal.classList.add('is-open');
   document.body.style.overflow = 'hidden';
+  
+  // Add to modal stack
+  modalStack.push(id);
   
   // Create floating close button
   let closeBtn = document.getElementById('floating-close-btn');
@@ -1625,22 +1739,60 @@ function openModal(id) {
   }
   
   // Always update the onclick and show it
-  closeBtn.onclick = () => closeModal(id);
+  closeBtn.onclick = () => closeTopModal();
   closeBtn.style.display = 'flex';
   closeBtn.style.opacity = '1';
   closeBtn.style.visibility = 'visible';
 }
 
+function closeTopModal() {
+  if (modalStack.length > 0) {
+    const id = modalStack.pop();
+    const modal = document.getElementById('m-' + id);
+    if (modal) {
+      modal.classList.remove('is-open');
+    }
+  }
+  
+  // If no more modals in stack, hide close button and restore scroll
+  if (modalStack.length === 0) {
+    document.body.style.overflow = '';
+    const closeBtn = document.getElementById('floating-close-btn');
+    if (closeBtn) {
+      closeBtn.style.display = 'none';
+      closeBtn.style.opacity = '0';
+      closeBtn.style.visibility = 'hidden';
+    }
+  } else {
+    // Update close button to close the new top modal
+    const closeBtn = document.getElementById('floating-close-btn');
+    if (closeBtn) {
+      closeBtn.onclick = () => closeTopModal();
+    }
+  }
+}
+
 function closeModal(id) {
   const modal = document.getElementById('m-' + id);
-  modal.classList.remove('is-open');
-  document.body.style.overflow = '';
+  if (modal) {
+    modal.classList.remove('is-open');
+  }
   
-  const closeBtn = document.getElementById('floating-close-btn');
-  if (closeBtn) {
-    closeBtn.style.display = 'none';
-    closeBtn.style.opacity = '0';
-    closeBtn.style.visibility = 'hidden';
+  // Remove from stack
+  const index = modalStack.indexOf(id);
+  if (index > -1) {
+    modalStack.splice(index, 1);
+  }
+  
+  // If no more modals, restore page
+  if (modalStack.length === 0) {
+    document.body.style.overflow = '';
+    const closeBtn = document.getElementById('floating-close-btn');
+    if (closeBtn) {
+      closeBtn.style.display = 'none';
+      closeBtn.style.opacity = '0';
+      closeBtn.style.visibility = 'hidden';
+    }
   }
 }
 
@@ -1673,7 +1825,12 @@ document.addEventListener('click', (e) => {
 document.querySelectorAll('.modal').forEach(modal => {
   modal.addEventListener('click', (e) => {
     if (e.target === modal) {
-      closeModal(modal.id.replace('m-', ''));
+      // Get the modal id from the element
+      const modalId = modal.id.replace('m-', '');
+      // Only close if it's the top modal in the stack
+      if (modalStack.length > 0 && modalStack[modalStack.length - 1] === modalId) {
+        closeTopModal();
+      }
     }
   });
 });
