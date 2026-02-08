@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -64,6 +63,7 @@ const SITE_DATA = {
     '@la1o – $150',
     '@13763 – $70',
     '@bd0g – $50',
+    '@tydv – $50',
     '@fjke – $45',
   ],
 
@@ -90,7 +90,7 @@ const SITE_DATA = {
   // 🎮 PSN STOCK
   // ═══════════════════════════════════
   psn: [
-    'llHw – $200',
+    'Coming Soon',
   ],
 
   // ═══════════════════════════════════
@@ -177,7 +177,7 @@ const SITE_DATA = {
     '@owgi', '@oyql', '@pashed', '@pc62', '@pf7i', '@pfrv', '@pmrc', '@pxuj',
     '@pvmn', '@qyjo', '@qzip', '@qtud', '@qpyj', '@qtud', '@qdhv', '@qt70', '@qz37', '@rbcy', '@r46j',
     '@raspado', '@retightening', '@rhpt', '@rtgn', '@ryjw', '@rm4c', '@stillen',
-    '@tae7', '@tbgy', '@tbpr', '@tvrp', '@tydv', '@t0ld', '@tuqz', '@udn4', '@uvi6',
+    '@tae7', '@tbgy', '@tbpr', '@tvrp', '@t0ld', '@tuqz', '@udn4', '@uvi6',
     '@vaqz', '@vcqw', '@vqem', '@wpvh', '@wcmb', '@wgta', '@wkgo', '@wu1b',
     '@wxas', '@wxzd', '@wiqo', '@wyk0', '@xe74', '@xem0', '@xgqw', '@xkrq',
     '@xpdg', '@y0k_', '@y0se', '@yellowed', '@yg0t', '@ykdp', '@ylsk', '@ylkz',
@@ -217,6 +217,11 @@ const SITE_DATA = {
   // 📊 SOLD CAPCUT (3 usernames)
   // ═══════════════════════════════════
   soldCapCut: ['@riot', '@tool', '@', '@ecstacy'],
+
+  // ═══════════════════════════════════
+  // 📊 SOLD PSN (1 username)
+  // ═══════════════════════════════════
+  soldPSN: ['llHw'],
 };
 </script>
 
@@ -238,13 +243,13 @@ const SITE_DATA = {
     --glass-dark: rgba(20, 20, 25, 0.6);
     --glass-darker: rgba(15, 15, 20, 0.8);
     --glass-border: rgba(255, 255, 255, 0.08);
-    --glass-border-hover: rgba(214, 41, 118, 0.4);
-    --accent-primary: #E1306C;
-    --accent-secondary: #C13584;
-    --accent-gradient-start: #FCAF45;
-    --accent-gradient-mid: #F77737;
-    --accent-gradient-end: #E1306C;
-    --accent-purple: #C13584;
+    --glass-border-hover: rgba(100, 200, 255, 0.4);
+    --accent-primary: #00D4FF;
+    --accent-secondary: #0084FF;
+    --accent-gradient-start: #667EEA;
+    --accent-gradient-mid: #00D4FF;
+    --accent-gradient-end: #0084FF;
+    --accent-purple: #764BA2;
     --text-white: #ffffff;
     --text-gray: #a0a0a0;
     --text-dark: #606060;
@@ -357,13 +362,9 @@ const SITE_DATA = {
   
   .stat-link:hover {
     background: var(--glass-darker);
-    border: 2px solid transparent;
-    background-image: linear-gradient(var(--glass-darker), var(--glass-darker)), 
-                      linear-gradient(45deg, var(--accent-gradient-start), var(--accent-gradient-mid), var(--accent-gradient-end), var(--accent-purple));
-    background-origin: border-box;
-    background-clip: padding-box, border-box;
+    border-color: var(--accent-primary);
     transform: translateY(-2px);
-    box-shadow: 0 4px 16px rgba(188, 42, 141, 0.3);
+    box-shadow: 0 4px 16px rgba(0, 212, 255, 0.3);
   }
   
   .tos-notice {
@@ -390,12 +391,8 @@ const SITE_DATA = {
   
   .tos-btn:hover {
     background: var(--glass-darker);
-    border: 2px solid transparent;
-    background-image: linear-gradient(var(--glass-darker), var(--glass-darker)), 
-                      linear-gradient(45deg, var(--accent-gradient-start), var(--accent-gradient-mid), var(--accent-gradient-end), var(--accent-purple));
-    background-origin: border-box;
-    background-clip: padding-box, border-box;
-    color: var(--accent-purple);
+    border-color: var(--accent-primary);
+    color: var(--accent-primary);
     transform: translateY(-2px);
   }
   
@@ -413,16 +410,7 @@ const SITE_DATA = {
     background: var(--glass-dark);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border: 1px solid transparent;
-    background-image: 
-      linear-gradient(var(--glass-dark), var(--glass-dark)),
-      linear-gradient(135deg, 
-        rgba(252, 175, 69, 0.3) 0%,
-        rgba(247, 119, 55, 0.3) 33%,
-        rgba(225, 48, 108, 0.3) 66%,
-        rgba(193, 53, 132, 0.3) 100%);
-    background-origin: border-box;
-    background-clip: padding-box, border-box;
+    border: 1px solid var(--glass-border);
     border-radius: 12px;
     padding: 32px;
     margin-bottom: 20px;
@@ -440,10 +428,8 @@ const SITE_DATA = {
     right: 0;
     bottom: 0;
     background: linear-gradient(135deg, 
-      rgba(252, 175, 69, 0.05) 0%,
-      rgba(247, 119, 55, 0.05) 33%,
-      rgba(225, 48, 108, 0.05) 66%,
-      rgba(193, 53, 132, 0.08) 100%);
+      rgba(0, 212, 255, 0.03) 0%,
+      rgba(0, 132, 255, 0.05) 100%);
     opacity: 0;
     transition: opacity 0.3s ease;
     pointer-events: none;
@@ -456,17 +442,11 @@ const SITE_DATA = {
   
   .category:hover {
     transform: translateY(-6px);
-    background-image: 
-      linear-gradient(var(--glass-darker), var(--glass-darker)),
-      linear-gradient(135deg, 
-        rgba(252, 175, 69, 0.5) 0%,
-        rgba(247, 119, 55, 0.5) 33%,
-        rgba(225, 48, 108, 0.5) 66%,
-        rgba(193, 53, 132, 0.6) 100%);
+    background: var(--glass-darker);
+    border-color: var(--accent-primary);
     box-shadow: 
       0 20px 60px rgba(0, 0, 0, 0.8), 
-      0 0 80px rgba(225, 48, 108, 0.2),
-      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      0 0 80px rgba(0, 212, 255, 0.15);
   }
   
   .category-content {
@@ -661,12 +641,8 @@ const SITE_DATA = {
   
   .modal-close:hover {
     background: var(--glass-darker);
-    border: 2px solid transparent;
-    background-image: linear-gradient(var(--glass-darker), var(--glass-darker)), 
-                      linear-gradient(45deg, var(--accent-gradient-start), var(--accent-gradient-mid), var(--accent-gradient-end), var(--accent-purple));
-    background-origin: border-box;
-    background-clip: padding-box, border-box;
-    color: var(--accent-purple);
+    border-color: var(--accent-primary);
+    color: var(--accent-primary);
     transform: rotate(90deg);
   }
   
@@ -701,8 +677,7 @@ const SITE_DATA = {
     background: var(--glass-dark);
     backdrop-filter: blur(20px);
     border: 1px solid var(--glass-border);
-    border-left: 3px solid;
-    border-image: linear-gradient(45deg, var(--accent-gradient-start), var(--accent-gradient-mid), var(--accent-gradient-end), var(--accent-purple)) 1;
+    border-left: 3px solid var(--accent-primary);
     border-radius: 8px;
     padding: 22px 26px;
     margin-bottom: 16px;
@@ -752,15 +727,14 @@ const SITE_DATA = {
   
   .item-btn:hover {
     transform: scale(1.05);
-    box-shadow: 0 4px 20px rgba(188, 42, 141, 0.4);
+    box-shadow: 0 4px 20px rgba(0, 212, 255, 0.4);
   }
   
   .info {
     background: var(--glass-dark);
     backdrop-filter: blur(20px);
     border: 1px solid var(--glass-border);
-    border-left: 4px solid;
-    border-image: linear-gradient(45deg, var(--accent-gradient-start), var(--accent-gradient-mid), var(--accent-gradient-end), var(--accent-purple)) 1;
+    border-left: 4px solid var(--accent-primary);
     border-radius: 10px;
     padding: 30px;
     margin-bottom: 22px;
@@ -825,7 +799,7 @@ const SITE_DATA = {
   
   .info-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 20px rgba(188, 42, 141, 0.4);
+    box-shadow: 0 4px 20px rgba(0, 212, 255, 0.4);
   }
   
   .big-info {
@@ -868,7 +842,7 @@ const SITE_DATA = {
     font-weight: 600;
     font-size: 13px;
     cursor: pointer;
-    box-shadow: 0 8px 32px rgba(188, 42, 141, 0.3);
+    box-shadow: 0 8px 32px rgba(0, 212, 255, 0.3);
     transition: all 0.3s ease;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -876,7 +850,7 @@ const SITE_DATA = {
   
   .contact-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 12px 48px rgba(188, 42, 141, 0.5);
+    box-shadow: 0 12px 48px rgba(0, 212, 255, 0.5);
   }
   
   .contact-panel {
@@ -954,11 +928,7 @@ const SITE_DATA = {
   }
   
   .sold-item:hover {
-    border: 2px solid transparent;
-    background-image: linear-gradient(var(--glass-dark), var(--glass-dark)), 
-                      linear-gradient(45deg, var(--accent-gradient-start), var(--accent-gradient-mid), var(--accent-gradient-end), var(--accent-purple));
-    background-origin: border-box;
-    background-clip: padding-box, border-box;
+    border-color: var(--accent-primary);
     color: var(--text-white);
   }
   
@@ -1019,11 +989,7 @@ const SITE_DATA = {
   
   .payment-option:hover {
     background: var(--glass-darker);
-    border: 2px solid transparent;
-    background-image: linear-gradient(var(--glass-darker), var(--glass-darker)), 
-                      linear-gradient(45deg, var(--accent-gradient-start), var(--accent-gradient-mid), var(--accent-gradient-end), var(--accent-purple));
-    background-origin: border-box;
-    background-clip: padding-box, border-box;
+    border-color: var(--accent-primary);
     transform: translateX(4px);
   }
   
@@ -1070,10 +1036,7 @@ const SITE_DATA = {
   }
   
   .payment-option:hover .payment-copy-icon {
-    background: linear-gradient(45deg, var(--accent-gradient-start), var(--accent-gradient-mid), var(--accent-gradient-end), var(--accent-purple));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--accent-primary);
   }
   
   .payment-option.copied .payment-copy-icon {
@@ -1098,7 +1061,7 @@ const SITE_DATA = {
   
   .payment-telegram-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 20px rgba(188, 42, 141, 0.4);
+    box-shadow: 0 4px 20px rgba(0, 212, 255, 0.4);
   }
   
   .payment-note {
@@ -1164,12 +1127,12 @@ const SITE_DATA = {
       <p class="tos-disclaimer">By making any purchase, you automatically agree to our Terms of Service, whether read or not.</p>
     </div>
   </div>
-
+  
   <div class="section">
     <h2 class="section-title">Services</h2>
   </div>
   <div id="services"></div>
-
+  
   <div class="category" data-modal="sold">
     <div class="category-content">
       <div class="category-top">
@@ -1179,7 +1142,7 @@ const SITE_DATA = {
       <div class="category-desc">View past transactions</div>
     </div>
   </div>
-
+  
   <div class="footer">© 2-1.xyz (2025) • @7521 (IG) • All Rights Reserved</div>
 </div>
 
@@ -1448,6 +1411,10 @@ document.getElementById('modals').innerHTML = `
           <div class="grid-item-name">CapCut</div>
           <div class="grid-item-count">${D.soldCapCut.length} Sold</div>
         </div>
+        <div class="grid-item" data-modal="sold-psn">
+          <div class="grid-item-name">PSN</div>
+          <div class="grid-item-count">${D.soldPSN.length} Sold</div>
+        </div>
       </div>
     </div>
   </div>
@@ -1508,6 +1475,21 @@ document.getElementById('modals').innerHTML = `
       </div>
       <div class="sold-grid" id="items-sold-cc">
         ${D.soldCapCut.map(u => `<div class="sold-item">${u}</div>`).join('')}
+      </div>
+    </div>
+  </div>
+  
+  <div class="modal" id="m-sold-psn">
+    
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title">Sold PSN</h2>
+      </div>
+      <div class="search">
+        <input type="text" placeholder="Search..." onkeyup="filter(this,'sold-psn')">
+      </div>
+      <div class="sold-grid" id="items-sold-psn">
+        ${D.soldPSN.map(u => `<div class="sold-item">${u}</div>`).join('')}
       </div>
     </div>
   </div>
