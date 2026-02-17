@@ -8,10 +8,10 @@
   <style>
   *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
   :root {
-    --bg:     #0a0a0a;
-    --bg2:    #0f0f0f;
-    --bg3:    #141414;
-    --bg4:    #1c1c1c;
+    --bg:     #080810;
+    --bg2:    rgba(14,14,24,0.85);
+    --bg3:    rgba(22,22,38,0.9);
+    --bg4:    rgba(32,32,52,0.95);
     --b1:     rgba(255,255,255,0.07);
     --b2:     rgba(255,255,255,0.11);
     --b3:     rgba(255,255,255,0.18);
@@ -20,13 +20,13 @@
     --f2:     #999;
     --f3:     #555;
     --f4:     #333;
-    --ac:     #5b5bd6;
-    --ac2:    #7c7ce8;
+    --ac:     #6d4ef5;
+    --ac2:    #8b6ff7;
     --r:      6px;
   }
-  html { background: var(--bg); }
+  html { background: #080810; }
   body {
-    background-color: var(--bg);
+    background-color: #080810;
     color: var(--f1);
     font-family: 'Inter', sans-serif;
     font-size: 14px;
@@ -34,48 +34,71 @@
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
   }
-  /* ── DYNAMIC BACKGROUND ─────────────────────────────────
-     Two layers:
-     1. Subtle diagonal stripes that drift slowly
-     2. A moving radial accent bloom behind content
-     Edit stripe opacity at rgba(..., 0.022) — increase for more visible
-     Edit bloom color at var(--ac) to change hue
-     Edit durations to change animation speed               */
-  body::before {
-    content: '';
+
+  /* ── STRIPE-STYLE DARK MESH BACKGROUND ──────────────────
+     Mimics Stripe's animated gradient mesh. Three color orbs
+     drift independently creating a living, breathing backdrop.
+     Colors: deep indigo base + violet/teal accents.          */
+
+  /* Base gradient layer */
+  .bg-stripes {
+    position: fixed; inset: 0; z-index: -3;
+    background:
+      radial-gradient(ellipse 80% 50% at 50% -20%, rgba(120,80,255,0.15) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 40% at 80% 110%, rgba(60,180,220,0.1) 0%, transparent 55%),
+      #080810;
+  }
+
+  /* Orb 1: violet, drifts top-left → bottom-right */
+  .bg-bloom {
     position: fixed; inset: 0; z-index: -2;
-    background-image: repeating-linear-gradient(
-      -45deg,
-      transparent 0px,
-      transparent 60px,
-      rgba(255,255,255,0.022) 60px,
-      rgba(255,255,255,0.022) 61px
-    );
-    background-size: 400% 400%;
-    animation: stripeDrift 50s linear infinite;
+    background: radial-gradient(ellipse 55% 45% at 20% 20%, rgba(110,60,230,0.18) 0%, transparent 65%);
+    animation: orb1 22s ease-in-out infinite alternate;
+    will-change: transform;
   }
-  body::after {
-    content: '';
+  @keyframes orb1 {
+    0%   { transform: translate(0px, 0px)   scale(1);    opacity: 1; }
+    33%  { transform: translate(60px, 40px) scale(1.1);  opacity: 0.8; }
+    66%  { transform: translate(20px, 80px) scale(0.95); opacity: 0.9; }
+    100% { transform: translate(80px, 20px) scale(1.05); opacity: 1; }
+  }
+
+  /* Orb 2: teal, drifts bottom-right → top-left */
+  .bg-bloom2 {
+    position: fixed; inset: 0; z-index: -2;
+    background: radial-gradient(ellipse 45% 55% at 80% 75%, rgba(30,160,200,0.12) 0%, transparent 60%);
+    animation: orb2 28s ease-in-out infinite alternate;
+    will-change: transform;
+  }
+  @keyframes orb2 {
+    0%   { transform: translate(0px, 0px)    scale(1);   }
+    50%  { transform: translate(-70px, -50px) scale(1.2); }
+    100% { transform: translate(-30px, 60px) scale(0.9); }
+  }
+
+  /* Orb 3: rose/purple, subtle pulse center-right */
+  .bg-bloom3 {
+    position: fixed; inset: 0; z-index: -2;
+    background: radial-gradient(ellipse 40% 35% at 65% 40%, rgba(180,60,160,0.08) 0%, transparent 55%);
+    animation: orb3 18s ease-in-out infinite alternate;
+    will-change: transform;
+  }
+  @keyframes orb3 {
+    0%   { transform: translate(0px, 0px)   scale(1);   opacity: 0.6; }
+    50%  { transform: translate(-40px, 30px) scale(1.15); opacity: 1; }
+    100% { transform: translate(50px, -40px) scale(0.85); opacity: 0.7; }
+  }
+
+  /* Noise grain overlay for texture depth */
+  .bg-noise {
     position: fixed; inset: 0; z-index: -1;
-    background: radial-gradient(
-      ellipse 70% 60% at var(--bx, 30%) var(--by, 20%),
-      rgba(91,91,214,0.06) 0%,
-      transparent 70%
-    );
-    animation: bloomDrift 18s ease-in-out infinite alternate;
+    opacity: 0.025;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-size: 200px 200px;
   }
-  @keyframes stripeDrift {
-    0%   { background-position: 0% 0%; }
-    100% { background-position: 100% 100%; }
-  }
-  @keyframes bloomDrift {
-    0%   { background: radial-gradient(ellipse 70% 60% at 20% 15%, rgba(91,91,214,0.07) 0%, transparent 70%); }
-    33%  { background: radial-gradient(ellipse 60% 70% at 75% 30%, rgba(91,91,214,0.05) 0%, transparent 70%); }
-    66%  { background: radial-gradient(ellipse 80% 50% at 50% 80%, rgba(91,91,214,0.06) 0%, transparent 70%); }
-    100% { background: radial-gradient(ellipse 65% 65% at 10% 60%, rgba(91,91,214,0.07) 0%, transparent 70%); }
-  }
+
   @media (prefers-reduced-motion: reduce) {
-    body::before, body::after { animation: none; }
+    .bg-bloom, .bg-bloom2, .bg-bloom3 { animation: none; }
   }
   ::-webkit-scrollbar { width: 5px; }
   ::-webkit-scrollbar-track { background: var(--bg); }
@@ -179,12 +202,12 @@
     height: 28px;
   }
   .nav-ticker-item:hover { color: var(--f1); }
-  .nav-ticker-dot {
-    width: 4px; height: 4px;
-    border-radius: 50%;
-    background: var(--ac);
-    flex-shrink: 0;
+  .nav-ticker-icon {
+    display: inline-flex; align-items: center;
+    opacity: 0.5; flex-shrink: 0;
+    color: var(--f2);
   }
+  .nav-ticker-item:hover .nav-ticker-icon { opacity: 0.8; }
   .nav-ticker-label { font-weight: 500; color: var(--f2); font-size: 11px; }
   .nav-ticker-val   { color: var(--f3); font-size: 11px; }
   /* ── NAV ─────────────────────────────── */
@@ -193,18 +216,30 @@
     height: 52px;
     display: flex; align-items: center;
     padding: 0 24px;
-    background: rgba(10,10,10,0.96);
+    background: rgba(8,8,16,0.75);
     border-bottom: 1px solid var(--b1);
-    backdrop-filter: blur(16px);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     gap: 4px;
   }
   .nav-logo {
     font-size: 15px; font-weight: 700;
     letter-spacing: -0.5px;
     color: var(--w);
-    margin-right: 20px;
     flex-shrink: 0;
   }
+  .nav-brand {
+    display: flex; align-items: center; gap: 10px;
+    flex-shrink: 0;
+    padding-right: 4px;
+    border-right: 1px solid var(--b1);
+    margin-right: 4px;
+  }
+  .nav-visits {
+    font-size: 11px; color: var(--f4);
+    font-weight: 400; white-space: nowrap;
+  }
+  .nav-visits span { color: var(--f2); font-weight: 500; }
   .nl {
     padding: 5px 11px;
     border-radius: var(--r);
@@ -258,137 +293,132 @@
     gap: 0;
   }
 
-  /* profile card */
+  /* profile card — flat vertical layout, no side column gap */
   .profile-card {
     width: 100%;
     background: var(--bg2);
     border: 1px solid var(--b2);
     border-radius: 12px;
-    padding: 32px 36px;
-    margin-bottom: 0;
-    display: flex;
-    align-items: flex-start;
-    gap: 28px;
-    position: relative;
     overflow: hidden;
+    position: relative;
   }
-  /* subtle accent edge */
   .profile-card::before {
     content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 1px;
+    position: absolute; top: 0; left: 0; right: 0; height: 1px;
     background: linear-gradient(90deg, transparent, var(--ac), transparent);
     opacity: 0.5;
   }
+  /* head: avatar + identity inline, tight */
+  .profile-head {
+    display: flex; align-items: center; gap: 16px;
+    padding: 24px 24px 16px;
+  }
   .profile-avatar {
-    width: 56px; height: 56px;
-    border-radius: 12px;
+    width: 48px; height: 48px;
+    border-radius: 10px;
     background: var(--bg3);
     border: 1px solid var(--b2);
     display: flex; align-items: center; justify-content: center;
-    font-size: 22px; font-weight: 800;
+    font-size: 18px; font-weight: 800;
     color: var(--w);
     flex-shrink: 0;
-    font-family: 'Inter', sans-serif;
     letter-spacing: -1px;
     user-select: none;
   }
-  /* avatar + TOS pill stacked below it */
-  .profile-avatar-wrap {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    flex-shrink: 0;
-  }
-  .profile-tos-pill {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 6px 12px;
-    border-radius: 6px;
-    font-size: 11px; font-weight: 600;
-    color: #f87171;
-    background: rgba(239,68,68,0.08);
-    border: 1px solid rgba(239,68,68,0.25);
-    text-decoration: none;
-    white-space: nowrap;
-    transition: all 0.15s ease;
-    letter-spacing: 0.3px;
-    width: 100%;
-    text-align: center;
-  }
-  .profile-tos-pill:hover {
-    background: rgba(239,68,68,0.14);
-    border-color: rgba(239,68,68,0.45);
-    color: #fca5a5;
-  }
-  .profile-body { flex: 1; min-width: 0; }
-  .profile-top-row {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 16px;
-    margin-bottom: 16px;
-  }
+  .profile-identity { flex: 1; min-width: 0; }
   .profile-name {
-    font-size: 20px; font-weight: 700;
-    letter-spacing: -0.5px; color: var(--w);
-    margin-bottom: 4px;
-    display: flex; align-items: center; gap: 10px;
+    font-size: 17px; font-weight: 700;
+    letter-spacing: -0.4px; color: var(--w);
+    display: flex; align-items: center; gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 3px;
   }
   .profile-status {
     display: inline-flex; align-items: center; gap: 5px;
     font-size: 11px; color: #4ade80;
     background: rgba(74,222,128,0.08);
     border: 1px solid rgba(74,222,128,0.2);
-    border-radius: 99px;
-    padding: 2px 9px;
+    border-radius: 99px; padding: 2px 9px;
     font-weight: 500;
   }
   .profile-status::before {
-    content: '';
-    width: 5px; height: 5px; border-radius: 50%;
+    content: ''; width: 5px; height: 5px; border-radius: 50%;
     background: #4ade80;
     animation: statusPulse 2s ease infinite;
   }
-  @keyframes statusPulse {
-    0%,100% { opacity:1; } 50% { opacity:0.4; }
-  }
+  @keyframes statusPulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
   .profile-tagline {
-    font-size: 14px; color: var(--f2);
-    font-weight: 300; margin-bottom: 20px;
+    font-size: 12px; color: var(--f3); font-weight: 400;
   }
+  /* links: even 3-column grid */
   .profile-links {
-    display: flex; gap: 6px; flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+    padding: 0 24px 16px;
   }
   .profile-link {
-    display: inline-flex; align-items: center; gap: 5px;
-    padding: 5px 12px; border-radius: 5px;
+    display: flex; align-items: center; justify-content: center;
+    padding: 8px 10px; border-radius: 6px;
     font-size: 12px; font-weight: 500;
     color: var(--f2);
     background: var(--bg3);
     border: 1px solid var(--b1);
     text-decoration: none;
     transition: all 0.15s ease;
+    text-align: center;
   }
   .profile-link:hover { color: var(--w); border-color: var(--b2); background: var(--bg4); }
-  .pl-icon {
-    font-size: 10px; color: var(--f4);
-    font-style: normal;
-  }
   .profile-link-vouches {
     color: #4ade80;
     border-color: rgba(74,222,128,0.15);
     background: rgba(74,222,128,0.04);
+    grid-column: span 2;
   }
-  .profile-link-vouches:hover {
-    color: #86efac;
-    border-color: rgba(74,222,128,0.3);
-    background: rgba(74,222,128,0.08);
+  .profile-link-vouches:hover { color: #86efac; border-color: rgba(74,222,128,0.3); background: rgba(74,222,128,0.08); }
+  /* sold + visits row */
+  .profile-sold-row {
+    display: flex; align-items: center;
+    padding: 14px 24px;
+    border-top: 1px solid var(--b1);
+    gap: 0;
   }
-  .profile-link-vouches .pl-icon { color: #4ade80; }
+  .profile-sold-trigger {
+    flex: 1; display: flex; align-items: center;
+    justify-content: space-between; gap: 12px;
+    background: transparent; border: none;
+    cursor: pointer; text-align: left;
+    padding: 0; font-family: 'Inter', sans-serif;
+  }
+  .profile-sold-stats { display: flex; gap: 14px; flex-wrap: wrap; }
+  .pss-item { display: flex; align-items: baseline; gap: 3px; }
+  .pss-n { font-size: 14px; font-weight: 700; letter-spacing: -0.3px; color: var(--w); }
+  .pss-l { font-size: 10px; color: var(--f4); }
+  .profile-sold-cta { font-size: 11px; color: var(--f3); white-space: nowrap; flex-shrink: 0; transition: color 0.15s; }
+  .profile-sold-trigger:hover .profile-sold-cta { color: var(--f1); }
+  .profile-visits-block {
+    padding-left: 18px; margin-left: 18px;
+    border-left: 1px solid var(--b1);
+    text-align: right; flex-shrink: 0;
+  }
+  .profile-visits-n { font-size: 14px; font-weight: 700; letter-spacing: -0.3px; color: var(--w); line-height: 1; }
+  .profile-visits-l { font-size: 10px; color: var(--f4); margin-top: 2px; }
+  /* TOS full-width bar at bottom of card */
+  .profile-tos-bar {
+    display: flex; align-items: center; gap: 10px;
+    padding: 12px 24px;
+    background: rgba(239,68,68,0.05);
+    border-top: 1px solid rgba(239,68,68,0.18);
+    text-decoration: none;
+    transition: background 0.15s;
+  }
+  .profile-tos-bar:hover { background: rgba(239,68,68,0.09); }
+  .profile-tos-icon { font-size: 13px; flex-shrink: 0; }
+  .profile-tos-text {
+    font-size: 12px; font-weight: 500; color: #f87171;
+    flex: 1; letter-spacing: 0.1px;
+  }
+  .profile-tos-arrow { font-size: 13px; color: #f87171; opacity: 0.6; flex-shrink: 0; }
 
   /* ── PROFILE SOLD ROW ────────────────── */
   .profile-sold-row {
@@ -445,24 +475,7 @@
     font-size: 11px; color: var(--f4);
     margin-top: 1px;
   }
-  .profile-right {
-    display: flex; flex-direction: column;
-    align-items: flex-end; gap: 12px;
-    flex-shrink: 0;
-  }
-  .profile-right { display: none; }
-  .profile-cta {
-    display: inline-flex; align-items: center;
-    padding: 9px 18px; border-radius: var(--r);
-    font-size: 13px; font-weight: 500;
-    background: var(--ac); color: var(--w);
-    border: none; cursor: pointer;
-    transition: all 0.15s ease;
-    text-decoration: none;
-    white-space: nowrap;
-  }
-  .profile-cta:hover { background: var(--ac2); transform: translateY(-1px); box-shadow: 0 4px 14px rgba(91,91,214,0.35); }
-
+  /* ── SECTION CHROME ──────────────────── */
   .hero-badge {
     display: inline-flex; align-items: center; gap: 8px;
     padding: 4px 12px 4px 8px;
@@ -519,9 +532,10 @@
   .hbs:hover { background: var(--bg4); border-color: var(--b3); }
 
   @media(max-width:640px){
-    .profile-card { flex-direction: column; padding: 24px 20px; gap: 16px; }
-    .profile-right { align-items: flex-start; flex-direction: row; gap: 16px; }
-    .visitor-count { text-align: left; }
+    .profile-links { grid-template-columns: repeat(2, 1fr); }
+    .profile-link-vouches { grid-column: span 2; }
+    .profile-sold-stats { gap: 10px; }
+    .pss-n { font-size: 13px; }
   }
 
   /* ── SECTION CHROME ──────────────────── */
@@ -561,7 +575,7 @@
     flex-wrap: wrap;
   }
   .ptab {
-    display: inline-flex; align-items: center; gap: 5px;
+    display: inline-flex; align-items: center; gap: 6px;
     padding: 5px 11px;
     border-radius: var(--r);
     font-size: 12px; font-weight: 400;
@@ -569,6 +583,8 @@
     background: transparent; border: none;
     cursor: pointer; transition: all 0.12s ease;
   }
+  .ptab svg { opacity: 0.5; transition: opacity 0.12s; flex-shrink: 0; }
+  .ptab:hover svg, .ptab.on svg { opacity: 1; }
   .ptab:hover { background: var(--bg3); color: var(--f1); }
   .ptab.on { background: var(--bg3); color: var(--f1); }
   .ptab-ct {
@@ -1023,10 +1039,18 @@ const SOLD = {
 </div>
 
 <div id="site">
+  <div class="bg-stripes"></div>
+  <div class="bg-bloom"></div>
+  <div class="bg-bloom2"></div>
+  <div class="bg-bloom3"></div>
+  <div class="bg-noise"></div>
 
   <!-- NAV -->
   <nav id="nav">
-    <span class="nav-logo">21®</span>
+    <div class="nav-brand">
+      <span class="nav-logo">21®</span>
+      <span class="nav-visits"><span id="nav-visit-count">—</span> visits</span>
+    </div>
     <div class="nav-ticker">
       <div class="nav-ticker-track" id="ticker-track"></div>
     </div>
@@ -1050,49 +1074,42 @@ const SOLD = {
 
         <!-- PROFILE CARD -->
         <div class="profile-card">
-          <div class="profile-avatar-wrap">
+          <!-- Top: avatar + name inline -->
+          <div class="profile-head">
             <div class="profile-avatar">21</div>
-            <a class="profile-tos-pill" href="/tos" target="_blank">Terms ↗</a>
-          </div>
-          <div class="profile-body">
-            <div class="profile-top-row">
-              <div>
-                <div class="profile-name">
-                  21®
-                  <span class="profile-status">Open for deals</span>
-                </div>
-                <p class="profile-tagline">Premium username marketplace · Est. 2023</p>
+            <div class="profile-identity">
+              <div class="profile-name">
+                21®
+                <span class="profile-status">Open for deals</span>
               </div>
-            </div>
-            <div class="profile-links">
-              <a class="profile-link" href="https://t.me/abuto" target="_blank">
-                <span class="pl-icon">✈</span>Telegram
-              </a>
-              <a class="profile-link" href="https://www.instagram.com/7521" target="_blank">
-                <span class="pl-icon">◎</span>Instagram
-              </a>
-              <a class="profile-link" href="https://oguser.com/21" target="_blank">
-                <span class="pl-icon">○</span>OGUsers
-              </a>
-              <a class="profile-link" href="https://solo.to/215" target="_blank">
-                <span class="pl-icon">↗</span>More Links
-              </a>
-              <a class="profile-link profile-link-vouches" href="https://www.instagram.com/21v7" target="_blank">
-                <span class="pl-icon">✓</span>570+ Vouches
-              </a>
-            </div>
-            <!-- SOLD TRACK RECORD + VISITS -->
-            <div class="profile-sold-row">
-              <button class="profile-sold-trigger" onclick="openSold()">
-                <div class="profile-sold-stats" id="profile-sold-stats"></div>
-                <span class="profile-sold-cta">View sold history ↗</span>
-              </button>
-              <div class="profile-visits-block">
-                <div class="profile-visits-n" id="visit-count">—</div>
-                <div class="profile-visits-l">Page visits</div>
-              </div>
+              <p class="profile-tagline">Premium username marketplace · Est. 2023</p>
             </div>
           </div>
+          <!-- Links grid: even columns -->
+          <div class="profile-links">
+            <a class="profile-link" href="https://t.me/abuto" target="_blank">Telegram</a>
+            <a class="profile-link" href="https://www.instagram.com/7521" target="_blank">Instagram</a>
+            <a class="profile-link" href="https://oguser.com/21" target="_blank">OGUsers</a>
+            <a class="profile-link" href="https://solo.to/215" target="_blank">More Links</a>
+            <a class="profile-link profile-link-vouches" href="https://www.instagram.com/21v7" target="_blank">570+ Vouches</a>
+          </div>
+          <!-- Stats row: sold counts + visits -->
+          <div class="profile-sold-row">
+            <button class="profile-sold-trigger" onclick="openSold()">
+              <div class="profile-sold-stats" id="profile-sold-stats"></div>
+              <span class="profile-sold-cta">View sold history ↗</span>
+            </button>
+            <div class="profile-visits-block">
+              <div class="profile-visits-n" id="visit-count">—</div>
+              <div class="profile-visits-l">Page visits</div>
+            </div>
+          </div>
+          <!-- TOS: full-width bar at bottom -->
+          <a class="profile-tos-bar" href="/tos" target="_blank">
+            <span class="profile-tos-icon">⚠</span>
+            <span class="profile-tos-text">Terms of Service — Read before purchasing. All sales final.</span>
+            <span class="profile-tos-arrow">↗</span>
+          </a>
         </div>
 
       </div>
@@ -1323,37 +1340,55 @@ function incrementVisit() {
   } catch { return null; }
 }
 function initVisitCounter() {
-  const el = document.getElementById('visit-count');
-  if (!el) return;
   try {
     const count = incrementVisit();
-    if (count === null) { el.textContent = '—'; return; }
-    // animate number up
+    const val = count === null ? '—' : count.toLocaleString();
+    // sync to nav
+    const navEl = document.getElementById('nav-visit-count');
+    if (navEl) navEl.textContent = val;
+    // sync + animate to profile card
+    const cardEl = document.getElementById('visit-count');
+    if (!cardEl) return;
+    if (count === null) { cardEl.textContent = '—'; return; }
     let start = Math.max(0, count - 12);
     const step = () => {
       start++;
-      el.textContent = start.toLocaleString();
+      cardEl.textContent = start.toLocaleString();
       if (start < count) requestAnimationFrame(step);
     };
     requestAnimationFrame(step);
-  } catch { el.textContent = '—'; }
+  } catch (e) {
+    const navEl = document.getElementById('nav-visit-count');
+    if (navEl) navEl.textContent = '—';
+  }
 }
 initVisitCounter();
 
+// ── PLATFORM ICONS (actual brand SVGs) ── defined first so all code can use them
+const ICONS = {
+  ig:    `<svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>`,
+  tw:    `<svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.258 5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>`,
+  tt:    `<svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.76a4.85 4.85 0 01-1.01-.07z"/></svg>`,
+  cc:    `<svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>`,
+  psn:   `<svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M8.984 2.596v17.545l3.915 1.261V6.688c0-.69.304-1.151.794-.995.636.181.76.814.76 1.504v4.558c2.853.895 4.997-.28 4.997-3.955 0-3.755-1.909-5.355-4.572-6.254-1.073-.354-3.111-.629-5.894.05zM2 19.152l4.786 1.411V11.97L2 10.675v8.477zm17.879-5.464c-2.138-.65-4.898-.507-4.898-.507v2.312s2.367-.19 2.834.507c.365.547.198 1.5-.573 2.033l-2.261 1.518v2.594l4.165-2.729c2.259-1.553 2.574-3.786.733-5.728z"/></svg>`,
+  proxy: `<svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>`,
+  tg:    `<svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>`,
+};
+
 // ── TICKER BUILD (lives in nav right side) ───────────────
 const TICKER_ITEMS = [
-  { label: 'Telegram',   val: '@abuto',          href: D.telegram },
-  { label: 'Instagram',  val: '@7521',            href: D.instagram },
-  { label: 'OGUsers',    val: 'oguser.com/21',    href: D.ogu },
-  { label: 'Vouches',    val: 'Telegram',         href: D.vouchesLink },
-  { label: 'Links',      val: 'solo.to/215',      href: D.moreLinks },
-  { label: 'Vouches IG', val: '@21v7',            href: D.vouchesInstagram },
+  { label: 'Telegram',   val: '@abuto',          href: D.telegram,         icon: ICONS.tg    },
+  { label: 'Instagram',  val: '@7521',            href: D.instagram,        icon: ICONS.ig    },
+  { label: 'OGUsers',    val: 'oguser.com/21',    href: D.ogu,              icon: ICONS.proxy },
+  { label: 'Vouches',    val: 'Telegram',         href: D.vouchesLink,      icon: ICONS.tg    },
+  { label: 'Links',      val: 'solo.to/215',      href: D.moreLinks,        icon: ICONS.proxy },
+  { label: 'Vouches IG', val: '@21v7',            href: D.vouchesInstagram, icon: ICONS.ig    },
 ];
 function buildTicker() {
   const all = [...TICKER_ITEMS, ...TICKER_ITEMS, ...TICKER_ITEMS, ...TICKER_ITEMS];
   document.getElementById('ticker-track').innerHTML = all.map(item => `
     <a class="nav-ticker-item" href="${item.href}" target="_blank">
-      <span class="nav-ticker-dot"></span>
+      <span class="nav-ticker-icon">${item.icon}</span>
       <span class="nav-ticker-label">${item.label}</span>
       <span class="nav-ticker-val">${item.val}</span>
     </a>
@@ -1369,15 +1404,15 @@ function goto(id) {
   window.scrollTo({ top, behavior: 'smooth' });
 }
 
-// ── STOCK ────────────────────────────────────────────────
+// ── STOCK ──────────────────────────────────────────────────
 // Platform definitions — data comes from STOCK object above
 const PLATFORMS = [
-  { id:'ig',    name:'Instagram', icon:'📸', data: STOCK.ig    },
-  { id:'tw',    name:'Twitter',   icon:'🐦', data: STOCK.tw    },
-  { id:'tt',    name:'TikTok',    icon:'🎵', data: STOCK.tt    },
-  { id:'cc',    name:'CapCut',    icon:'✂️', data: STOCK.cc    },
-  { id:'proxy', name:'IG Proxy',  icon:'📸', data: STOCK.proxy },
-  { id:'psn',   name:'PSN',       icon:'🎮', data: STOCK.psn   },
+  { id:'ig',    name:'Instagram', icon: ICONS.ig,    data: STOCK.ig    },
+  { id:'tw',    name:'Twitter',   icon: ICONS.tw,    data: STOCK.tw    },
+  { id:'tt',    name:'TikTok',    icon: ICONS.tt,    data: STOCK.tt    },
+  { id:'cc',    name:'CapCut',    icon: ICONS.cc,    data: STOCK.cc    },
+  { id:'proxy', name:'IG Proxy',  icon: ICONS.proxy, data: STOCK.proxy },
+  { id:'psn',   name:'PSN',       icon: ICONS.psn,   data: STOCK.psn   },
 ];
 let activeP = 'ig';
 
@@ -1457,11 +1492,11 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeSold();
 
 // ── SOLD ─────────────────────────────────────────────────
 const SOLD_PLATFORMS = [
-  { id:'ig',  name:'Instagram', icon:'📸', data: SOLD.ig  },
-  { id:'tt',  name:'TikTok',    icon:'🎵', data: SOLD.tt  },
-  { id:'tw',  name:'Twitter',   icon:'🐦', data: SOLD.tw  },
-  { id:'cc',  name:'CapCut',    icon:'✂️', data: SOLD.cc  },
-  { id:'psn', name:'PSN',       icon:'🎮', data: SOLD.psn },
+  { id:'ig',  name:'Instagram', icon: ICONS.ig,  data: SOLD.ig  },
+  { id:'tt',  name:'TikTok',    icon: ICONS.tt,  data: SOLD.tt  },
+  { id:'tw',  name:'Twitter',   icon: ICONS.tw,  data: SOLD.tw  },
+  { id:'cc',  name:'CapCut',    icon: ICONS.cc,  data: SOLD.cc  },
+  { id:'psn', name:'PSN',       icon: ICONS.psn, data: SOLD.psn },
 ];
 let activeSold = 'ig';
 
