@@ -26,13 +26,56 @@
   }
   html { background: var(--bg); }
   body {
-    background: var(--bg);
+    background-color: var(--bg);
     color: var(--f1);
     font-family: 'Inter', sans-serif;
     font-size: 14px;
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
+  }
+  /* ── DYNAMIC BACKGROUND ─────────────────────────────────
+     Two layers:
+     1. Subtle diagonal stripes that drift slowly
+     2. A moving radial accent bloom behind content
+     Edit stripe opacity at rgba(..., 0.022) — increase for more visible
+     Edit bloom color at var(--ac) to change hue
+     Edit durations to change animation speed               */
+  body::before {
+    content: '';
+    position: fixed; inset: 0; z-index: -2;
+    background-image: repeating-linear-gradient(
+      -45deg,
+      transparent 0px,
+      transparent 60px,
+      rgba(255,255,255,0.022) 60px,
+      rgba(255,255,255,0.022) 61px
+    );
+    background-size: 400% 400%;
+    animation: stripeDrift 50s linear infinite;
+  }
+  body::after {
+    content: '';
+    position: fixed; inset: 0; z-index: -1;
+    background: radial-gradient(
+      ellipse 70% 60% at var(--bx, 30%) var(--by, 20%),
+      rgba(91,91,214,0.06) 0%,
+      transparent 70%
+    );
+    animation: bloomDrift 18s ease-in-out infinite alternate;
+  }
+  @keyframes stripeDrift {
+    0%   { background-position: 0% 0%; }
+    100% { background-position: 100% 100%; }
+  }
+  @keyframes bloomDrift {
+    0%   { background: radial-gradient(ellipse 70% 60% at 20% 15%, rgba(91,91,214,0.07) 0%, transparent 70%); }
+    33%  { background: radial-gradient(ellipse 60% 70% at 75% 30%, rgba(91,91,214,0.05) 0%, transparent 70%); }
+    66%  { background: radial-gradient(ellipse 80% 50% at 50% 80%, rgba(91,91,214,0.06) 0%, transparent 70%); }
+    100% { background: radial-gradient(ellipse 65% 65% at 10% 60%, rgba(91,91,214,0.07) 0%, transparent 70%); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    body::before, body::after { animation: none; }
   }
   ::-webkit-scrollbar { width: 5px; }
   ::-webkit-scrollbar-track { background: var(--bg); }
@@ -48,15 +91,7 @@
   }
   @keyframes introOut { to { opacity:0; visibility:hidden; } }
 
-  .ig {
-    position: absolute; inset: 0;
-    background-image:
-      linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
-    background-size: 52px 52px;
-    animation: igIn 0.5s ease 0.1s both;
-  }
-  @keyframes igIn { from { opacity:0; } to { opacity:1; } }
+  .ig { display: none; }
 
   .iglow {
     position: absolute;
@@ -107,69 +142,51 @@
   #site { opacity: 0; animation: siteIn 0.5s ease 2.6s forwards; }
   @keyframes siteIn { to { opacity:1; } }
 
-  /* ── ROTATING TICKER BAR ─────────────── */
-  .ticker-wrap {
-    position: fixed;
-    top: -40px;
-    left: 0; right: 0;
-    z-index: 101;
-    width: 100%;
-    height: 36px;
-    background: rgba(10,10,10,0.97);
-    border-bottom: 1px solid var(--b1);
+  /* ── NAV TICKER (inline right side) ─────────────────── */
+  .nav-ticker {
+    position: relative;
     overflow: hidden;
-    display: flex;
-    align-items: center;
-    backdrop-filter: blur(16px);
-    transition: top 0.35s cubic-bezier(0.16,1,0.3,1);
+    flex: 1;
+    height: 52px;
+    /* Fade starts at left edge (right next to logo/nav links) */
+    mask-image: linear-gradient(90deg, transparent, black 6%, black 94%, transparent 100%);
+    -webkit-mask-image: linear-gradient(90deg, transparent, black 6%, black 94%, transparent 100%);
   }
-  .ticker-wrap.visible { top: 0; }
-  .ticker-track {
+  .nav-ticker-track {
     display: flex;
     align-items: center;
-    gap: 0;
+    height: 52px;
     white-space: nowrap;
-    animation: tickerScroll 28s linear infinite;
+    animation: navTicker 22s linear infinite;
     will-change: transform;
   }
-  .ticker-track:hover { animation-play-state: paused; }
-  @keyframes tickerScroll {
+  .nav-ticker-track:hover { animation-play-state: paused; }
+  @keyframes navTicker {
     from { transform: translateX(0); }
     to   { transform: translateX(-50%); }
   }
-  .ticker-item {
+  .nav-ticker-item {
     display: inline-flex;
     align-items: center;
-    gap: 10px;
-    padding: 0 28px;
-    height: 36px;
+    gap: 7px;
+    padding: 0 20px;
     font-size: 12px;
     color: var(--f3);
     text-decoration: none;
-    transition: color 0.2s ease;
-    border-right: 1px solid var(--b1);
+    transition: color 0.15s ease;
     flex-shrink: 0;
+    border-right: 1px solid var(--b1);
+    height: 28px;
   }
-  .ticker-item:hover { color: var(--f1); }
-  .ticker-dot {
-    width: 5px; height: 5px;
+  .nav-ticker-item:hover { color: var(--f1); }
+  .nav-ticker-dot {
+    width: 4px; height: 4px;
     border-radius: 50%;
     background: var(--ac);
     flex-shrink: 0;
   }
-  .ticker-label { font-weight: 500; color: var(--f2); }
-  .ticker-val { color: var(--f3); }
-  .ticker-sep {
-    display: inline-flex;
-    align-items: center;
-    padding: 0 20px;
-    height: 36px;
-    font-size: 14px;
-    color: var(--f4);
-    border-right: 1px solid var(--b1);
-    flex-shrink: 0;
-  }
-
+  .nav-ticker-label { font-weight: 500; color: var(--f2); font-size: 11px; }
+  .nav-ticker-val   { color: var(--f3); font-size: 11px; }
   /* ── NAV ─────────────────────────────── */
   #nav {
     position: sticky; top: 0; z-index: 100;
@@ -180,9 +197,7 @@
     border-bottom: 1px solid var(--b1);
     backdrop-filter: blur(16px);
     gap: 4px;
-    transition: top 0.35s cubic-bezier(0.16,1,0.3,1);
   }
-  #nav.ticker-down { top: 36px; }
   .nav-logo {
     font-size: 15px; font-weight: 700;
     letter-spacing: -0.5px;
@@ -229,22 +244,11 @@
     padding: 0 24px;
   }
 
-  /* ── HERO ────────────────────────────── */
+  /* ── PROFILE HERO ────────────────────── */
   .hero {
-    padding: 72px 0 56px;
+    padding: 56px 0 48px;
     border-bottom: 1px solid var(--b1);
     position: relative;
-  }
-  .hero::before {
-    content: '';
-    position: absolute; inset: 0;
-    background-image:
-      linear-gradient(var(--b1) 1px, transparent 1px),
-      linear-gradient(90deg, var(--b1) 1px, transparent 1px);
-    background-size: 48px 48px;
-    mask-image: radial-gradient(ellipse 70% 80% at 50% 100%, black 20%, transparent 80%);
-    -webkit-mask-image: radial-gradient(ellipse 70% 80% at 50% 100%, black 20%, transparent 80%);
-    pointer-events: none;
   }
   .hero-inner {
     position: relative; z-index: 1;
@@ -253,6 +257,212 @@
     align-items: flex-start;
     gap: 0;
   }
+
+  /* profile card */
+  .profile-card {
+    width: 100%;
+    background: var(--bg2);
+    border: 1px solid var(--b2);
+    border-radius: 12px;
+    padding: 32px 36px;
+    margin-bottom: 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  /* subtle accent edge */
+  .profile-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--ac), transparent);
+    opacity: 0.5;
+  }
+  .profile-avatar {
+    width: 56px; height: 56px;
+    border-radius: 12px;
+    background: var(--bg3);
+    border: 1px solid var(--b2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; font-weight: 800;
+    color: var(--w);
+    flex-shrink: 0;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: -1px;
+    user-select: none;
+  }
+  /* avatar + TOS pill stacked below it */
+  .profile-avatar-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+  .profile-tos-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 11px; font-weight: 600;
+    color: #f87171;
+    background: rgba(239,68,68,0.08);
+    border: 1px solid rgba(239,68,68,0.25);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: all 0.15s ease;
+    letter-spacing: 0.3px;
+    width: 100%;
+    text-align: center;
+  }
+  .profile-tos-pill:hover {
+    background: rgba(239,68,68,0.14);
+    border-color: rgba(239,68,68,0.45);
+    color: #fca5a5;
+  }
+  .profile-body { flex: 1; min-width: 0; }
+  .profile-top-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+  .profile-name {
+    font-size: 20px; font-weight: 700;
+    letter-spacing: -0.5px; color: var(--w);
+    margin-bottom: 4px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .profile-status {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-size: 11px; color: #4ade80;
+    background: rgba(74,222,128,0.08);
+    border: 1px solid rgba(74,222,128,0.2);
+    border-radius: 99px;
+    padding: 2px 9px;
+    font-weight: 500;
+  }
+  .profile-status::before {
+    content: '';
+    width: 5px; height: 5px; border-radius: 50%;
+    background: #4ade80;
+    animation: statusPulse 2s ease infinite;
+  }
+  @keyframes statusPulse {
+    0%,100% { opacity:1; } 50% { opacity:0.4; }
+  }
+  .profile-tagline {
+    font-size: 14px; color: var(--f2);
+    font-weight: 300; margin-bottom: 20px;
+  }
+  .profile-links {
+    display: flex; gap: 6px; flex-wrap: wrap;
+  }
+  .profile-link {
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 5px 12px; border-radius: 5px;
+    font-size: 12px; font-weight: 500;
+    color: var(--f2);
+    background: var(--bg3);
+    border: 1px solid var(--b1);
+    text-decoration: none;
+    transition: all 0.15s ease;
+  }
+  .profile-link:hover { color: var(--w); border-color: var(--b2); background: var(--bg4); }
+  .pl-icon {
+    font-size: 10px; color: var(--f4);
+    font-style: normal;
+  }
+  .profile-link-vouches {
+    color: #4ade80;
+    border-color: rgba(74,222,128,0.15);
+    background: rgba(74,222,128,0.04);
+  }
+  .profile-link-vouches:hover {
+    color: #86efac;
+    border-color: rgba(74,222,128,0.3);
+    background: rgba(74,222,128,0.08);
+  }
+  .profile-link-vouches .pl-icon { color: #4ade80; }
+
+  /* ── PROFILE SOLD ROW ────────────────── */
+  .profile-sold-row {
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid var(--b1);
+    display: flex;
+    align-items: center;
+    gap: 0;
+  }
+  .profile-sold-trigger {
+    flex: 1;
+    display: flex; align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    background: transparent; border: none;
+    cursor: pointer; text-align: left;
+    padding: 0; font-family: 'Inter', sans-serif;
+  }
+  .profile-sold-stats {
+    display: flex; gap: 16px; flex-wrap: wrap;
+  }
+  .pss-item {
+    display: flex; align-items: baseline; gap: 4px;
+  }
+  .pss-n {
+    font-size: 15px; font-weight: 700;
+    letter-spacing: -0.5px; color: var(--w);
+  }
+  .pss-l {
+    font-size: 11px; color: var(--f4);
+  }
+  .profile-sold-cta {
+    font-size: 12px; color: var(--f3);
+    white-space: nowrap; flex-shrink: 0;
+    transition: color 0.15s;
+  }
+  .profile-sold-trigger:hover .profile-sold-cta { color: var(--f1); }
+
+  /* visits block — right side of sold row, separated by border */
+  .profile-visits-block {
+    padding-left: 20px;
+    margin-left: 20px;
+    border-left: 1px solid var(--b1);
+    text-align: right;
+    flex-shrink: 0;
+  }
+  .profile-visits-n {
+    font-size: 15px; font-weight: 700;
+    letter-spacing: -0.5px; color: var(--w);
+    line-height: 1;
+  }
+  .profile-visits-l {
+    font-size: 11px; color: var(--f4);
+    margin-top: 1px;
+  }
+  .profile-right {
+    display: flex; flex-direction: column;
+    align-items: flex-end; gap: 12px;
+    flex-shrink: 0;
+  }
+  .profile-right { display: none; }
+  .profile-cta {
+    display: inline-flex; align-items: center;
+    padding: 9px 18px; border-radius: var(--r);
+    font-size: 13px; font-weight: 500;
+    background: var(--ac); color: var(--w);
+    border: none; cursor: pointer;
+    transition: all 0.15s ease;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .profile-cta:hover { background: var(--ac2); transform: translateY(-1px); box-shadow: 0 4px 14px rgba(91,91,214,0.35); }
+
   .hero-badge {
     display: inline-flex; align-items: center; gap: 8px;
     padding: 4px 12px 4px 8px;
@@ -260,7 +470,7 @@
     border: 1px solid var(--b2);
     background: var(--bg2);
     font-size: 12px; color: var(--f2);
-    margin-bottom: 24px;
+    margin-top: 20px;
     cursor: pointer;
     transition: border-color 0.2s;
   }
@@ -277,7 +487,8 @@
     letter-spacing: -2.5px;
     line-height: 1.05;
     color: var(--w);
-    margin-bottom: 16px;
+    margin-top: 0;
+    margin-bottom: 28px;
     max-width: 620px;
   }
   .hero-h1 em { font-style: italic; font-weight: 300; color: var(--f2); }
@@ -285,9 +496,9 @@
     font-size: 15px; font-weight: 300;
     color: var(--f2); line-height: 1.7;
     max-width: 400px;
-    margin-bottom: 32px;
+    margin-bottom: 28px;
   }
-  .hero-acts { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 48px; }
+  .hero-acts { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 32px; }
   .hbp {
     display: inline-flex; align-items: center; gap: 6px;
     padding: 10px 20px; border-radius: var(--r);
@@ -307,29 +518,11 @@
   }
   .hbs:hover { background: var(--bg4); border-color: var(--b3); }
 
-  .hero-stats {
-    display: flex; gap: 0;
-    border: 1px solid var(--b1);
-    border-radius: var(--r);
-    background: var(--bg2);
-    overflow: hidden;
-    width: fit-content;
+  @media(max-width:640px){
+    .profile-card { flex-direction: column; padding: 24px 20px; gap: 16px; }
+    .profile-right { align-items: flex-start; flex-direction: row; gap: 16px; }
+    .visitor-count { text-align: left; }
   }
-  .hstat {
-    padding: 16px 28px;
-    border-right: 1px solid var(--b1);
-    text-align: left;
-    text-decoration: none;
-    transition: background 0.15s ease;
-  }
-  .hstat:last-child { border-right: none; }
-  .hstat:hover { background: var(--bg3); }
-  .hstat-n {
-    font-size: 20px; font-weight: 700;
-    letter-spacing: -0.8px; color: var(--w);
-    margin-bottom: 2px;
-  }
-  .hstat-l { font-size: 11px; color: var(--f3); }
 
   /* ── SECTION CHROME ──────────────────── */
   .sec { padding: 48px 0 0; }
@@ -568,7 +761,73 @@
   .vouch-l { font-size: 12px; color: var(--f3); margin-bottom: 16px; }
   .vouch-d { font-size: 14px; color: var(--f2); line-height: 1.7; max-width: 320px; margin: 0 auto 24px; }
 
-  /* ── SOLD ────────────────────────────── */
+  /* ── SOLD TRIGGER ────────────────────── */
+  .sold-trigger {
+    width: 100%;
+    margin-top: 1px;
+    background: var(--bg2);
+    border: 1px solid var(--b1);
+    border-radius: var(--r);
+    padding: 20px 24px;
+    cursor: pointer;
+    transition: background 0.15s ease, border-color 0.15s ease;
+    text-align: left;
+    font-family: 'Inter', sans-serif;
+  }
+  .sold-trigger:hover { background: var(--bg3); border-color: var(--b2); }
+  .sold-trigger-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .sold-trigger-counts { display: flex; gap: 20px; }
+  .sold-trigger-stat { }
+  .sold-trigger-stat-n { font-size: 18px; font-weight: 700; letter-spacing: -0.5px; color: var(--w); }
+  .sold-trigger-stat-l { font-size: 11px; color: var(--f3); margin-top: 1px; }
+  .sold-trigger-cta { font-size: 13px; color: var(--f3); transition: color 0.15s; }
+  .sold-trigger:hover .sold-trigger-cta { color: var(--f1); }
+
+  /* ── SOLD MODAL ──────────────────────── */
+  .sold-modal-backdrop {
+    position: fixed; inset: 0; z-index: 500;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(4px);
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+  .sold-modal-backdrop.open { opacity: 1; pointer-events: all; }
+  .sold-modal {
+    position: fixed;
+    top: 52px; right: 0; bottom: 0;
+    z-index: 501;
+    width: min(560px, 95vw);
+    background: var(--bg2);
+    border-left: 1px solid var(--b2);
+    display: flex; flex-direction: column;
+    transform: translateX(100%);
+    transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
+    overflow: hidden;
+  }
+  .sold-modal.open { transform: translateX(0); }
+  .sold-modal-head {
+    display: flex; align-items: flex-start;
+    justify-content: space-between;
+    padding: 24px 24px 16px;
+    border-bottom: 1px solid var(--b1);
+    flex-shrink: 0;
+  }
+  .sold-modal-close {
+    width: 32px; height: 32px;
+    border-radius: var(--r);
+    background: var(--bg3); border: 1px solid var(--b1);
+    color: var(--f2); font-size: 13px;
+    cursor: pointer; transition: all 0.15s ease;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Inter', sans-serif;
+  }
+  .sold-modal-close:hover { background: var(--bg4); color: var(--w); border-color: var(--b2); }
+  /* tabs + chips inside modal */
+  .sold-modal .sold-tabs { padding: 12px 24px 0; flex-shrink: 0; }
+  .sold-modal #sold-body { overflow-y: auto; padding: 0 24px 24px; flex: 1; }
+  .sold-modal .sold-chips { padding: 16px 0; }
+
+  /* ── SOLD CHIPS ──────────────────────── */
   .sold-tabs { display: flex; gap: 2px; padding: 12px 0; flex-wrap: wrap; }
   .sold-chips { display: flex; flex-wrap: wrap; gap: 5px; padding: 16px 0 32px; }
   .chip {
@@ -628,55 +887,129 @@
 <body>
 
 <script id="EDIT_THIS">
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+//  SITE CONFIG — edit your info here
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 const D = {
   vouchCount: '570+',
-  totalSales: '500+',
-  estYear: '2023',
-  telegram:          'https://t.me/abuto',
-  instagram:         'https://www.instagram.com/7521',
-  ogu:               'https://oguser.com/21',
-  moreLinks:         'https://solo.to/215',
-  vouchesLink:       'https://t.me/id7221',
-  vouchesInstagram:  'https://www.instagram.com/21v7',
-  instagramStock: [
-    '@guia – $500','@gawx – $200','@la1o – $150','@13763 – $70','@bd0g – $50','@fjke – $45',
+  telegram:         'https://t.me/abuto',
+  instagram:        'https://www.instagram.com/7521',
+  ogu:              'https://oguser.com/21',
+  moreLinks:        'https://solo.to/215',
+  vouchesLink:      'https://t.me/id7221',
+  vouchesInstagram: 'https://www.instagram.com/21v7',
+};
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+//  STOCK DATA — ADD / REMOVE / EDIT ITEMS HERE
+//
+//  Each item:  { name: '@handle', price: 50 }
+//  To add:     paste a new line: { name: '@newhandle', price: 30 },
+//  To remove:  delete the line
+//  To change price: edit the number
+//  price: 0 means "Contact for price"
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+const STOCK = {
+  ig: [
+    { name: '@guia',  price: 500 },
+    { name: '@gawx',  price: 200 },
+    { name: '@la1o',  price: 150 },
+    { name: '@13763', price: 70  },
+    { name: '@bd0g',  price: 50  },
+    { name: '@fjke',  price: 45  },
   ],
-  twitter: [
-    '@359893 – $20','@522613 – $20','@687286 – $20','@964945 – $30','@mmssqq – $30','@wanted_criminal – $50',
+  tw: [
+    { name: '@359893',          price: 20 },
+    { name: '@522613',          price: 20 },
+    { name: '@687286',          price: 20 },
+    { name: '@964945',          price: 30 },
+    { name: '@mmssqq',          price: 30 },
+    { name: '@wanted_criminal', price: 50 },
   ],
-  tiktok: ['@c__p_m (stat) - $15'],
-  capcut: [
-    '@adjust – $5','@alter – $5','@antisociality – $5','@avoid – $5','@awful – $5','@Bankroll – $8','@Boost – $8',
-    '@burden – $8','@clap – $5','@clean – $5','@color – $8','@creature – $8','@crop – $5','@delusional – $5',
-    '@ecstasy – $5','@grasp – $5','@grateful – $5','@hazard – $8','@heroism – $8','@impatient – $5',
-    '@inferior – $5','@irresponsible – $5','@jailbreak – $5','@offense – $8','@orphan – $8','@physic – $8',
-    '@place – $8','@producer – $8','@rack – $8','@ransom – $8','@reap – $5','@request – $8','@sack – $8',
-    '@science – $8','@selfless – $8','@sore – $5','@spain – $8','@spine – $8','@stair – $8','@stolen – $8',
-    '@street – $8','@supervillain – $8','@talk – $5','@thread – $5','@tier – $8','@tied – $5','@timid – $5',
-    '@tool – $8','@topic – $8','@turf – $8','@want – $8','@writer – $8',
+  tt: [
+    { name: '@c__p_m (stat)', price: 15 },
+  ],
+  cc: [
+    { name: '@adjust',        price: 5 }, { name: '@alter',         price: 5 },
+    { name: '@antisociality', price: 5 }, { name: '@avoid',         price: 5 },
+    { name: '@awful',         price: 5 }, { name: '@Bankroll',      price: 8 },
+    { name: '@Boost',         price: 8 }, { name: '@burden',        price: 8 },
+    { name: '@clap',          price: 5 }, { name: '@clean',         price: 5 },
+    { name: '@color',         price: 8 }, { name: '@creature',      price: 8 },
+    { name: '@crop',          price: 5 }, { name: '@delusional',    price: 5 },
+    { name: '@ecstasy',       price: 5 }, { name: '@grasp',         price: 5 },
+    { name: '@grateful',      price: 5 }, { name: '@hazard',        price: 8 },
+    { name: '@heroism',       price: 8 }, { name: '@impatient',     price: 5 },
+    { name: '@inferior',      price: 5 }, { name: '@irresponsible', price: 5 },
+    { name: '@jailbreak',     price: 5 }, { name: '@offense',       price: 8 },
+    { name: '@orphan',        price: 8 }, { name: '@physic',        price: 8 },
+    { name: '@place',         price: 8 }, { name: '@producer',      price: 8 },
+    { name: '@rack',          price: 8 }, { name: '@ransom',        price: 8 },
+    { name: '@reap',          price: 5 }, { name: '@request',       price: 8 },
+    { name: '@sack',          price: 8 }, { name: '@science',       price: 8 },
+    { name: '@selfless',      price: 8 }, { name: '@sore',          price: 5 },
+    { name: '@spain',         price: 8 }, { name: '@spine',         price: 8 },
+    { name: '@stair',         price: 8 }, { name: '@stolen',        price: 8 },
+    { name: '@street',        price: 8 }, { name: '@supervillain',  price: 8 },
+    { name: '@talk',          price: 5 }, { name: '@thread',        price: 5 },
+    { name: '@tier',          price: 8 }, { name: '@tied',          price: 5 },
+    { name: '@timid',         price: 5 }, { name: '@tool',          price: 8 },
+    { name: '@topic',         price: 8 }, { name: '@turf',          price: 8 },
+    { name: '@want',          price: 8 }, { name: '@writer',        price: 8 },
   ],
   proxy: [
-    'hoca – $850','mram – $850','msfo – $230','3m.n – $100','3r_x – $100','awzm – $100','pie0 – $100',
-    'qh.o – $100','vacb – $100','vagc – $100','rhf9 – $85','rske – $85','smta – $85','wtoa – $85',
-    'x674 – $85','qsho – $80','rwnm – $80','0kld – $75','duep – $75','769k – $70','yaxv – $70','zlav – $70',
-    '4esm – $65','7a9h – $65','_8ra – $65','awej – $65','gjnj – $65','hebc – $65','hk1d – $65','ipyt – $65',
-    'iyqu – $65','jcyn – $65','jcoz – $65','juzp – $65','kol1 – $65','ldkl – $65','mzoh – $65','oank – $65',
-    'rdse – $65','rtls – $65','skfs – $65','tkir – $65','fhfw – $60','ia7h – $60','ljwl – $60','rdpc – $60',
-    'si9_ – $60','tbqe – $60','wbcy – $60','xnld – $60','yo4f – $60','8_qa – $55','acrp – $55','ddpc – $55',
-    'gdne – $55','jr3h – $55','miqt – $55','oajd – $55','ofnh – $55','yh7p – $55','43nd – $50','krcp – $50',
-    'nq2q – $50','pwjd – $50','q_j4 – $50','spvd – $50','tfdj – $50','v_7l – $50','vqfl – $50','wfmb – $50',
-    'xg7x – $50','xp6r – $50','xw7y – $50','xy3b – $50','bdvt – $45','bjrh – $45','cn1d – $45','eplh – $45',
-    'erkj – $45','etpj – $45','eyhf – $45','fblh – $45','hcms – $45','jsgq – $45','jvps – $45','ljmz – $45',
-    'lwmj – $45','mvjb – $45','mzdk – $45','ob3m – $45','qnmt – $45','rcfp – $45','wjbf – $45','wlgk – $45',
-    '1cym – $40','4mti – $40','slqg – $40','0nho – $35','8ly6 – $35','dx3o – $35','e7ha – $35','eh0b – $35',
-    'eq7w – $35','fkj1 – $35','hfo2 – $35','k26q – $35','m65n – $35','m7aq – $35','ms3a – $35','n1d2 – $35',
-    'nd7r – $35','q8k4 – $35','uj12 – $35','vl7p – $35','wb2s – $35','wq7u – $35',
+    { name: 'hoca', price: 850 }, { name: 'mram', price: 850 }, { name: 'msfo', price: 230 },
+    { name: '3m.n', price: 100 }, { name: '3r_x', price: 100 }, { name: 'awzm', price: 100 },
+    { name: 'pie0', price: 100 }, { name: 'qh.o', price: 100 }, { name: 'vacb', price: 100 },
+    { name: 'vagc', price: 100 }, { name: 'rhf9', price: 85  }, { name: 'rske', price: 85  },
+    { name: 'smta', price: 85  }, { name: 'wtoa', price: 85  }, { name: 'x674', price: 85  },
+    { name: 'qsho', price: 80  }, { name: 'rwnm', price: 80  }, { name: '0kld', price: 75  },
+    { name: 'duep', price: 75  }, { name: '769k', price: 70  }, { name: 'yaxv', price: 70  },
+    { name: 'zlav', price: 70  }, { name: '4esm', price: 65  }, { name: '7a9h', price: 65  },
+    { name: '_8ra', price: 65  }, { name: 'awej', price: 65  }, { name: 'gjnj', price: 65  },
+    { name: 'hebc', price: 65  }, { name: 'hk1d', price: 65  }, { name: 'ipyt', price: 65  },
+    { name: 'iyqu', price: 65  }, { name: 'jcyn', price: 65  }, { name: 'jcoz', price: 65  },
+    { name: 'juzp', price: 65  }, { name: 'kol1', price: 65  }, { name: 'ldkl', price: 65  },
+    { name: 'mzoh', price: 65  }, { name: 'oank', price: 65  }, { name: 'rdse', price: 65  },
+    { name: 'rtls', price: 65  }, { name: 'skfs', price: 65  }, { name: 'tkir', price: 65  },
+    { name: 'fhfw', price: 60  }, { name: 'ia7h', price: 60  }, { name: 'ljwl', price: 60  },
+    { name: 'rdpc', price: 60  }, { name: 'si9_', price: 60  }, { name: 'tbqe', price: 60  },
+    { name: 'wbcy', price: 60  }, { name: 'xnld', price: 60  }, { name: 'yo4f', price: 60  },
+    { name: '8_qa', price: 55  }, { name: 'acrp', price: 55  }, { name: 'ddpc', price: 55  },
+    { name: 'gdne', price: 55  }, { name: 'jr3h', price: 55  }, { name: 'miqt', price: 55  },
+    { name: 'oajd', price: 55  }, { name: 'ofnh', price: 55  }, { name: 'yh7p', price: 55  },
+    { name: '43nd', price: 50  }, { name: 'krcp', price: 50  }, { name: 'nq2q', price: 50  },
+    { name: 'pwjd', price: 50  }, { name: 'q_j4', price: 50  }, { name: 'spvd', price: 50  },
+    { name: 'tfdj', price: 50  }, { name: 'v_7l', price: 50  }, { name: 'vqfl', price: 50  },
+    { name: 'wfmb', price: 50  }, { name: 'xg7x', price: 50  }, { name: 'xp6r', price: 50  },
+    { name: 'xw7y', price: 50  }, { name: 'xy3b', price: 50  }, { name: 'bdvt', price: 45  },
+    { name: 'bjrh', price: 45  }, { name: 'cn1d', price: 45  }, { name: 'eplh', price: 45  },
+    { name: 'erkj', price: 45  }, { name: 'etpj', price: 45  }, { name: 'eyhf', price: 45  },
+    { name: 'fblh', price: 45  }, { name: 'hcms', price: 45  }, { name: 'jsgq', price: 45  },
+    { name: 'jvps', price: 45  }, { name: 'ljmz', price: 45  }, { name: 'lwmj', price: 45  },
+    { name: 'mvjb', price: 45  }, { name: 'mzdk', price: 45  }, { name: 'ob3m', price: 45  },
+    { name: 'qnmt', price: 45  }, { name: 'rcfp', price: 45  }, { name: 'wjbf', price: 45  },
+    { name: 'wlgk', price: 45  }, { name: '1cym', price: 40  }, { name: '4mti', price: 40  },
+    { name: 'slqg', price: 40  }, { name: '0nho', price: 35  }, { name: '8ly6', price: 35  },
+    { name: 'dx3o', price: 35  }, { name: 'e7ha', price: 35  }, { name: 'eh0b', price: 35  },
+    { name: 'eq7w', price: 35  }, { name: 'fkj1', price: 35  }, { name: 'hfo2', price: 35  },
+    { name: 'k26q', price: 35  }, { name: 'm65n', price: 35  }, { name: 'm7aq', price: 35  },
+    { name: 'ms3a', price: 35  }, { name: 'n1d2', price: 35  }, { name: 'nd7r', price: 35  },
+    { name: 'q8k4', price: 35  }, { name: 'uj12', price: 35  }, { name: 'vl7p', price: 35  },
+    { name: 'wb2s', price: 35  }, { name: 'wq7u', price: 35  },
   ],
-  soldInstagram: ['@afed','@ai7g','@allaying','@apah','@apoy','@apvc','@azjb','@azpi','@bbpc','@bdng','@bkcg','@bkwu','@bped','@bmo9','@b9y0','@c0dp','@cains','@cfib','@cgli','@crnp','@covp','@csjf','@d4pb','@deadland','@djmf','@dqki','@edvw','@elrj','@epjg','@epre','@enj9','@f40m','@fdqj','@fdwb','@fhug','@fligr','@fliu','@furled','@fzld','@f67o','@gr8b','@gzev','@g3i9','@g3r1','@g6a9','@gepm','@gfsg','@ghif','@gohzilla','@gnx5','@gpvi','@gwrp','@gzw6','@_gt6','@hbxt','@hijt','@hiqr','@hjgo','@hopb','@horne','@htbv','@hwye','@hxgl','@hyoc','@igba','@iemf','@ijyb','@istb','@jdga','@jeyv','@jxuj','@jfxz','@jk16','@jn4e','@jnfy','@jol4','@j41x','@kdlv','@kjui','@ky2t','@ljpf','@lkfj','@lndc','@lxc3','@mo4p','@movk','@mzye','@nyqe','@nc_t','@ngqo','@nlsd','@nqsz','@nfyb','@nyw0','@ne0o','@od4t','@ofqu','@ogjh','@orpc','@owgi','@oyql','@pashed','@pc62','@pf7i','@pfrv','@pmrc','@pxuj','@pvmn','@qyjo','@qzip','@qtud','@qpyj','@qdhv','@qt70','@qz37','@rbcy','@r46j','@raspado','@retightening','@rhpt','@rtgn','@ryjw','@rm4c','@stillen','@tae7','@tbgy','@tbpr','@tvrp','@tydv','@t0ld','@tuqz','@udn4','@uvi6','@vaqz','@vcqw','@vqem','@wpvh','@wcmb','@wgta','@wkgo','@wu1b','@wxas','@wxzd','@wiqo','@wyk0','@xe74','@xem0','@xgqw','@xkrq','@xpdg','@y0k_','@y0se','@yellowed','@yg0t','@ykdp','@ylsk','@ylkz','@ylxt','@z1gm','@zyqh','@1j8u','@14ld','@27hp','@31hn','@3ukl','@4lj_','@4nvq','@4ra5','@5341','@54jd','@54yg','@5ucy','@6bze','@6ihv','@7__i','@9ag4','@9xcg','@94ej','@3930','@4340','@6930','@8106','@8720','@1.6.4','@8.0.6','@00049','@009726','@01501','@01681','@111421','@10331','@13611','@15753','@21593','@26753','@36644','@39702','@41076','@43679','@5224367','@5235478','@54242','@67778','@73859','@81866','@86168','@92499','@94040','@94040499','@0817191439','@0892912917','@0988041686'],
-  soldTikTok: ['@aa (font)','@aisf','@anmp','@bm73','@c (font)','@cidb','@cjly','@dd (font)','@god (font)','@gb3','@m3me','@hgfx','@ibga','@jlmo','@kczs','@kfex','@kbry','kngm','@los (font)','@luey','@peqw','@tazn','@tnsg','@uhvf','@v1to','@vrgw','@widc','@wbsk','@xywr','@xdmi','@yjqs','@zmqr','@moonlight (font)','@00 (font)','@11 (font)','@21 (font)','@99 (font)','@55854 (font)','@318502 (font)','@520491 (font)','@529416 (font)','@810153 (font)','@827513 (font)','@829114 (font)','@invisibleuser(font)'],
-  soldTwitter: ['@o2x_','@codq','@r0un','@yg65','@_dine','@billi0n','@topage','@delacree','@paqmane','@vendetta_','@062183','@173601','@179170','@222824','@230204','@296945','@313178','@337723'],
-  soldCapCut: ['@riot','@tool','@ecstacy'],
-  soldPSN: ['llHw'],
+  psn: [], // coming soon
+};
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+//  SOLD HISTORY — add/remove handles here
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+const SOLD = {
+  ig:  ['@afed','@ai7g','@allaying','@apah','@apoy','@apvc','@azjb','@azpi','@bbpc','@bdng','@bkcg','@bkwu','@bped','@bmo9','@b9y0','@c0dp','@cains','@cfib','@cgli','@crnp','@covp','@csjf','@d4pb','@deadland','@djmf','@dqki','@edvw','@elrj','@epjg','@epre','@enj9','@f40m','@fdqj','@fdwb','@fhug','@fligr','@fliu','@furled','@fzld','@f67o','@gr8b','@gzev','@g3i9','@g3r1','@g6a9','@gepm','@gfsg','@ghif','@gohzilla','@gnx5','@gpvi','@gwrp','@gzw6','@_gt6','@hbxt','@hijt','@hiqr','@hjgo','@hopb','@horne','@htbv','@hwye','@hxgl','@hyoc','@igba','@iemf','@ijyb','@istb','@jdga','@jeyv','@jxuj','@jfxz','@jk16','@jn4e','@jnfy','@jol4','@j41x','@kdlv','@kjui','@ky2t','@ljpf','@lkfj','@lndc','@lxc3','@mo4p','@movk','@mzye','@nyqe','@nc_t','@ngqo','@nlsd','@nqsz','@nfyb','@nyw0','@ne0o','@od4t','@ofqu','@ogjh','@orpc','@owgi','@oyql','@pashed','@pc62','@pf7i','@pfrv','@pmrc','@pxuj','@pvmn','@qyjo','@qzip','@qtud','@qpyj','@qdhv','@qt70','@qz37','@rbcy','@r46j','@raspado','@retightening','@rhpt','@rtgn','@ryjw','@rm4c','@stillen','@tae7','@tbgy','@tbpr','@tvrp','@tydv','@t0ld','@tuqz','@udn4','@uvi6','@vaqz','@vcqw','@vqem','@wpvh','@wcmb','@wgta','@wkgo','@wu1b','@wxas','@wxzd','@wiqo','@wyk0','@xe74','@xem0','@xgqw','@xkrq','@xpdg','@y0k_','@y0se','@yellowed','@yg0t','@ykdp','@ylsk','@ylkz','@ylxt','@z1gm','@zyqh','@1j8u','@14ld','@27hp','@31hn','@3ukl','@4lj_','@4nvq','@4ra5','@5341','@54jd','@54yg','@5ucy','@6bze','@6ihv','@7__i','@9ag4','@9xcg','@94ej','@3930','@4340','@6930','@8106','@8720','@1.6.4','@8.0.6','@00049','@009726','@01501','@01681','@111421','@10331','@13611','@15753','@21593','@26753','@36644','@39702','@41076','@43679','@5224367','@5235478','@54242','@67778','@73859','@81866','@86168','@92499','@94040','@94040499','@0817191439','@0892912917','@0988041686'],
+  tt:  ['@aa (font)','@aisf','@anmp','@bm73','@c (font)','@cidb','@cjly','@dd (font)','@god (font)','@gb3','@m3me','@hgfx','@ibga','@jlmo','@kczs','@kfex','@kbry','kngm','@los (font)','@luey','@peqw','@tazn','@tnsg','@uhvf','@v1to','@vrgw','@widc','@wbsk','@xywr','@xdmi','@yjqs','@zmqr','@moonlight (font)','@00 (font)','@11 (font)','@21 (font)','@99 (font)','@55854 (font)','@318502 (font)','@520491 (font)','@529416 (font)','@810153 (font)','@827513 (font)','@829114 (font)','@invisibleuser(font)'],
+  tw:  ['@o2x_','@codq','@r0un','@yg65','@_dine','@billi0n','@topage','@delacree','@paqmane','@vendetta_','@062183','@173601','@179170','@222824','@230204','@296945','@313178','@337723'],
+  cc:  ['@riot','@tool','@ecstacy'],
+  psn: ['llHw'],
 };
 </script>
 
@@ -685,29 +1018,22 @@ const D = {
   <div class="ig"></div>
   <div class="iglow"></div>
   <div class="iword"><span>21®</span></div>
-  <div class="itag">Social Media Agency</div>
+  <div class="itag">Premium Username Marketplace</div>
   <div class="ibar"></div>
 </div>
 
 <div id="site">
 
-  <!-- ROTATING TICKER -->
-  <div class="ticker-wrap">
-    <div class="ticker-track" id="ticker-track"></div>
-  </div>
-
   <!-- NAV -->
   <nav id="nav">
     <span class="nav-logo">21®</span>
-    <div style="display:flex;gap:2px;flex:1">
+    <div class="nav-ticker">
+      <div class="nav-ticker-track" id="ticker-track"></div>
+    </div>
+    <div style="display:flex;gap:2px;flex-shrink:0;">
       <button class="nl" onclick="goto('sec-stock')">Stock</button>
       <button class="nl" onclick="goto('sec-services')">Services</button>
-      <button class="nl" onclick="goto('sec-sold')">Sold</button>
-    </div>
-    <div class="nav-r">
-      <a class="nbg" href="/tos" target="_blank">Terms of Service ↗</a>
-      <a class="nbg" href="https://www.instagram.com/21v7" target="_blank">570+ Vouches ↗</a>
-      <a class="nbs" href="https://t.me/abuto" target="_blank">Contact</a>
+      <button class="nl" onclick="openSold()">Sold</button>
     </div>
   </nav>
 
@@ -716,17 +1042,59 @@ const D = {
     <!-- HERO -->
     <section class="hero rev">
       <div class="hero-inner">
-        <div class="hero-badge" onclick="goto('sec-stock')">
-          <span class="hero-pill">New</span>
-          109 IG Proxy usernames now available
-          <span style="color:var(--f3);font-size:11px">→</span>
-        </div>
-        <h1 class="hero-h1">Highly Rated, Well connected.<br><em>Est. 2023</em></h1>
-        <p class="hero-sub">Premium usernames across every major platform. Trusted by hundreds of buyers since 2023.</p>
+
+        <h1 class="hero-h1">The handle you want,<br><em>actually available.</em></h1>
         <div class="hero-acts">
           <button class="hbp" onclick="goto('sec-stock')">Browse inventory →</button>
-          <a class="hbs" href="https://t.me/abuto" target="_blank">Get in touch</a>
         </div>
+
+        <!-- PROFILE CARD -->
+        <div class="profile-card">
+          <div class="profile-avatar-wrap">
+            <div class="profile-avatar">21</div>
+            <a class="profile-tos-pill" href="/tos" target="_blank">Terms ↗</a>
+          </div>
+          <div class="profile-body">
+            <div class="profile-top-row">
+              <div>
+                <div class="profile-name">
+                  21®
+                  <span class="profile-status">Open for deals</span>
+                </div>
+                <p class="profile-tagline">Premium username marketplace · Est. 2023</p>
+              </div>
+            </div>
+            <div class="profile-links">
+              <a class="profile-link" href="https://t.me/abuto" target="_blank">
+                <span class="pl-icon">✈</span>Telegram
+              </a>
+              <a class="profile-link" href="https://www.instagram.com/7521" target="_blank">
+                <span class="pl-icon">◎</span>Instagram
+              </a>
+              <a class="profile-link" href="https://oguser.com/21" target="_blank">
+                <span class="pl-icon">○</span>OGUsers
+              </a>
+              <a class="profile-link" href="https://solo.to/215" target="_blank">
+                <span class="pl-icon">↗</span>More Links
+              </a>
+              <a class="profile-link profile-link-vouches" href="https://www.instagram.com/21v7" target="_blank">
+                <span class="pl-icon">✓</span>570+ Vouches
+              </a>
+            </div>
+            <!-- SOLD TRACK RECORD + VISITS -->
+            <div class="profile-sold-row">
+              <button class="profile-sold-trigger" onclick="openSold()">
+                <div class="profile-sold-stats" id="profile-sold-stats"></div>
+                <span class="profile-sold-cta">View sold history ↗</span>
+              </button>
+              <div class="profile-visits-block">
+                <div class="profile-visits-n" id="visit-count">—</div>
+                <div class="profile-visits-l">Page visits</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </section>
 
@@ -897,13 +1265,15 @@ const D = {
       </div>
     </div>
 
-    <!-- SOLD -->
-    <div class="sec rev" id="sec-sold">
-      <div class="sec-head">
-        <div class="sec-left">
-          <div class="sec-lbl">Track record</div>
-          <div class="sec-ttl">Sold History</div>
+    <!-- SOLD MODAL -->
+    <div class="sold-modal-backdrop" id="sold-backdrop" onclick="closeSold()"></div>
+    <div class="sold-modal" id="sold-modal">
+      <div class="sold-modal-head">
+        <div>
+          <div style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--f3);margin-bottom:4px">Track record</div>
+          <div style="font-size:18px;font-weight:700;letter-spacing:-0.5px;color:var(--w)">Sold History</div>
         </div>
+        <button class="sold-modal-close" onclick="closeSold()">✕</button>
       </div>
       <div class="sold-tabs" id="sold-tabs"></div>
       <div id="sold-body"></div>
@@ -922,60 +1292,76 @@ const D = {
 </div><!-- /site -->
 
 <script>
-// ── TICKER SCROLL BEHAVIOR ──────────────────────────────
-const ticker = document.querySelector('.ticker-wrap');
-const nav = document.getElementById('nav');
-let tickerVisible = false;
-
-window.addEventListener('scroll', () => {
-  const shouldShow = window.scrollY > 80;
-  if (shouldShow !== tickerVisible) {
-    tickerVisible = shouldShow;
-    ticker.classList.toggle('visible', shouldShow);
-    nav.classList.toggle('ticker-down', shouldShow);
-  }
-}, { passive: true });
-
 // ── ACCORDION ───────────────────────────────────────────
 function toggleAcc(trigger) {
   const body = trigger.nextElementSibling;
   const isOpen = trigger.classList.contains('open');
-  // close all
   document.querySelectorAll('.acc-trigger.open').forEach(t => {
     t.classList.remove('open');
     t.nextElementSibling.classList.remove('open');
   });
-  // open this one if it wasn't already open
   if (!isOpen) {
     trigger.classList.add('open');
     body.classList.add('open');
   }
 }
 
-// ── TICKER BUILD ─────────────────────────────────────────────
-const TICKER_ITEMS = [
-  { label: 'Telegram', val: '@abuto', href: D.telegram },
-  { label: 'Instagram', val: '@7521', href: D.instagram },
-  { label: 'OGUsers', val: 'oguser.com/21', href: D.ogu },
-  { label: 'Vouches', val: 'Telegram Channel', href: D.vouchesLink },
-  { label: 'More Links', val: 'solo.to/215', href: D.moreLinks },
-  { label: 'Vouches IG', val: '@21v7', href: D.vouchesInstagram },
-];
+// ── VISITOR COUNTER ──────────────────────────────────────
+// Uses localStorage to count visits per device.
+// To swap in a real backend: replace getVisitCount() and incrementVisit()
+// with your API calls. The display code stays the same.
+function getVisitCount() {
+  try {
+    return parseInt(localStorage.getItem('21_visits') || '0');
+  } catch { return null; }
+}
+function incrementVisit() {
+  try {
+    const n = getVisitCount() + 1;
+    localStorage.setItem('21_visits', n);
+    return n;
+  } catch { return null; }
+}
+function initVisitCounter() {
+  const el = document.getElementById('visit-count');
+  if (!el) return;
+  try {
+    const count = incrementVisit();
+    if (count === null) { el.textContent = '—'; return; }
+    // animate number up
+    let start = Math.max(0, count - 12);
+    const step = () => {
+      start++;
+      el.textContent = start.toLocaleString();
+      if (start < count) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  } catch { el.textContent = '—'; }
+}
+initVisitCounter();
 
+// ── TICKER BUILD (lives in nav right side) ───────────────
+const TICKER_ITEMS = [
+  { label: 'Telegram',   val: '@abuto',          href: D.telegram },
+  { label: 'Instagram',  val: '@7521',            href: D.instagram },
+  { label: 'OGUsers',    val: 'oguser.com/21',    href: D.ogu },
+  { label: 'Vouches',    val: 'Telegram',         href: D.vouchesLink },
+  { label: 'Links',      val: 'solo.to/215',      href: D.moreLinks },
+  { label: 'Vouches IG', val: '@21v7',            href: D.vouchesInstagram },
+];
 function buildTicker() {
-  // Duplicate 4x for seamless loop
   const all = [...TICKER_ITEMS, ...TICKER_ITEMS, ...TICKER_ITEMS, ...TICKER_ITEMS];
   document.getElementById('ticker-track').innerHTML = all.map(item => `
-    <a class="ticker-item" href="${item.href}" target="_blank">
-      <span class="ticker-dot"></span>
-      <span class="ticker-label">${item.label}</span>
-      <span class="ticker-val">${item.val}</span>
+    <a class="nav-ticker-item" href="${item.href}" target="_blank">
+      <span class="nav-ticker-dot"></span>
+      <span class="nav-ticker-label">${item.label}</span>
+      <span class="nav-ticker-val">${item.val}</span>
     </a>
   `).join('');
 }
 buildTicker();
 
-// ── NAV ─────────────────────────────────────────────────────
+// ── NAV ─────────────────────────────────────────────────
 function goto(id) {
   const el = document.getElementById(id);
   if (!el) return;
@@ -983,22 +1369,24 @@ function goto(id) {
   window.scrollTo({ top, behavior: 'smooth' });
 }
 
-// ── STOCK ────────────────────────────────────────────────────
+// ── STOCK ────────────────────────────────────────────────
+// Platform definitions — data comes from STOCK object above
 const PLATFORMS = [
-  { id:'ig',    name:'Instagram', icon:'📸', data: D.instagramStock },
-  { id:'tw',    name:'Twitter',   icon:'🐦', data: D.twitter },
-  { id:'tt',    name:'TikTok',    icon:'🎵', data: D.tiktok },
-  { id:'cc',    name:'CapCut',    icon:'✂️', data: D.capcut },
-  { id:'proxy', name:'IG Proxy',  icon:'📸', data: D.proxy },
-  { id:'psn',   name:'PSN',       icon:'🎮', data: [] },
+  { id:'ig',    name:'Instagram', icon:'📸', data: STOCK.ig    },
+  { id:'tw',    name:'Twitter',   icon:'🐦', data: STOCK.tw    },
+  { id:'tt',    name:'TikTok',    icon:'🎵', data: STOCK.tt    },
+  { id:'cc',    name:'CapCut',    icon:'✂️', data: STOCK.cc    },
+  { id:'proxy', name:'IG Proxy',  icon:'📸', data: STOCK.proxy },
+  { id:'psn',   name:'PSN',       icon:'🎮', data: STOCK.psn   },
 ];
 let activeP = 'ig';
 
+// Build platform tabs — shows live count from STOCK data
 function buildTabs() {
   document.getElementById('ptabs').innerHTML = PLATFORMS.map(p => `
     <button class="ptab${p.id===activeP?' on':''}" onclick="switchP('${p.id}')">
       ${p.icon} ${p.name}
-      <span class="ptab-ct">${p.data.length||(p.id==='psn'?'Soon':0)}</span>
+      <span class="ptab-ct">${p.data.length || (p.id==='psn' ? 'Soon' : 0)}</span>
     </button>
   `).join('');
 }
@@ -1006,54 +1394,79 @@ function buildTabs() {
 function switchP(id) {
   activeP = id;
   document.getElementById('stock-search').value = '';
-  buildTabs(); renderStock();
+  buildTabs();
+  renderStock();
 }
 
-function parseIt(s) {
-  const p = s.split(' – ');
-  return { name: p[0], price: p[1]||'', num: parseInt((s.match(/\$(\d+)/)||[0,0])[1])||0 };
-}
-
+// Render stock rows from STOCK data — no HTML duplication needed
 function renderStock() {
   const body = document.getElementById('stock-body');
   const p = PLATFORMS.find(p => p.id === activeP);
-  if (p.id === 'psn') {
-    body.innerHTML = `<div style="padding:40px;text-align:center;color:var(--f3);font-size:13px">PSN usernames coming soon — <a href="${D.telegram}" target="_blank" style="color:var(--f1);text-decoration:underline">get notified on Telegram</a></div>`;
+
+  if (p.id === 'psn' || !p.data.length) {
+    body.innerHTML = `<div style="padding:40px;text-align:center;color:var(--f3);font-size:13px">
+      PSN usernames coming soon —
+      <a href="${D.telegram}" target="_blank" style="color:var(--f1);text-decoration:underline">get notified on Telegram</a>
+    </div>`;
     return;
   }
+
   const q = document.getElementById('stock-search').value.toLowerCase();
   const sort = document.getElementById('stock-sort').value;
-  let arr = p.data.map(parseIt).filter(i => i.name.toLowerCase().includes(q));
-  if (sort==='az') arr.sort((a,b)=>a.name.localeCompare(b.name));
-  else if (sort==='lo') arr.sort((a,b)=>a.num-b.num);
-  else if (sort==='hi') arr.sort((a,b)=>b.num-a.num);
+
+  // Filter by search
+  let arr = p.data.filter(i => i.name.toLowerCase().includes(q));
+
+  // Sort
+  if (sort === 'az') arr.sort((a,b) => a.name.localeCompare(b.name));
+  else if (sort === 'lo') arr.sort((a,b) => a.price - b.price);
+  else if (sort === 'hi') arr.sort((a,b) => b.price - a.price);
+
   if (!arr.length) {
     body.innerHTML = `<div style="padding:36px;text-align:center;color:var(--f3)">No results for "${q}"</div>`;
     return;
   }
-  body.innerHTML = arr.map((item,i) => `
-    <div class="srow" style="animation-delay:${i*.022}s">
+
+  body.innerHTML = arr.map((item, i) => {
+    const priceStr = item.price > 0 ? `$${item.price}` : 'Contact';
+    return `
+    <div class="srow" style="animation-delay:${i * 0.022}s">
       <div class="sname">${item.name}</div>
-      <div class="sprice">${item.price}</div>
-      <button class="sbtn" onclick="buy('${item.name.replace(/'/g,"\\'")}','${item.price.replace(/'/g,"\\'")}')">Buy</button>
-    </div>
-  `).join('');
+      <div class="sprice">${priceStr}</div>
+      <button class="sbtn" onclick="buy('${item.name.replace(/'/g,"\\'")}','${priceStr}')">Buy</button>
+    </div>`;
+  }).join('');
 }
 
-buildTabs(); renderStock();
+buildTabs();
+renderStock();
 
-// ── SOLD ─────────────────────────────────────────────────────
-const SOLD = [
-  { id:'ig',  name:'Instagram', icon:'📸', data: D.soldInstagram },
-  { id:'tt',  name:'TikTok',    icon:'🎵', data: D.soldTikTok },
-  { id:'tw',  name:'Twitter',   icon:'🐦', data: D.soldTwitter },
-  { id:'cc',  name:'CapCut',    icon:'✂️', data: D.soldCapCut },
-  { id:'psn', name:'PSN',       icon:'🎮', data: D.soldPSN },
+// ── SOLD MODAL ───────────────────────────────────────────
+function openSold() {
+  document.getElementById('sold-backdrop').classList.add('open');
+  document.getElementById('sold-modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeSold() {
+  document.getElementById('sold-backdrop').classList.remove('open');
+  document.getElementById('sold-modal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+// Close on Escape key
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeSold(); });
+
+// ── SOLD ─────────────────────────────────────────────────
+const SOLD_PLATFORMS = [
+  { id:'ig',  name:'Instagram', icon:'📸', data: SOLD.ig  },
+  { id:'tt',  name:'TikTok',    icon:'🎵', data: SOLD.tt  },
+  { id:'tw',  name:'Twitter',   icon:'🐦', data: SOLD.tw  },
+  { id:'cc',  name:'CapCut',    icon:'✂️', data: SOLD.cc  },
+  { id:'psn', name:'PSN',       icon:'🎮', data: SOLD.psn },
 ];
 let activeSold = 'ig';
 
 function buildSoldTabs() {
-  document.getElementById('sold-tabs').innerHTML = SOLD.map(p => `
+  document.getElementById('sold-tabs').innerHTML = SOLD_PLATFORMS.map(p => `
     <button class="ptab${p.id===activeSold?' on':''}" onclick="switchSold('${p.id}')">
       ${p.icon} ${p.name} <span class="ptab-ct">${p.data.length}</span>
     </button>
@@ -1061,21 +1474,41 @@ function buildSoldTabs() {
 }
 
 function renderSold() {
-  const p = SOLD.find(p => p.id === activeSold);
+  const p = SOLD_PLATFORMS.find(p => p.id === activeSold);
   document.getElementById('sold-body').innerHTML = `
-    <div class="sold-chips">${p.data.map(u=>`<div class="chip">${u}</div>`).join('')}</div>
+    <div class="sold-chips">${p.data.map(u => `<div class="chip">${u}</div>`).join('')}</div>
   `;
 }
 
 function switchSold(id) { activeSold = id; buildSoldTabs(); renderSold(); }
-buildSoldTabs(); renderSold();
+buildSoldTabs();
+renderSold();
 
-// ── BUY ──────────────────────────────────────────────────────
+// Build profile card sold stats
+(function buildProfileSoldStats() {
+  const el = document.getElementById('profile-sold-stats');
+  if (!el) return;
+  const stats = [
+    { n: SOLD.ig.length,  l: 'Instagram' },
+    { n: SOLD.tt.length,  l: 'TikTok'    },
+    { n: SOLD.tw.length,  l: 'Twitter'   },
+    { n: SOLD.cc.length,  l: 'CapCut'    },
+    { n: SOLD.psn.length, l: 'PSN'       },
+  ];
+  el.innerHTML = stats.map(s => `
+    <div class="pss-item">
+      <span class="pss-n">${s.n}</span>
+      <span class="pss-l">${s.l}</span>
+    </div>
+  `).join('');
+})();
+
+// ── BUY ──────────────────────────────────────────────────
 function buy(name, price) {
   window.open(`/tos?item=${encodeURIComponent(name)}&price=${encodeURIComponent(price)}`, '_blank');
 }
 
-// ── REVEAL ───────────────────────────────────────────────────
+// ── REVEAL ───────────────────────────────────────────────
 const ro = new IntersectionObserver(entries => {
   entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('on'); ro.unobserve(e.target); }});
 }, { threshold: 0.06 });
