@@ -1,6 +1,246 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+<!-- ═══════════════════════════════════════════════════════════════════════════════
+     ⚡⚡⚡ SCROLL DOWN JUST A BIT TO FIND THE DAILY EDIT SECTION ⚡⚡⚡
+     Look for the big "SUPER EASY DAILY EDITING ZONE" header below!
+     ═══════════════════════════════════════════════════════════════════════════════ -->
+
+<script id="EDIT_THIS">
+// ╔════════════════════════════════════════════════════════════════════════════╗
+// ║                                                                            ║
+// ║                     ⚡ SUPER EASY DAILY EDITING ZONE ⚡                     ║
+// ║                                                                            ║
+// ║  This is the ONLY section you need to touch for daily updates.            ║
+// ║  Everything else is site code — don't edit below this section.            ║
+// ║                                                                            ║
+// ╚════════════════════════════════════════════════════════════════════════════╝
+
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// 
+//  📌 QUICK ACTIONS — Copy/paste these commands:
+//
+//  ✅ SOLD AN ITEM? 
+//     1. Find it in STOCK below
+//     2. Cut the entire line (Ctrl+X / Cmd+X)
+//     3. Paste it into SOLD section under the right platform
+//     4. Remove the price (just leave: '@handle',)
+//
+//  ➕ ADD NEW STOCK?
+//     1. Copy an existing line from STOCK
+//     2. Change the @handle and price
+//     3. Save file
+//
+//  💰 CHANGE PRICE?
+//     1. Find the item in STOCK
+//     2. Change the number
+//     3. Save file
+//
+//  🗑️ REMOVE ITEM?
+//     1. Delete the entire line
+//     2. Save file
+//
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+//  📱 YOUR CONTACT LINKS
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+const D = {
+  vouchCount: '570+',
+  telegram:         'https://t.me/abuto',
+  instagram:        'https://www.instagram.com/7521',
+  ogu:              'https://oguser.com/21',
+  moreLinks:        'https://solo.to/215',
+  vouchesLink:      'https://t.me/id7221',
+  vouchesInstagram: 'https://www.instagram.com/21v7',
+};
+
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+//  📦 CURRENT STOCK — Items for sale RIGHT NOW
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+//  Format:  { name: '@handle', price: 50 },
+//  
+//  WHEN YOU SELL SOMETHING:
+//    1. Find it below (e.g. { name: '@guia', price: 500 },)
+//    2. CUT the entire line (Ctrl+X)
+//    3. PASTE into SOLD section at the bottom
+//    4. Remove the price, keep just: '@guia',
+//
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+const STOCK = {
+  
+  // ═══════════════════════════════════════════════════════
+  //  INSTAGRAM HANDLES
+  // ═══════════════════════════════════════════════════════
+  ig: [
+    { name: '@guia',  price: 500 },
+    { name: '@gawx',  price: 200 },
+    { name: '@la1o',  price: 150 },
+    { name: '@13763', price: 70  },
+    { name: '@bd0g',  price: 50  },
+    { name: '@fjke',  price: 45  },
+  ],
+
+  // ═══════════════════════════════════════════════════════
+  //  TWITTER/X HANDLES
+  // ═══════════════════════════════════════════════════════
+  tw: [
+    { name: '@359893',          price: 20 },
+    { name: '@522613',          price: 20 },
+    { name: '@687286',          price: 20 },
+    { name: '@964945',          price: 30 },
+    { name: '@mmssqq',          price: 30 },
+    { name: '@wanted_criminal', price: 50 },
+  ],
+
+  // ═══════════════════════════════════════════════════════
+  //  TIKTOK HANDLES
+  // ═══════════════════════════════════════════════════════
+  tt: [
+    { name: '@c__p_m (stat)', price: 15 },
+  ],
+
+  // ═══════════════════════════════════════════════════════
+  //  CAPCUT HANDLES
+  // ═══════════════════════════════════════════════════════
+  cc: [
+    { name: '@adjust',        price: 5 }, { name: '@alter',         price: 5 },
+    { name: '@antisociality', price: 5 }, { name: '@avoid',         price: 5 },
+    { name: '@awful',         price: 5 }, { name: '@Bankroll',      price: 8 },
+    { name: '@Boost',         price: 8 }, { name: '@burden',        price: 8 },
+    { name: '@clap',          price: 5 }, { name: '@clean',         price: 5 },
+    { name: '@color',         price: 8 }, { name: '@creature',      price: 8 },
+    { name: '@crop',          price: 5 }, { name: '@delusional',    price: 5 },
+    { name: '@ecstasy',       price: 5 }, { name: '@grasp',         price: 5 },
+    { name: '@grateful',      price: 5 }, { name: '@hazard',        price: 8 },
+    { name: '@heroism',       price: 8 }, { name: '@impatient',     price: 5 },
+    { name: '@inferior',      price: 5 }, { name: '@irresponsible', price: 5 },
+    { name: '@jailbreak',     price: 5 }, { name: '@offense',       price: 8 },
+    { name: '@orphan',        price: 8 }, { name: '@physic',        price: 8 },
+    { name: '@place',         price: 8 }, { name: '@producer',      price: 8 },
+    { name: '@rack',          price: 8 }, { name: '@ransom',        price: 8 },
+    { name: '@reap',          price: 5 }, { name: '@request',       price: 8 },
+    { name: '@sack',          price: 8 }, { name: '@science',       price: 8 },
+    { name: '@selfless',      price: 8 }, { name: '@sore',          price: 5 },
+    { name: '@spain',         price: 8 }, { name: '@spine',         price: 8 },
+    { name: '@stair',         price: 8 }, { name: '@stolen',        price: 8 },
+    { name: '@street',        price: 8 }, { name: '@supervillain',  price: 8 },
+    { name: '@talk',          price: 5 }, { name: '@thread',        price: 5 },
+    { name: '@tier',          price: 8 }, { name: '@tied',          price: 5 },
+    { name: '@timid',         price: 5 }, { name: '@tool',          price: 8 },
+    { name: '@topic',         price: 8 }, { name: '@turf',          price: 8 },
+    { name: '@want',          price: 8 }, { name: '@writer',        price: 8 },
+  ],
+
+  // ═══════════════════════════════════════════════════════
+  //  INSTAGRAM PROXY HANDLES
+  // ═══════════════════════════════════════════════════════
+  proxy: [
+    { name: 'hoca', price: 850 }, { name: 'mram', price: 850 }, { name: 'msfo', price: 230 },
+    { name: '3m.n', price: 100 }, { name: '3r_x', price: 100 }, { name: 'awzm', price: 100 },
+    { name: 'pie0', price: 100 }, { name: 'qh.o', price: 100 }, { name: 'vacb', price: 100 },
+    { name: 'vagc', price: 100 }, { name: 'rhf9', price: 85  }, { name: 'rske', price: 85  },
+    { name: 'smta', price: 85  }, { name: 'wtoa', price: 85  }, { name: 'x674', price: 85  },
+    { name: 'qsho', price: 80  }, { name: 'rwnm', price: 80  }, { name: '0kld', price: 75  },
+    { name: 'duep', price: 75  }, { name: '769k', price: 70  }, { name: 'yaxv', price: 70  },
+    { name: 'zlav', price: 70  }, { name: '4esm', price: 65  }, { name: '7a9h', price: 65  },
+    { name: '_8ra', price: 65  }, { name: 'awej', price: 65  }, { name: 'gjnj', price: 65  },
+    { name: 'hebc', price: 65  }, { name: 'hk1d', price: 65  }, { name: 'ipyt', price: 65  },
+    { name: 'iyqu', price: 65  }, { name: 'jcyn', price: 65  }, { name: 'jcoz', price: 65  },
+    { name: 'juzp', price: 65  }, { name: 'kol1', price: 65  }, { name: 'ldkl', price: 65  },
+    { name: 'mzoh', price: 65  }, { name: 'oank', price: 65  }, { name: 'rdse', price: 65  },
+    { name: 'rtls', price: 65  }, { name: 'skfs', price: 65  }, { name: 'tkir', price: 65  },
+    { name: 'fhfw', price: 60  }, { name: 'ia7h', price: 60  }, { name: 'ljwl', price: 60  },
+    { name: 'rdpc', price: 60  }, { name: 'si9_', price: 60  }, { name: 'tbqe', price: 60  },
+    { name: 'wbcy', price: 60  }, { name: 'xnld', price: 60  }, { name: 'yo4f', price: 60  },
+    { name: '8_qa', price: 55  }, { name: 'acrp', price: 55  }, { name: 'ddpc', price: 55  },
+    { name: 'gdne', price: 55  }, { name: 'jr3h', price: 55  }, { name: 'miqt', price: 55  },
+    { name: 'oajd', price: 55  }, { name: 'ofnh', price: 55  }, { name: 'yh7p', price: 55  },
+    { name: '43nd', price: 50  }, { name: 'krcp', price: 50  }, { name: 'nq2q', price: 50  },
+    { name: 'pwjd', price: 50  }, { name: 'q_j4', price: 50  }, { name: 'spvd', price: 50  },
+    { name: 'tfdj', price: 50  }, { name: 'v_7l', price: 50  }, { name: 'vqfl', price: 50  },
+    { name: 'wfmb', price: 50  }, { name: 'xg7x', price: 50  }, { name: 'xp6r', price: 50  },
+    { name: 'xw7y', price: 50  }, { name: 'xy3b', price: 50  }, { name: 'bdvt', price: 45  },
+    { name: 'bjrh', price: 45  }, { name: 'cn1d', price: 45  }, { name: 'eplh', price: 45  },
+    { name: 'erkj', price: 45  }, { name: 'etpj', price: 45  }, { name: 'eyhf', price: 45  },
+    { name: 'fblh', price: 45  }, { name: 'hcms', price: 45  }, { name: 'jsgq', price: 45  },
+    { name: 'jvps', price: 45  }, { name: 'ljmz', price: 45  }, { name: 'lwmj', price: 45  },
+    { name: 'mvjb', price: 45  }, { name: 'mzdk', price: 45  }, { name: 'ob3m', price: 45  },
+    { name: 'qnmt', price: 45  }, { name: 'rcfp', price: 45  }, { name: 'wjbf', price: 45  },
+    { name: 'wlgk', price: 45  }, { name: '1cym', price: 40  }, { name: '4mti', price: 40  },
+    { name: 'slqg', price: 40  }, { name: '0nho', price: 35  }, { name: '8ly6', price: 35  },
+    { name: 'dx3o', price: 35  }, { name: 'e7ha', price: 35  }, { name: 'eh0b', price: 35  },
+    { name: 'eq7w', price: 35  }, { name: 'fkj1', price: 35  }, { name: 'hfo2', price: 35  },
+    { name: 'k26q', price: 35  }, { name: 'm65n', price: 35  }, { name: 'm7aq', price: 35  },
+    { name: 'ms3a', price: 35  }, { name: 'n1d2', price: 35  }, { name: 'nd7r', price: 35  },
+    { name: 'q8k4', price: 35  }, { name: 'uj12', price: 35  }, { name: 'vl7p', price: 35  },
+    { name: 'wb2s', price: 35  }, { name: 'wq7u', price: 35  },
+  ],
+  psn: [], // coming soon
+};
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+//  ✅ SOLD ITEMS — Your track record (paste sold items here)
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+//  
+//  ✅ WHEN YOU SELL SOMETHING:
+//     1. Go to STOCK section above
+//     2. Find the item (e.g. { name: '@guia', price: 500 },)
+//     3. CUT the entire line (Ctrl+X / Cmd+X)
+//     4. Come down here and PASTE it at the END of the right platform array
+//     5. Delete the price, keep just '@guia',
+//     6. Save file — DONE!
+//
+//  Example:
+//    STOCK had:     { name: '@guia', price: 500 },
+//    SOLD gets:     '@guia',
+//
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+const SOLD = {
+  
+  // ═══════════════════════════════════════════════════════
+  //  SOLD INSTAGRAM HANDLES — Add new sold items at the end
+  // ═══════════════════════════════════════════════════════
+  ig:  ['@afed','@ai7g','@allaying','@apah','@apoy','@apvc','@azjb','@azpi','@bbpc','@bdng','@bkcg','@bkwu','@bped','@bmo9','@b9y0','@c0dp','@cains','@cfib','@cgli','@crnp','@covp','@csjf','@d4pb','@deadland','@djmf','@dqki','@edvw','@elrj','@epjg','@epre','@enj9','@f40m','@fdqj','@fdwb','@fhug','@fligr','@fliu','@furled','@fzld','@f67o','@gr8b','@gzev','@g3i9','@g3r1','@g6a9','@gepm','@gfsg','@ghif','@gohzilla','@gnx5','@gpvi','@gwrp','@gzw6','@_gt6','@hbxt','@hijt','@hiqr','@hjgo','@hopb','@horne','@htbv','@hwye','@hxgl','@hyoc','@igba','@iemf','@ijyb','@istb','@jdga','@jeyv','@jxuj','@jfxz','@jk16','@jn4e','@jnfy','@jol4','@j41x','@kdlv','@kjui','@ky2t','@ljpf','@lkfj','@lndc','@lxc3','@mo4p','@movk','@mzye','@nyqe','@nc_t','@ngqo','@nlsd','@nqsz','@nfyb','@nyw0','@ne0o','@od4t','@ofqu','@ogjh','@orpc','@owgi','@oyql','@pashed','@pc62','@pf7i','@pfrv','@pmrc','@pxuj','@pvmn','@qyjo','@qzip','@qtud','@qpyj','@qdhv','@qt70','@qz37','@rbcy','@r46j','@raspado','@retightening','@rhpt','@rtgn','@ryjw','@rm4c','@stillen','@tae7','@tbgy','@tbpr','@tvrp','@tydv','@t0ld','@tuqz','@udn4','@uvi6','@vaqz','@vcqw','@vqem','@wpvh','@wcmb','@wgta','@wkgo','@wu1b','@wxas','@wxzd','@wiqo','@wyk0','@xe74','@xem0','@xgqw','@xkrq','@xpdg','@y0k_','@y0se','@yellowed','@yg0t','@ykdp','@ylsk','@ylkz','@ylxt','@z1gm','@zyqh','@1j8u','@14ld','@27hp','@31hn','@3ukl','@4lj_','@4nvq','@4ra5','@5341','@54jd','@54yg','@5ucy','@6bze','@6ihv','@7__i','@9ag4','@9xcg','@94ej','@3930','@4340','@6930','@8106','@8720','@1.6.4','@8.0.6','@00049','@009726','@01501','@01681','@111421','@10331','@13611','@15753','@21593','@26753','@36644','@39702','@41076','@43679','@5224367','@5235478','@54242','@67778','@73859','@81866','@86168','@92499','@94040','@94040499','@0817191439','@0892912917','@0988041686'],
+  
+  // ═══════════════════════════════════════════════════════
+  //  SOLD TIKTOK HANDLES — Add new sold items at the end
+  // ═══════════════════════════════════════════════════════
+  tt:  ['@aa (font)','@aisf','@anmp','@bm73','@c (font)','@cidb','@cjly','@dd (font)','@god (font)','@gb3','@m3me','@hgfx','@ibga','@jlmo','@kczs','@kfex','@kbry','kngm','@los (font)','@luey','@peqw','@tazn','@tnsg','@uhvf','@v1to','@vrgw','@widc','@wbsk','@xywr','@xdmi','@yjqs','@zmqr','@moonlight (font)','@00 (font)','@11 (font)','@21 (font)','@99 (font)','@55854 (font)','@318502 (font)','@520491 (font)','@529416 (font)','@810153 (font)','@827513 (font)','@829114 (font)','@invisibleuser(font)'],
+  
+  // ═══════════════════════════════════════════════════════
+  //  SOLD TWITTER/X HANDLES — Add new sold items at the end
+  // ═══════════════════════════════════════════════════════
+  tw:  ['@o2x_','@codq','@r0un','@yg65','@_dine','@billi0n','@topage','@delacree','@paqmane','@vendetta_','@062183','@173601','@179170','@222824','@230204','@296945','@313178','@337723'],
+  
+  // ═══════════════════════════════════════════════════════
+  //  SOLD CAPCUT HANDLES — Add new sold items at the end
+  // ═══════════════════════════════════════════════════════
+  cc:  ['@riot','@tool','@ecstacy'],
+  
+  // ═══════════════════════════════════════════════════════
+  //  SOLD PSN HANDLES — Add new sold items at the end
+  // ═══════════════════════════════════════════════════════
+  psn: ['llHw'],
+};
+
+// ╔════════════════════════════════════════════════════════════════════════════╗
+// ║                                                                            ║
+// ║                    🔒 END OF DAILY EDITING ZONE 🔒                         ║
+// ║                                                                            ║
+// ║  Everything below this line is site code.                                 ║
+// ║  Don't edit unless you know what you're doing!                            ║
+// ║                                                                            ║
+// ╚════════════════════════════════════════════════════════════════════════════╝
+</script>
+
+
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>21® — Premium Username Marketplace</title>
@@ -35,23 +275,45 @@
     overflow-x: hidden;
   }
 
-  /* ── STRIPE'S ACTUAL ANIMATED GRID BACKGROUND ────────────
-     Moving gradient grid with color shifts - electric indigo theme */
+  /* ── STRIPE'S SPIRAL WAVE BACKGROUND ─────────────────────
+     Animated spiral lines that rotate and pulse                */
   
   .bg-stripes {
     position: fixed;
     inset: 0;
     z-index: -3;
-    background: 
-      linear-gradient(to right, rgba(98,0,238,0.04) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(98,0,238,0.04) 1px, transparent 1px);
-    background-size: 60px 60px;
-    animation: gridShift 20s linear infinite;
+    overflow: hidden;
   }
   
-  @keyframes gridShift {
-    0% { background-position: 0 0; }
-    100% { background-position: 60px 60px; }
+  .bg-stripes::before,
+  .bg-stripes::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 200vw;
+    height: 200vw;
+    border-radius: 50%;
+    border: 1px solid rgba(98,0,238,0.08);
+    transform: translate(-50%, -50%);
+    animation: spiralPulse 20s ease-in-out infinite;
+  }
+  
+  .bg-stripes::after {
+    border-color: rgba(98,0,238,0.05);
+    animation-delay: -10s;
+    animation-duration: 25s;
+  }
+  
+  @keyframes spiralPulse {
+    0%, 100% {
+      transform: translate(-50%, -50%) scale(0.8) rotate(0deg);
+      opacity: 0.3;
+    }
+    50% {
+      transform: translate(-50%, -50%) scale(1.2) rotate(180deg);
+      opacity: 1;
+    }
   }
   
   /* Gradient overlay with color shifts */
@@ -60,45 +322,71 @@
     inset: 0;
     z-index: -2;
     background: 
-      radial-gradient(circle at 20% 20%, rgba(98,0,238,0.15), transparent 50%),
-      radial-gradient(circle at 80% 80%, rgba(124,77,255,0.12), transparent 50%);
+      radial-gradient(circle at 20% 20%, rgba(98,0,238,0.12), transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(124,77,255,0.1), transparent 50%);
     animation: gradientShift 15s ease-in-out infinite alternate;
   }
   
   @keyframes gradientShift {
     0% {
       background: 
-        radial-gradient(circle at 20% 20%, rgba(98,0,238,0.15), transparent 50%),
-        radial-gradient(circle at 80% 80%, rgba(124,77,255,0.12), transparent 50%);
+        radial-gradient(circle at 20% 20%, rgba(98,0,238,0.12), transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(124,77,255,0.1), transparent 50%);
     }
     50% {
       background: 
-        radial-gradient(circle at 60% 30%, rgba(98,0,238,0.13), transparent 50%),
-        radial-gradient(circle at 40% 70%, rgba(170,0,255,0.1), transparent 50%);
+        radial-gradient(circle at 60% 30%, rgba(98,0,238,0.1), transparent 50%),
+        radial-gradient(circle at 40% 70%, rgba(170,0,255,0.08), transparent 50%);
     }
     100% {
       background: 
-        radial-gradient(circle at 80% 10%, rgba(124,77,255,0.12), transparent 50%),
-        radial-gradient(circle at 20% 90%, rgba(98,0,238,0.15), transparent 50%);
+        radial-gradient(circle at 80% 10%, rgba(124,77,255,0.1), transparent 50%),
+        radial-gradient(circle at 20% 90%, rgba(98,0,238,0.12), transparent 50%);
     }
   }
   
-  /* Accent dots that pulse */
+  /* Multiple concentric circles for depth */
   .bg-bloom2 {
     position: fixed;
     inset: 0;
     z-index: -2;
-    opacity: 0;
-    animation: dotsPulse 8s ease-in-out infinite;
+    overflow: hidden;
   }
   
-  @keyframes dotsPulse {
-    0%, 100% { opacity: 0; }
-    50% { 
+  .bg-bloom2::before,
+  .bg-bloom2::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border-radius: 50%;
+    border: 2px solid rgba(98,0,238,0.04);
+    animation: spiralExpand 30s linear infinite;
+  }
+  
+  .bg-bloom2::before {
+    width: 150vw;
+    height: 150vw;
+  }
+  
+  .bg-bloom2::after {
+    width: 100vw;
+    height: 100vw;
+    animation-delay: -15s;
+    border-color: rgba(124,77,255,0.06);
+  }
+  
+  @keyframes spiralExpand {
+    0% {
+      transform: translate(-50%, -50%) scale(0.5) rotate(0deg);
+      opacity: 0;
+    }
+    50% {
       opacity: 1;
-      background: 
-        radial-gradient(circle at 30% 50%, rgba(98,0,238,0.25), transparent 5%),
-        radial-gradient(circle at 70% 50%, rgba(124,77,255,0.25), transparent 5%);
+    }
+    100% {
+      transform: translate(-50%, -50%) scale(1.5) rotate(360deg);
+      opacity: 0;
     }
   }
   
@@ -112,6 +400,8 @@
 
   @media (prefers-reduced-motion: reduce) {
     .bg-stripes, .bg-bloom, .bg-bloom2 { animation: none; }
+    .bg-stripes::before, .bg-stripes::after,
+    .bg-bloom2::before, .bg-bloom2::after { animation: none; }
   }
   ::-webkit-scrollbar { width: 5px; }
   ::-webkit-scrollbar-track { background: var(--bg); }
@@ -795,15 +1085,72 @@
   .acc-cta:hover { background: var(--ac); color: var(--w); border-color: var(--ac); }
 
   /* ── VOUCHES ─────────────────────────── */
-  .vouch-card {
-    border: 1px solid var(--b1); border-radius: var(--r);
-    background: var(--bg2);
-    padding: 48px; text-align: center;
+  .vouch-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
     margin-top: 1px;
   }
-  .vouch-n { font-size: 52px; font-weight: 700; letter-spacing: -3px; color: var(--w); margin-bottom: 4px; }
-  .vouch-l { font-size: 12px; color: var(--f3); margin-bottom: 16px; }
-  .vouch-d { font-size: 14px; color: var(--f2); line-height: 1.7; max-width: 320px; margin: 0 auto 24px; }
+  
+  .vouch-platform-card {
+    background: var(--bg2);
+    border: 1px solid var(--b1);
+    border-radius: var(--r);
+    padding: 32px 24px;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .vouch-platform-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(98,0,238,0.3);
+    box-shadow: 0 12px 24px -4px rgba(98,0,238,0.12), 0 8px 16px -4px rgba(98,0,238,0.08);
+  }
+  
+  .vouch-platform-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, rgba(98,0,238,0.1), rgba(124,77,255,0.1));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ac);
+    margin-bottom: 20px;
+  }
+  
+  .vouch-platform-name {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--f1);
+    margin-bottom: 8px;
+  }
+  
+  .vouch-platform-desc {
+    font-size: 14px;
+    color: var(--f3);
+    line-height: 1.6;
+    margin-bottom: 16px;
+    flex: 1;
+  }
+  
+  .vouch-platform-link {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ac);
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+  
+  @media (max-width: 768px) {
+    .vouch-grid {
+      grid-template-columns: 1fr;
+    }
+  }
 
   /* ── SOLD TRIGGER ────────────────────── */
   .sold-trigger {
@@ -930,150 +1277,7 @@
 </head>
 <body>
 
-<script id="EDIT_THIS">
-// ╔══════════════════════════════════════════════════════════╗
-// ║                    ✏️ QUICK EDIT SECTION                  ║
-// ║         All editable data is in this script block        ║
-// ╚══════════════════════════════════════════════════════════╝
 
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-//  📱 CONTACT LINKS — Update your social/contact URLs here
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-const D = {
-  vouchCount: '570+',
-  telegram:         'https://t.me/abuto',
-  instagram:        'https://www.instagram.com/7521',
-  ogu:              'https://oguser.com/21',
-  moreLinks:        'https://solo.to/215',
-  vouchesLink:      'https://t.me/id7221',
-  vouchesInstagram: 'https://www.instagram.com/21v7',
-};
-
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-//  📦 STOCK INVENTORY — Add/Remove/Edit Items Here
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-//  Format:  { name: '@handle', price: 50 }
-//  
-//  To ADD an item:     Copy a line and edit the name/price
-//  To REMOVE an item:  Delete the entire line
-//  To EDIT price:      Change the number
-//  
-//  Special: price: 0 means "Contact for price"
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-const STOCK = {
-  ig: [
-    { name: '@guia',  price: 500 },
-    { name: '@gawx',  price: 200 },
-    { name: '@la1o',  price: 150 },
-    { name: '@13763', price: 70  },
-    { name: '@bd0g',  price: 50  },
-    { name: '@fjke',  price: 45  },
-  ],
-  tw: [
-    { name: '@359893',          price: 20 },
-    { name: '@522613',          price: 20 },
-    { name: '@687286',          price: 20 },
-    { name: '@964945',          price: 30 },
-    { name: '@mmssqq',          price: 30 },
-    { name: '@wanted_criminal', price: 50 },
-  ],
-  tt: [
-    { name: '@c__p_m (stat)', price: 15 },
-  ],
-  cc: [
-    { name: '@adjust',        price: 5 }, { name: '@alter',         price: 5 },
-    { name: '@antisociality', price: 5 }, { name: '@avoid',         price: 5 },
-    { name: '@awful',         price: 5 }, { name: '@Bankroll',      price: 8 },
-    { name: '@Boost',         price: 8 }, { name: '@burden',        price: 8 },
-    { name: '@clap',          price: 5 }, { name: '@clean',         price: 5 },
-    { name: '@color',         price: 8 }, { name: '@creature',      price: 8 },
-    { name: '@crop',          price: 5 }, { name: '@delusional',    price: 5 },
-    { name: '@ecstasy',       price: 5 }, { name: '@grasp',         price: 5 },
-    { name: '@grateful',      price: 5 }, { name: '@hazard',        price: 8 },
-    { name: '@heroism',       price: 8 }, { name: '@impatient',     price: 5 },
-    { name: '@inferior',      price: 5 }, { name: '@irresponsible', price: 5 },
-    { name: '@jailbreak',     price: 5 }, { name: '@offense',       price: 8 },
-    { name: '@orphan',        price: 8 }, { name: '@physic',        price: 8 },
-    { name: '@place',         price: 8 }, { name: '@producer',      price: 8 },
-    { name: '@rack',          price: 8 }, { name: '@ransom',        price: 8 },
-    { name: '@reap',          price: 5 }, { name: '@request',       price: 8 },
-    { name: '@sack',          price: 8 }, { name: '@science',       price: 8 },
-    { name: '@selfless',      price: 8 }, { name: '@sore',          price: 5 },
-    { name: '@spain',         price: 8 }, { name: '@spine',         price: 8 },
-    { name: '@stair',         price: 8 }, { name: '@stolen',        price: 8 },
-    { name: '@street',        price: 8 }, { name: '@supervillain',  price: 8 },
-    { name: '@talk',          price: 5 }, { name: '@thread',        price: 5 },
-    { name: '@tier',          price: 8 }, { name: '@tied',          price: 5 },
-    { name: '@timid',         price: 5 }, { name: '@tool',          price: 8 },
-    { name: '@topic',         price: 8 }, { name: '@turf',          price: 8 },
-    { name: '@want',          price: 8 }, { name: '@writer',        price: 8 },
-  ],
-  proxy: [
-    { name: 'hoca', price: 850 }, { name: 'mram', price: 850 }, { name: 'msfo', price: 230 },
-    { name: '3m.n', price: 100 }, { name: '3r_x', price: 100 }, { name: 'awzm', price: 100 },
-    { name: 'pie0', price: 100 }, { name: 'qh.o', price: 100 }, { name: 'vacb', price: 100 },
-    { name: 'vagc', price: 100 }, { name: 'rhf9', price: 85  }, { name: 'rske', price: 85  },
-    { name: 'smta', price: 85  }, { name: 'wtoa', price: 85  }, { name: 'x674', price: 85  },
-    { name: 'qsho', price: 80  }, { name: 'rwnm', price: 80  }, { name: '0kld', price: 75  },
-    { name: 'duep', price: 75  }, { name: '769k', price: 70  }, { name: 'yaxv', price: 70  },
-    { name: 'zlav', price: 70  }, { name: '4esm', price: 65  }, { name: '7a9h', price: 65  },
-    { name: '_8ra', price: 65  }, { name: 'awej', price: 65  }, { name: 'gjnj', price: 65  },
-    { name: 'hebc', price: 65  }, { name: 'hk1d', price: 65  }, { name: 'ipyt', price: 65  },
-    { name: 'iyqu', price: 65  }, { name: 'jcyn', price: 65  }, { name: 'jcoz', price: 65  },
-    { name: 'juzp', price: 65  }, { name: 'kol1', price: 65  }, { name: 'ldkl', price: 65  },
-    { name: 'mzoh', price: 65  }, { name: 'oank', price: 65  }, { name: 'rdse', price: 65  },
-    { name: 'rtls', price: 65  }, { name: 'skfs', price: 65  }, { name: 'tkir', price: 65  },
-    { name: 'fhfw', price: 60  }, { name: 'ia7h', price: 60  }, { name: 'ljwl', price: 60  },
-    { name: 'rdpc', price: 60  }, { name: 'si9_', price: 60  }, { name: 'tbqe', price: 60  },
-    { name: 'wbcy', price: 60  }, { name: 'xnld', price: 60  }, { name: 'yo4f', price: 60  },
-    { name: '8_qa', price: 55  }, { name: 'acrp', price: 55  }, { name: 'ddpc', price: 55  },
-    { name: 'gdne', price: 55  }, { name: 'jr3h', price: 55  }, { name: 'miqt', price: 55  },
-    { name: 'oajd', price: 55  }, { name: 'ofnh', price: 55  }, { name: 'yh7p', price: 55  },
-    { name: '43nd', price: 50  }, { name: 'krcp', price: 50  }, { name: 'nq2q', price: 50  },
-    { name: 'pwjd', price: 50  }, { name: 'q_j4', price: 50  }, { name: 'spvd', price: 50  },
-    { name: 'tfdj', price: 50  }, { name: 'v_7l', price: 50  }, { name: 'vqfl', price: 50  },
-    { name: 'wfmb', price: 50  }, { name: 'xg7x', price: 50  }, { name: 'xp6r', price: 50  },
-    { name: 'xw7y', price: 50  }, { name: 'xy3b', price: 50  }, { name: 'bdvt', price: 45  },
-    { name: 'bjrh', price: 45  }, { name: 'cn1d', price: 45  }, { name: 'eplh', price: 45  },
-    { name: 'erkj', price: 45  }, { name: 'etpj', price: 45  }, { name: 'eyhf', price: 45  },
-    { name: 'fblh', price: 45  }, { name: 'hcms', price: 45  }, { name: 'jsgq', price: 45  },
-    { name: 'jvps', price: 45  }, { name: 'ljmz', price: 45  }, { name: 'lwmj', price: 45  },
-    { name: 'mvjb', price: 45  }, { name: 'mzdk', price: 45  }, { name: 'ob3m', price: 45  },
-    { name: 'qnmt', price: 45  }, { name: 'rcfp', price: 45  }, { name: 'wjbf', price: 45  },
-    { name: 'wlgk', price: 45  }, { name: '1cym', price: 40  }, { name: '4mti', price: 40  },
-    { name: 'slqg', price: 40  }, { name: '0nho', price: 35  }, { name: '8ly6', price: 35  },
-    { name: 'dx3o', price: 35  }, { name: 'e7ha', price: 35  }, { name: 'eh0b', price: 35  },
-    { name: 'eq7w', price: 35  }, { name: 'fkj1', price: 35  }, { name: 'hfo2', price: 35  },
-    { name: 'k26q', price: 35  }, { name: 'm65n', price: 35  }, { name: 'm7aq', price: 35  },
-    { name: 'ms3a', price: 35  }, { name: 'n1d2', price: 35  }, { name: 'nd7r', price: 35  },
-    { name: 'q8k4', price: 35  }, { name: 'uj12', price: 35  }, { name: 'vl7p', price: 35  },
-    { name: 'wb2s', price: 35  }, { name: 'wq7u', price: 35  },
-  ],
-  psn: [], // coming soon
-};
-
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-//  📜 SOLD HISTORY — Add handles to show your track record
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-//  Format:  Just the handle strings in an array
-//  Example: ['@handle1', '@handle2', '@handle3']
-//  
-//  To ADD:    Insert '@newhandle' in the appropriate platform array
-//  To REMOVE: Delete the handle from the list
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-const SOLD = {
-  ig:  ['@afed','@ai7g','@allaying','@apah','@apoy','@apvc','@azjb','@azpi','@bbpc','@bdng','@bkcg','@bkwu','@bped','@bmo9','@b9y0','@c0dp','@cains','@cfib','@cgli','@crnp','@covp','@csjf','@d4pb','@deadland','@djmf','@dqki','@edvw','@elrj','@epjg','@epre','@enj9','@f40m','@fdqj','@fdwb','@fhug','@fligr','@fliu','@furled','@fzld','@f67o','@gr8b','@gzev','@g3i9','@g3r1','@g6a9','@gepm','@gfsg','@ghif','@gohzilla','@gnx5','@gpvi','@gwrp','@gzw6','@_gt6','@hbxt','@hijt','@hiqr','@hjgo','@hopb','@horne','@htbv','@hwye','@hxgl','@hyoc','@igba','@iemf','@ijyb','@istb','@jdga','@jeyv','@jxuj','@jfxz','@jk16','@jn4e','@jnfy','@jol4','@j41x','@kdlv','@kjui','@ky2t','@ljpf','@lkfj','@lndc','@lxc3','@mo4p','@movk','@mzye','@nyqe','@nc_t','@ngqo','@nlsd','@nqsz','@nfyb','@nyw0','@ne0o','@od4t','@ofqu','@ogjh','@orpc','@owgi','@oyql','@pashed','@pc62','@pf7i','@pfrv','@pmrc','@pxuj','@pvmn','@qyjo','@qzip','@qtud','@qpyj','@qdhv','@qt70','@qz37','@rbcy','@r46j','@raspado','@retightening','@rhpt','@rtgn','@ryjw','@rm4c','@stillen','@tae7','@tbgy','@tbpr','@tvrp','@tydv','@t0ld','@tuqz','@udn4','@uvi6','@vaqz','@vcqw','@vqem','@wpvh','@wcmb','@wgta','@wkgo','@wu1b','@wxas','@wxzd','@wiqo','@wyk0','@xe74','@xem0','@xgqw','@xkrq','@xpdg','@y0k_','@y0se','@yellowed','@yg0t','@ykdp','@ylsk','@ylkz','@ylxt','@z1gm','@zyqh','@1j8u','@14ld','@27hp','@31hn','@3ukl','@4lj_','@4nvq','@4ra5','@5341','@54jd','@54yg','@5ucy','@6bze','@6ihv','@7__i','@9ag4','@9xcg','@94ej','@3930','@4340','@6930','@8106','@8720','@1.6.4','@8.0.6','@00049','@009726','@01501','@01681','@111421','@10331','@13611','@15753','@21593','@26753','@36644','@39702','@41076','@43679','@5224367','@5235478','@54242','@67778','@73859','@81866','@86168','@92499','@94040','@94040499','@0817191439','@0892912917','@0988041686'],
-  tt:  ['@aa (font)','@aisf','@anmp','@bm73','@c (font)','@cidb','@cjly','@dd (font)','@god (font)','@gb3','@m3me','@hgfx','@ibga','@jlmo','@kczs','@kfex','@kbry','kngm','@los (font)','@luey','@peqw','@tazn','@tnsg','@uhvf','@v1to','@vrgw','@widc','@wbsk','@xywr','@xdmi','@yjqs','@zmqr','@moonlight (font)','@00 (font)','@11 (font)','@21 (font)','@99 (font)','@55854 (font)','@318502 (font)','@520491 (font)','@529416 (font)','@810153 (font)','@827513 (font)','@829114 (font)','@invisibleuser(font)'],
-  tw:  ['@o2x_','@codq','@r0un','@yg65','@_dine','@billi0n','@topage','@delacree','@paqmane','@vendetta_','@062183','@173601','@179170','@222824','@230204','@296945','@313178','@337723'],
-  cc:  ['@riot','@tool','@ecstacy'],
-  psn: ['llHw'],
-};
-
-// ╔══════════════════════════════════════════════════════════╗
-// ║              🔒 END OF EDITABLE SECTION                  ║
-// ║    Everything below is site code - edit with caution     ║
-// ╚══════════════════════════════════════════════════════════╝
-</script>
 
 <!-- INTRO -->
 <div id="intro">
@@ -1137,7 +1341,7 @@ const SOLD = {
             <a class="profile-link" href="https://www.instagram.com/7521" target="_blank">Instagram</a>
             <a class="profile-link" href="https://oguser.com/21" target="_blank">OGUsers</a>
             <a class="profile-link" href="https://solo.to/215" target="_blank">More Links</a>
-            <a class="profile-link profile-link-vouches" href="https://www.instagram.com/21v7" target="_blank">570+ Vouches</a>
+            <a class="profile-link profile-link-vouches" href="#sec-vouches" onclick="event.preventDefault(); goto('sec-vouches')">570+ Vouches</a>
           </div>
           <!-- Stats row: sold counts -->
           <div class="profile-sold-row">
@@ -1314,13 +1518,41 @@ const SOLD = {
           <div class="sec-lbl">Reputation</div>
           <div class="sec-ttl">Vouches</div>
         </div>
-        <a class="sec-act" href="https://t.me/id7221" target="_blank">Read all →</a>
       </div>
-      <div class="vouch-card">
-        <div class="vouch-n">570+</div>
-        <div class="vouch-l">Verified transactions</div>
-        <div class="vouch-d">Highly rated seller, swapper & escrow. Fast, smooth, and stress-free — every single time.</div>
-        <a class="hbp" href="https://t.me/id7221" target="_blank">Read vouches →</a>
+      
+      <div class="vouch-grid">
+        <a href="https://oguser.com/21" target="_blank" class="vouch-platform-card">
+          <div class="vouch-platform-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+            </svg>
+          </div>
+          <div class="vouch-platform-name">OGUsers</div>
+          <div class="vouch-platform-desc">570+ vouches on OGUsers marketplace</div>
+          <div class="vouch-platform-link">oguser.com/21 →</div>
+        </a>
+
+        <a href="https://www.instagram.com/21v7" target="_blank" class="vouch-platform-card">
+          <div class="vouch-platform-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+            </svg>
+          </div>
+          <div class="vouch-platform-name">Instagram</div>
+          <div class="vouch-platform-desc">All vouches archived on Instagram</div>
+          <div class="vouch-platform-link">@21v7 →</div>
+        </a>
+
+        <a href="https://t.me/id8121/53" target="_blank" class="vouch-platform-card">
+          <div class="vouch-platform-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+            </svg>
+          </div>
+          <div class="vouch-platform-name">Telegram</div>
+          <div class="vouch-platform-desc">Vouch channel with screenshots</div>
+          <div class="vouch-platform-link">t.me/id8121/53 →</div>
+        </a>
       </div>
     </div>
 
