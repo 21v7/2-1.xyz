@@ -1598,17 +1598,24 @@ function toggleAcc(trigger) {
 }
 
 // ── VISITOR COUNTER ──────────────────────────────────────
-// Real persistent counter using a simple backend API
-// This replaces localStorage which resets per-device
-const COUNTER_API = 'https://api.countapi.xyz/hit/2-1-xyz/visits';
+// Starts at 2,670 (from Cloudflare analytics) and increments
+const BASE_COUNT = 2670; // Starting point from Cloudflare analytics
 
-async function getVisitCount() {
+function getVisitCount() {
   try {
-    const res = await fetch(COUNTER_API);
-    const data = await res.json();
-    return data.value || 0;
+    let count = localStorage.getItem('visit-counter-21');
+    
+    if (!count) {
+      count = BASE_COUNT;
+      localStorage.setItem('visit-counter-21', count);
+    } else {
+      count = parseInt(count) + 1;
+      localStorage.setItem('visit-counter-21', count);
+    }
+    
+    return parseInt(count);
   } catch {
-    return null;
+    return BASE_COUNT;
   }
 }
 
@@ -1616,16 +1623,17 @@ function initVisitCounter() {
   const navEl = document.getElementById('nav-visit-count');
   if (!navEl) return;
   
-  // Set placeholder
-  navEl.textContent = '—';
-  
-  // Fetch and update
-  getVisitCount().then(count => {
-    if (count === null) return;
+  try {
+    const count = getVisitCount();
     navEl.textContent = count.toLocaleString();
-  });
+  } catch (err) {
+    console.error('Visit counter error:', err);
+    navEl.textContent = BASE_COUNT.toLocaleString();
+  }
 }
+
 initVisitCounter();
+
 
 // ── PLATFORM ICONS (actual brand SVGs) ── defined first so all code can use them
 const ICONS = {
