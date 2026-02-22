@@ -538,11 +538,6 @@ const SOLD = {
     border-right: 1px solid var(--b1);
     margin-right: 4px;
   }
-  .nav-visits {
-    font-size: 11px; color: var(--f3);
-    font-weight: 400; white-space: nowrap;
-  }
-  .nav-visits span { color: var(--w); font-weight: 600; }
   .nl {
     padding: 5px 11px;
     border-radius: var(--r);
@@ -1074,6 +1069,45 @@ const SOLD = {
     border-radius: 4px; padding: 3px 8px;
     margin-bottom: 10px;
   }
+
+  /* Modern Service Items - ADDED FOR BETTER STYLING */
+  .service-item {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--b1);
+  }
+  .service-item:last-of-type {
+    border-bottom: none;
+    margin-bottom: 16px;
+  }
+  .service-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--f1);
+    margin-bottom: 6px;
+  }
+  .service-desc {
+    font-size: 13px;
+    color: var(--f3);
+    line-height: 1.6;
+    margin-bottom: 8px;
+  }
+  .service-pricing {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .price-tag {
+    display: inline-block;
+    padding: 4px 10px;
+    background: var(--bg3);
+    border: 1px solid var(--b1);
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--f2);
+  }
+
   .acc-cta {
     display: inline-flex; margin-top: 12px;
     padding: 8px 16px; border-radius: var(--r);
@@ -1300,7 +1334,6 @@ const SOLD = {
   <nav id="nav">
     <div class="nav-brand">
       <span class="nav-logo">21®</span>
-      <span class="nav-visits"><span id="nav-visit-count">—</span> visits</span>
     </div>
     <div class="nav-ticker">
       <div class="nav-ticker-track" id="ticker-track"></div>
@@ -1327,7 +1360,7 @@ const SOLD = {
         <div class="profile-card">
           <!-- Top: avatar + name inline -->
           <div class="profile-head">
-            <div class="profile-avatar">21</div>
+            <div class="profile-avatar"><img src="profile.jpg" alt="21" style="width:100%;height:100%;object-fit:cover;border-radius:10px;"></div>
             <div class="profile-identity">
               <div class="profile-name">
                 21®
@@ -1395,16 +1428,44 @@ const SOLD = {
 
         <div class="acc-row">
           <button class="acc-trigger" onclick="toggleAcc(this)">
-            <div class="acc-icon">🔄</div>
-            <div class="acc-label"><div class="acc-name">Swaps</div></div>
+            <div class="acc-icon">📸</div>
+            <div class="acc-label">
+              <div class="acc-name">Instagram Services</div>
+              <div class="acc-sub">Swaps • Verification • Aged Accounts • Recovery</div>
+            </div>
             <span class="acc-chevron">▼</span>
           </button>
           <div class="acc-body">
             <div class="acc-inner">
-              <p>Securely transfer your username to another account without waiting the standard 14 days.</p>
-              <p><strong>Uninsured:</strong> 8% fee (min $5). Under $60 value = flat $5. You accept full risk of loss.</p>
-              <p><strong>Insured:</strong> 15% fee (min $10). Under $60 value = flat $10. Full value refunded if lost during swap.</p>
-              <a class="acc-cta" href="https://t.me/abuto" target="_blank">Contact for Swap →</a>
+              <div class="service-item">
+                <div class="service-title">🔄 Swaps</div>
+                <div class="service-desc">Securely transfer your username to another account without waiting the standard 14 days.</div>
+                <div class="service-pricing">
+                  <span class="price-tag">Uninsured: 8% fee (min $5)</span>
+                  <span class="price-tag">Insured: 15% fee (min $10)</span>
+                </div>
+              </div>
+
+              <div class="service-item">
+                <div class="service-title">✓ Verification</div>
+                <div class="service-desc">Get the blue badge with any name or photo — no personal info required.</div>
+              </div>
+
+              <div class="service-item">
+                <div class="service-title">📅 Aged Accounts</div>
+                <div class="service-desc">Old Instagram accounts with clean history.</div>
+                <div class="service-pricing">
+                  <span class="price-tag">2010 OGE (No #): $45</span>
+                  <span class="price-tag">2015-2016 Uncreated: $10</span>
+                </div>
+              </div>
+
+              <div class="service-item">
+                <div class="service-title">🔓 Account Recovery</div>
+                <div class="service-desc">Recover suspended Instagram accounts. Payment for attempt, not guaranteed result.</div>
+              </div>
+
+              <a class="acc-cta" href="https://t.me/abuto" target="_blank">Contact on Telegram →</a>
             </div>
           </div>
         </div>
@@ -1434,49 +1495,6 @@ const SOLD = {
             <div class="acc-inner">
               <p>From my own stock or personal network, I can find almost any handle if the budget is right. POF (proof of funds) required for broker deals.</p>
               <a class="acc-cta" href="https://t.me/abuto" target="_blank">Inquire →</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="acc-row">
-          <button class="acc-trigger" onclick="toggleAcc(this)">
-            <div class="acc-icon">📅</div>
-            <div class="acc-label"><div class="acc-name">Aged Instagram Accounts</div></div>
-            <span class="acc-chevron">▼</span>
-          </button>
-          <div class="acc-body">
-            <div class="acc-inner">
-              <p><strong>2010 Accounts</strong> (OGE / No # linked) — $45</p>
-              <p><strong>2015–2016 Accounts</strong> (Uncreated OGE) — $10</p>
-              <a class="acc-cta" href="https://t.me/abuto" target="_blank">Order →</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="acc-row">
-          <button class="acc-trigger" onclick="toggleAcc(this)">
-            <div class="acc-icon">✓</div>
-            <div class="acc-label"><div class="acc-name">Instagram Verification</div></div>
-            <span class="acc-chevron">▼</span>
-          </button>
-          <div class="acc-body">
-            <div class="acc-inner">
-              <p>Get the blue badge with any name or photo — no personal info required.</p>
-              <a class="acc-cta" href="https://t.me/abuto" target="_blank">Get Verified →</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="acc-row">
-          <button class="acc-trigger" onclick="toggleAcc(this)">
-            <div class="acc-icon">🔓</div>
-            <div class="acc-label"><div class="acc-name">Account Recoveries</div></div>
-            <span class="acc-chevron">▼</span>
-          </button>
-          <div class="acc-body">
-            <div class="acc-inner">
-              <p>Almost always able to recover Instagram accounts from permanent suspension depending on case type. Payment is for the attempt, not a guaranteed result.</p>
-              <a class="acc-cta" href="https://t.me/abuto" target="_blank">Request Recovery →</a>
             </div>
           </div>
         </div>
@@ -1597,44 +1615,6 @@ function toggleAcc(trigger) {
     body.classList.add('open');
   }
 }
-
-// ── VISITOR COUNTER ──────────────────────────────────────
-// Starts at 2,670 (from Cloudflare analytics) and increments
-const BASE_COUNT = 2670; // Starting point from Cloudflare analytics
-
-function getVisitCount() {
-  try {
-    let count = localStorage.getItem('visit-counter-21');
-    
-    if (!count) {
-      count = BASE_COUNT;
-      localStorage.setItem('visit-counter-21', count);
-    } else {
-      count = parseInt(count) + 1;
-      localStorage.setItem('visit-counter-21', count);
-    }
-    
-    return parseInt(count);
-  } catch {
-    return BASE_COUNT;
-  }
-}
-
-function initVisitCounter() {
-  const navEl = document.getElementById('nav-visit-count');
-  if (!navEl) return;
-  
-  try {
-    const count = getVisitCount();
-    navEl.textContent = count.toLocaleString();
-  } catch (err) {
-    console.error('Visit counter error:', err);
-    navEl.textContent = BASE_COUNT.toLocaleString();
-  }
-}
-
-initVisitCounter();
-
 
 // ── PLATFORM ICONS (actual brand SVGs) ── defined first so all code can use them
 const ICONS = {
